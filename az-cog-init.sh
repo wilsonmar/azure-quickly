@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# ./az-cog-init.sh in https://github.com/wilsonmar/azure-your-way
+# ./az-cog-init.sh in https://github.com/wilsonmar/azure-quickly
 # Described in https://wilsonmar.github.io/microsoft-ai/#Text_Analytics
 
 set -o errexit

@@ -3,7 +3,7 @@
 # shellcheck disable=SC1090 # Can't follow non-constant source. Use a directive to specify location.
 # shellcheck disable=SC2129  # Consider using { cmd1; cmd2; } >> file instead of individual redirects.
 
-# source ./az-all-start.sh within https://github.com/wilsonmar/azure-your-way
+# source ./az-all-start.sh within https://github.com/wilsonmar/azure-quickly
 # This Bash script is explained in https://wilsonmar.github.io/bash-scripts.
 # This script is called by others to performs standard actions for all scripts:
 # 1. Capture and display start of script time stamp.

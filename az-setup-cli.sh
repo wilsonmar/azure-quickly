@@ -3,15 +3,15 @@
 # ./az-setup-cli.sh
 
 # This script is meant to be run by copy and paste:
-# bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-your-way/master/az-setup-cli.sh)" -v -i
+# bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-quickly/master/az-setup-cli.sh)" -v -i
 # within https://github.com/MicrosoftLearning/AI-102-AIEngineer/blob/master/...
 #
    set -o errexit
 
 # Because /setmem.sh in not set yet at this point:
 export MY_GITHUB_ACCT="wilsonmar"
-export MY_GITHUB_REPO="azure-your-way"
-export MY_REPO_FOLDER="azure-your-way"
+export MY_GITHUB_REPO="azure-quickly"
+export MY_REPO_FOLDER="azure-quickly"
 # To be specified in script call parms:"
 export RMV_GITHUB_BEFORE=false    # parm -d
 export DO_GITHUB_CLONE=false      # parm -c

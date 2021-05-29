@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-# This is ./az-vm-lb-init.sh within https://github.com/wilsonmar/azure-your-way
+# This is ./az-vm-lb-init.sh within https://github.com/wilsonmar/azure-quickly
 # Described in https://wilsonmar.github.io/azure-networking
 # Created to automate Exercise 1 in https://microsoftlearning.github.io/AZ-303-Microsoft-Azure-Architect-Technologies/Instructions/Labs/Module_05_Lab.html#exercise-1-implement-and-analyze-highly-available-azure-vm-deployments-using-availability-sets-and-azure-load-balancer-basic
-# 1. Prepare your CLI Bash environment according to https://wilsonmar.github.io/azure-your-way
-#    which references repo https://github.com/wilsonmar/azure-your-way.
+# 1. Prepare your CLI Bash environment according to https://wilsonmar.github.io/azure-quickly
+#    which references repo https://github.com/wilsonmar/azure-quickly.
 # 2. In your clouddrive folder edit your preferences in ../setmem.sh (MY_RG, MY_LOC, etc.)
 # 3. Copy and paste this to the Bash command line:
-#    bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-your-way/master/az-vm-lb.sh)" -v -i
+#    bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-quickly/master/az-vm-lb.sh)" -v -i
 
 source ./az-all-start.sh  # to setup environment variables and utility functions
 

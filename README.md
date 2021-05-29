@@ -223,49 +223,49 @@ The follow are steps and outputs from the run:
 
    <pre><strong>export MY_COG_ACCT="cogme"
    export MY_COG_PRICING_TIER="F0"  # or S0
-   ./<a href="https://github.com/wilsonmar/azure-your-way/blob/main/az-cog-cli.sh">az-cog-cli.sh</a>
+   ./<a href="https://github.com/wilsonmar/azure-quickly/blob/main/az-cog-cli.sh">az-cog-cli.sh</a>
    </strong></pre>
 
 * Use Helm charts
 
    <pre><strong>MY_RG="helm-$MY_LOC"
-   ./<a href="https://github.com/wilsonmar/azure-your-way/blob/main/az-helm-cli.sh">az-helm-cli.sh</a>
+   ./<a href="https://github.com/wilsonmar/azure-quickly/blob/main/az-helm-cli.sh">az-helm-cli.sh</a>
    </strong></pre>
 
 * Create a VM with a public IP address:
 
    <pre><strong>MY_RG="azuremolchapter2-$MY_LOC"
-   ./<a href="https://github.com/wilsonmar/azure-your-way/blob/main/az-vm-cli.sh">az-vm-cli.sh</a>
+   ./<a href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-cli.sh">az-vm-cli.sh</a>
    </strong></pre>
 
 * Create an App Service Plan, Azure Web App, Deployment, to show MY_APPNAME.
 
    <pre><strong>MY_RG="azuremolchapter3-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-your-way/blob/main/az-webapp-cli.sh">az-webapp-cli.sh</a>
+   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-webapp-cli.sh">az-webapp-cli.sh</a>
    </strong></pre>
 
 * Create a network with two subnets and a network security group that secures inbound traffic. One subnet is for remote access traffic, one is web traffic for VMs that run a web server. Two VMs are then created. One allows SSH access and has the appropriate network security group rules applied. You use this VM as an <strong>SSH jumpbox</strong> to then connect to the the second VM which can be used an web server:
 
    <pre><strong>MY_RG="azuremolchapter5-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-your-way/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
+   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
    </strong></pre> 
 
 * Create a VM with a public IP address. Enabled are a storage account, boot diagnostics with the VM diagnostics extension applied:
 
    <pre><strong>MY_RG="azuremolchapter12-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-your-way/blob/main/az-vm-diag-cli.sh">az-vm-diag-cli.sh</a>
+   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-diag-cli.sh">az-vm-diag-cli.sh</a>
    </strong></pre>
 
 * Create a VM; Recovery Services vault, a backup policy, then creates a VM and applies the backup policy before starting the initial backup job.
 
    <pre><strong>MY_RG="azuremolchapter13-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-your-way/blob/main/az-vm-backup-cli.sh">az-vm-backup-cli.sh</a>
+   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-backup-cli.sh">az-vm-backup-cli.sh</a>
    </strong></pre>
 
 * Create a Docker container from a Dockerfile; Create AKS; Scale up replicas 
 
    <pre><strong>MY_RG="azuremolchapter19-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-your-way/blob/main/az-aks-cli.sh">az-aks-cli.sh</a>
+   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-aks-cli.sh">az-aks-cli.sh</a>
    </strong></pre>
    
    The IP shows the "Month of Pizza Lunches in a container" website (load balanced).
@@ -275,13 +275,13 @@ The follow are steps and outputs from the run:
    <pre><strong>export MY_PROJECT_FOLDER="iot-project"
    export MY_IOT_HUB_NAME="hubahuba"
    export MY_IOT_HUB_GROUP="hubgroupie"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-your-way/blob/main/iot/az-iot-cli.sh">az-iot-cli.sh</a>
+   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/iot/az-iot-cli.sh">az-iot-cli.sh</a>
    </strong></pre>
 
 * Create Azure Functions:
 
    <pre><strong>MY_RG="azuremolchapter21-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-your-way/blob/main/az-functions-temp.sh">az-functions-temp.sh</a>
+   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-functions-temp.sh">az-functions-temp.sh</a>
    </strong></pre>
 
    Several Functions components are not available in the Azure CLI, so manual actions are needed on Azure portal to fill in the gaps.

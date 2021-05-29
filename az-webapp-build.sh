@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # ./az-webapp-build.sh
-# in https://github.com/wilsonmar/azure-your-way
+# in https://github.com/wilsonmar/azure-quickly
 # Data based on https://microsoftlearning.github.io/AZ-204-DevelopingSolutionsforMicrosoftAzure/Instructions/Labs/AZ-204_01_lab.html
-# 1. Prepare your CLI Bash environment according to https://wilsonmar.github.io/azure-your-way
-#    which references repo https://github.com/wilsonmar/azure-your-way.
+# 1. Prepare your CLI Bash environment according to https://wilsonmar.github.io/azure-quickly
+#    which references repo https://github.com/wilsonmar/azure-quickly.
 # 2. In your clouddrive folder edit your preferences in ../setmem.sh (MY_RG, MY_LOC, etc.)
 # 3. Copy and paste this to the Bash command line:
-#    bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-your-way/master/az-webapp-build.sh)" -v -i
+#    bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-quickly/master/az-webapp-build.sh)" -v -i
 
 set -o errexit
 

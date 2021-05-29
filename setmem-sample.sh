@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# ./setmem.sh is based on https://github.com/wilsonmar/azure-your-way/blob/main/setmem-sample.sh
-# copied above the azure-your-way repo folder by az-setup-cli.sh
+# ./setmem.sh is based on https://github.com/wilsonmar/azure-quickly/blob/main/setmem-sample.sh
+# copied above the azure-quickly repo folder by az-setup-cli.sh
 # CAUTION: DO NOT SAVE THIS FILE IN GITHUB
 # TODO: Save secrets in KeyVault (to rotate keys) and retrieve from there.
 
@@ -17,7 +17,7 @@
    export ARM_SUBSCRIPTION_ID="$MY_SUBSCRIPTION_ID"
    export ARM_TENANT_ID="$TENANT_ID"
 #
-   export MY_REPO="azure-your-way"           # repo name in my GitHub.com/wilsonmar
+   export MY_REPO="azure-quickly"           # repo name in my GitHub.com/wilsonmar
   #export MY_SCRIPT="az-???-cli.sh"          # the script being called
    export MY_SCRIPT_VERSION="0.1.4"          # to be sure that you're getting the right one.
 #
@@ -73,7 +73,7 @@ fi
    export MY_PLAN="${MY_RG}plan$RANDOM"    # used by Function App
    export MY_FUNC_APP_NAME="${MY_RG}funcapp$RANDOM"  # globally unique in front of .azurewebsites.net
    export MY_FUNC_APP_VER=2                # New!
-   export MY_FUNC_APP_URL="https://raw.githubusercontent.com/wilsonmar/azure-your-way/main/analyzeTemperature.js"
+   export MY_FUNC_APP_URL="https://raw.githubusercontent.com/wilsonmar/azure-quickly/main/analyzeTemperature.js"
 #
    export MY_SSH_KEY_FILE_NAME="id_rsa".        # default is id_rsa.
    export MY_MANAGED_IDENTITY="${MY_RG}identity$RANDOM" # LIMIT: Max. 24 chars/nums, no dashes.

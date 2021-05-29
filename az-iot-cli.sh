@@ -178,7 +178,7 @@ echo ">>> Clone the Azure sample repo, if it's not already there"
 cd ~ 
 cd clouddrive
 rm -rf "${MY_PROJECT_FOLDER}"
-git clone https://github.com/wilsonmar/azure-your-way.git  "${MY_PROJECT_FOLDER}"  --depth 1 
+git clone https://github.com/wilsonmar/azure-quickly.git  "${MY_PROJECT_FOLDER}"  --depth 1 
 cd "${MY_PROJECT_FOLDER}"
 pwd
 

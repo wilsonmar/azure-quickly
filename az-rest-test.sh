@@ -2,7 +2,7 @@
 # source ./az-rest-test.sh
 # This detects language of input text "hello" or "hola" (Spanish)
 # Adapted from 
-# https://github.com/wilsonmar/azure-your-way/blob/main/02-cognitive-security/rest-test.cmd
+# https://github.com/wilsonmar/azure-quickly/blob/main/02-cognitive-security/rest-test.cmd
 # and
 # https://github.com/MicrosoftLearning/AI-102-AIEngineer/blob/master/03-monitor/rest-test.cmd
 

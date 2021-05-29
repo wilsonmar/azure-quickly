@@ -2,11 +2,11 @@
 
 # ./az-storage-init.sh
 # This creates a storage account, the equivalent of manual portal
-# 1. Prepare your CLI Bash environment according to https://wilsonmar.github.io/azure-your-way
-#    which references repo https://github.com/wilsonmar/azure-your-way.
+# 1. Prepare your CLI Bash environment according to https://wilsonmar.github.io/azure-quickly
+#    which references repo https://github.com/wilsonmar/azure-quickly.
 # 2. In your clouddrive folder edit your preferences in ../setmem.sh (MY_RG, MY_LOC, etc.)
 # 3. Copy and paste this to the Bash command line:
-#    bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-your-way/master/az-storage-init.sh)" -v -i
+#    bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-quickly/master/az-storage-init.sh)" -v -i
 
 set -o errexit
 

@@ -1,0 +1,5 @@
+.env
+############# Mac OS  ###################
+.DS_Store
+.DS_S*
+Desktop.ini

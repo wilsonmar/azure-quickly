@@ -1,27 +1,30 @@
-## README.txt
+This repo (at <a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https://github.com/wilsonmar/azure-quickly</a>) contains automation scripts to invoke instead of manually mousing and typing through the Azure Portal (which is not quickly repeatable).
 
-This repo contains automation scripts to invoke instead of manually operating the Azure Portal, so that you can save money by deleting Resource Groups because you can get resources back with just a few commands. The scripts are repeatable. 
+Using this repo can save you money because you can confidently delete Resource Groups because you can get resources back with just a few commands. The scripts are repeatable. 
 
-Most scripts in the rep are Bash shell scripts that run natively on MacOS and thus familiar to most developers. PowerShell scripts are used in cases where they are the only solution. Utility script code enable the scripts to run from Linux and Windows Git Shell. 
-
-Scripts are also useful for learning both Azure and CLI Bash shell scripting. 
+We created these scripts while we took classes to learn both Azure and CLI Bash shell scripting. 
+Most scripts in the rep are Bash shell scripts for their portability. Bash runs natively on MacOS and thus familiar to most developers. Bash scripts can run on Windows Git Shell. CLI calls PowerShell commands when PowerShell is the only solution. 
 
 TODO: Setup a CI/CD pipeline to run these scripts whenever a git push into github occurs.
 
 For now, here are manual steps to invoke these scripts:
 
+1. First, get skill at using Azure Portal and CLI Bash by following my deep but concise tutorial at 
+
+   <a target="_blank" href="https://wilsonmar.github.io/azure-cloud-onramp/">https://wilsonmar.github.io/azure-cloud-onramp</a>
+
+   It covers creation of free Azure accounts and Azure Storage accounts to hold files in a clouddrive.
+
 1. Be in <a target="_blank" href="https://shell.azure.com/">https://shell.azure.com</a><br />
    or click the CLI icon after entering<br />
    <a target="_blank" href="https://portal.azure.com/">https://portal.azure.com</a>
-
-1. If you need to, create a Storage account to hold files in a clouddrive.
-
+   
 
    ## az-setup-cli.sh
 
 1. Copy and paste this one command in the CLI script window:
 
-   <pre><strong>bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-your-way/master/az-setup-cli.sh)" -v -i</strong></pre>
+   <pre><strong>bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-quickly/master/az-setup-cli.sh)" -v -i</strong></pre>
 
    The script should do all the steps below:
 
@@ -50,8 +53,8 @@ For now, here are manual steps to invoke these scripts:
 
    4. Download this repo to establish a run environment:
 
-   <pre><strong>git clone https://github.com/wilsonmar/azure-your-way.git --depth 1 
-   cd azure-your-way
+   <pre><strong>git clone https://github.com/wilsonmar/azure-quickly.git --depth 1 
+   cd azure-quickly
    ls
    </strong></pre>
 
@@ -168,7 +171,7 @@ For now, here are manual steps to invoke these scripts:
    That is how you can run scripts for several regions/locations - by changing just the <tt>MY_LOC</tt> environment variable's value and running the script again.
    
 1. Now you're ready to run using Python scripts at
-https://github.com/wilsonmar/azure-your-way/blob/main/ai-102-run.sh
+https://github.com/wilsonmar/azure-quickly/blob/main/ai-102-run.sh
 
    <pre><strong>chmod +x ai-102-run.sh
    source ./ai-102-run.sh
@@ -198,13 +201,13 @@ The follow are steps and outputs from the run:
 
 * Run a Bing Search using API:
 
-   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-your-way/blob/main/az-bing-cli.sh">az-bing-cli.sh</a>
+   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-bing-cli.sh">az-bing-cli.sh</a>
    </strong></pre>
 
 
 * Create an Azure Key Vault for use by scripts to follow:
 
-   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-your-way/blob/main/az-keyvault-cli.sh">az-keyvault-cli.sh</a>
+   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-keyvault-cli.sh">az-keyvault-cli.sh</a>
    </strong></pre>
 
    Optionally, put a secret in it; show secret; delete secret; recover secret; create a vm; Managed Service Identity; update permissions; Custom Script Extension; Apply the Custom Script Extension:
@@ -212,7 +215,7 @@ The follow are steps and outputs from the run:
 * Create a Machine Learning Workspace to run iPython Notebooks using JupyterLab:
 
    <pre><strong>export MY_MLWORKSPACE_NAME="mela"
-   ./<a href="https://github.com/wilsonmar/azure-your-way/blob/main/az-mlworkspace-cli.sh">az-mlworkspace-cli.sh</a>
+   ./<a href="https://github.com/wilsonmar/azure-quickly/blob/main/az-mlworkspace-cli.sh">az-mlworkspace-cli.sh</a>
    </strong></pre>
    
 

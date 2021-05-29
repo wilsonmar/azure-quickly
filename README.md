@@ -1,13 +1,19 @@
+Using this repo can save you money because you can confidently delete Resource Groups because you can get resources back with just a few commands. 
+
+People leave resources running because they don't have the time to repeat the <strong>manual toil to click though the Azure Portal GUI</strong>. 
+
+Don't leave resources running, running up your credit card bill.
+
 This repo (at <a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https://github.com/wilsonmar/azure-quickly</a>) contains automation scripts to invoke instead of manually mousing and typing through the Azure Portal (which is not quickly repeatable).
 
-Using this repo can save you money because you can confidently delete Resource Groups because you can get resources back with just a few commands. The scripts are repeatable. 
+Most scripts in the rep are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. PowerShell scripts are used in cases where they are the only solution. Script code can run on Windowsw Git Bash Shell.
 
 We created these scripts while we took classes to learn both Azure and CLI Bash shell scripting. 
 Most scripts in the rep are Bash shell scripts for their portability. Bash runs natively on MacOS and thus familiar to most developers. Bash scripts can run on Windows Git Shell. CLI calls PowerShell commands when PowerShell is the only solution. 
 
-TODO: Setup a CI/CD pipeline to run these scripts whenever a git push into github occurs.
+Within script code are references to documentation and tutorials related to the commands used.
 
-For now, here are manual steps to invoke these scripts:
+### Let's Go!
 
 1. First, get skill at using Azure Portal and CLI Bash by following my deep but concise tutorial at 
 
@@ -18,17 +24,156 @@ For now, here are manual steps to invoke these scripts:
 1. Be in <a target="_blank" href="https://shell.azure.com/">https://shell.azure.com</a><br />
    or click the CLI icon after entering<br />
    <a target="_blank" href="https://portal.azure.com/">https://portal.azure.com</a>
-   
 
-   ## az-setup-cli.sh
 
-1. Copy and paste this one command in the CLI script window:
+   ### Setup an environment for new Subscription
+
+1. Triple-click this command below:
 
    <pre><strong>bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-quickly/master/az-setup-cli.sh)" -v -i</strong></pre>
 
+1. Right-click the highlighted and select "Copy".
+
+1. Get in <a target="_blank" href="https://shell.azure.com/">https://shell.azure.com</a>
+   or click the CLI icon after entering
+   <a target="_blank" href="https://portal.azure.com/">https://portal.azure.com</a>
+
+1. Right-click anywhere on the CLI Terminal window, then press command+V to paste from the Clipboard:
+
+1. Press Enter to run the script. It takes several minutes to run.
+
+   Steps executed by the script "az-setup-cli.sh" are <a href="#az-setup-cli.sh">described in the section below</a>. When done, you should see the folder containing scripts and the prompt at the left, where it will stay after each command (instead of at the end of the folder path):
+
+   <pre>~/clouddrive/azure-quickly
+   $ _</pre>
+
+1. Use the built-in Visual Studio Code editor to edit file setmem.sh 
+
+   <pre><strong>code ../setmem.sh
+   </strong></pre>
+
+1. Switch to the Portal GUI.
+1. Open the Subscription blade. Click on your current Subscription. 
+1. Click the copy icon next to the Subscription code (so it gets saved to your Clipboard).
+
+1. Switch to the Code editor window. Highlight the existing text in variable MY_SUBSCRIPTION_ID and press Paste (Command+V on Macs or Ctrl+V on Windows).
+1. Click the "..." menu to the right of the Code editor window to save, then exit.
+
+
+### Run your commands:
+
+   Now you can run scripts to create and manage resources. 
+   Most of the scripts reference a tutorial at Microsoft Learn, CloudAcademy, Pluralsight, Coursera, etc.
+
+* Run a Bing Search using API:
+
+   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-bing-cli.sh">az-bing-cli.sh</a>
+   </strong></pre>
+
+
+* Create an Azure Key Vault for use by scripts to follow:
+
+   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-keyvault-cli.sh">az-keyvault-cli.sh</a>
+   </strong></pre>
+
+   Optionally, put a secret in it; show secret; delete secret; recover secret; create a vm; Managed Service Identity; update permissions; Custom Script Extension; Apply the Custom Script Extension:
+
+* Create a Machine Learning Workspace to run iPython Notebooks using JupyterLab:
+
+   <pre><strong>export MY_MLWORKSPACE_NAME="mela"
+   ./<a href="https://github.com/wilsonmar/azure-quickly/blob/main/az-mlworkspace-cli.sh">az-mlworkspace-cli.sh</a>
+   </strong></pre>
+   
+
+* Use Azure Cognitive Services:
+
+   <pre><strong>export MY_COG_ACCT="cogme"
+   export MY_COG_PRICING_TIER="F0"  # or S0
+   ./<a href="https://github.com/wilsonmar/azure-quickly/blob/main/az-cog-cli.sh">az-cog-cli.sh</a>
+   </strong></pre>
+
+* Use Helm charts
+
+   <pre><strong>./<a href="https://github.com/wilsonmar/azure-quickly/blob/main/az-helm-cli.sh">az-helm-cli.sh</a>
+   </strong></pre>
+
+* Create a VM with a public IP address:
+
+   <pre><strong>./<a href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-cli.sh">az-vm-cli.sh</a>
+   </strong></pre>
+
+* Create an App Service Plan, Azure Web App, Deployment, to show MY_APPNAME.
+
+   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-webapp-cli.sh">az-webapp-cli.sh</a>
+   </strong></pre>
+
+* Create a network with two subnets and a network security group that secures inbound traffic. One subnet is for remote access traffic, one is web traffic for VMs that run a web server. Two VMs are then created. One allows SSH access and has the appropriate network security group rules applied. You use this VM as an <strong>SSH jumpbox</strong> to then connect to the the second VM which can be used an web server:
+
+   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
+   </strong></pre> 
+
+* Create a VM with a public IP address. Enabled are a storage account, boot diagnostics with the VM diagnostics extension applied:
+
+   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-diag-cli.sh">az-vm-diag-cli.sh</a>
+   </strong></pre>
+
+* Create a VM; Recovery Services vault, a backup policy, then creates a VM and applies the backup policy before starting the initial backup job.
+
+   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-backup-cli.sh">az-vm-backup-cli.sh</a>
+   </strong></pre>
+
+* Create a Docker container from a Dockerfile; Create AKS; Scale up replicas 
+
+   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-aks-cli.sh">az-aks-cli.sh</a>
+   </strong></pre>
+   
+   The IP shows the "Month of Pizza Lunches in a container" website (load balanced).
+
+* Create IoT for WebApp:
+
+   <pre><strong>export MY_PROJECT_FOLDER="iot-project"
+  export MY_IOT_HUB_NAME="hubahuba"
+  export MY_IOT_HUB_GROUP="hubgroupie"
+  ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/iot/az-iot-cli.sh">az-iot-cli.sh</a>
+   </strong></pre>
+
+* Create Azure Functions:
+
+   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-functions-temp.sh">az-functions-temp.sh</a>
+   </strong></pre>
+
+   Several Functions components are not available in the Azure CLI, so manual actions are needed on Azure portal to fill in the gaps.
+   See the "Month of Lunches" ebook.
+
+https://github.com/Azure/azure-quickstart-templates
+
+<hr />
+
+## Script coding tricks
+
+Bash scripts here are written with coding conventions defined at <a target="_blank" href="https://wilsonmar.github.io/bash-codng">https://wilsonmar.github.io/bash-coding</a> which include:
+
+   * <tt>source ./az-all-start.sh </tt> sets up environment variables and utility functions.
+
+   * <tt>set -o errexit</tt> makes it so that the script stops on the first error (instead of running on).
+
+   * A backslash \ character at the end of a line within the same az shell command continues that command.
+
+   * A new Resource Group and all resources are created new every run to reduce the complexity of coding for idempotency (the status is the same at the end of every re-run).
+
+   * <tt>--resource-group</tt> is a required argument on many commands. It's last so that missing slash line a line above it would cause the command to fail.
+
+   * Variable (specification) data controlling Python programs are passed to Python programs by saving them as variables in an <strong>.env file</strong> in the same folder as the Python program.
+
+<hr />
+   
+<a name="az-setup-cli.sh"></a>
+
+## az-setup-cli.sh
+
    The script should do all the steps below:
 
-   1. OPTIONAL: Edit the <tt>.bashrc</tt> file to customize the prompt:
+1. OPTIONAL: Edit the <tt>.bashrc</tt> file to customize the prompt:
    
    If you're in the <strong>cloud Shell</strong> (which runs the Linux operating system), add these lines to the bottom of the <strong>.bashrc</strong>:
    
@@ -39,7 +184,7 @@ For now, here are manual steps to invoke these scripts:
 
    "#" at the last line of the file is a hack to make a comment out of the PS1 the system adds on its own.
 
-   2. Navigate into a folder which holds repository to be downloaded:
+2. Navigate into a folder which holds repository to be downloaded:
 
    Within Cloud Shell, it's<br />
    <tt><strong>cd cloudshell</strong></tt>
@@ -47,11 +192,11 @@ For now, here are manual steps to invoke these scripts:
    Alternately, on my laptop, I use<br />
    <tt>cd gmail_acct</tt>
 
-   3. Remove the previous repo folder:
+3. Remove the previous repo folder:
 
    PROTIP: A time proxy command is added in front of commands to identify how many time was taken to run the command each time. For example, "0m4.559s" means about 4.6 seconds.
 
-   4. Download this repo to establish a run environment:
+4. Download this repo to establish a run environment:
 
    <pre><strong>git clone https://github.com/wilsonmar/azure-quickly.git --depth 1 
    cd azure-quickly
@@ -62,12 +207,12 @@ For now, here are manual steps to invoke these scripts:
 
    <tt>ls</tt> lists folders and files to confirm the download actually occurred.
 
-   5. Give all the shell file permissions to run:
+5. Give all the shell file permissions to run:
 
    <pre><strong>chmod +x *.sh
    </strong></pre>
 
-   6. Run script to setup Azure Providers:
+6. Run script to setup Azure Providers:
 
    <pre><strong>source az-providers-setup.sh
    </strong></pre>
@@ -93,13 +238,13 @@ For now, here are manual steps to invoke these scripts:
 
    The above only needs to be done once, but running it again won't be harmful.
 
-   7. Give setmem.sh permissions to run and run it :
+7. Give setmem.sh permissions to run and run it :
 
    <pre><strong>chmod +x ../setmem.sh
    source ../setmem.sh
    </strong></pre>
 
-   8. Move (copy and rename) "sample-setmem.sh" to file "setmem.sh" 
+8. Move (copy and rename) "sample-setmem.sh" to file "setmem.sh" 
 
    <pre><strong>mv setmem-sample.sh ../setmem.sh
    </strong></pre>
@@ -109,7 +254,7 @@ For now, here are manual steps to invoke these scripts:
 
    ### Manually customize values in setmem.sh
 
-   9. Open the file for edit using program "code" (Visual Studio Code):
+9. Open the file for edit using program "code" (Visual Studio Code):
 
    <pre><strong>code ../setmem.sh
    </strong></pre>
@@ -156,9 +301,9 @@ For now, here are manual steps to invoke these scripts:
 
    ## Each work session
 
-1. At the beginning of each session invoke the script:
+1. At the beginning of each session invoke the script in the folder just above your custom scripts repo:
 
-   <pre><strong>source ./setmem.sh
+   <pre><strong>source ../setmem.sh
    </strong></pre>
 
    NOTE: Using "source" to run the script so that environment variables defined in the script will be visible after the script is done, and be inherited by any programs you launch from it. That's because source runs the script in the current shell. But note that any exit statement would stop the run.
@@ -169,20 +314,6 @@ For now, here are manual steps to invoke these scripts:
    After execution, you can still override variable values before running another script.
 
    That is how you can run scripts for several regions/locations - by changing just the <tt>MY_LOC</tt> environment variable's value and running the script again.
-   
-1. Now you're ready to run using Python scripts at
-https://github.com/wilsonmar/azure-quickly/blob/main/ai-102-run.sh
-
-   <pre><strong>chmod +x ai-102-run.sh
-   source ./ai-102-run.sh
-   </strong></pre>
-
-The follow are steps and outputs from the run:
-
-1. 
-
-
-## After the run
 
 1. PROTIP: <strong>Delete resource groups</strong> to stop charges from accumulating on Virtual Servers:
 
@@ -195,114 +326,6 @@ The follow are steps and outputs from the run:
 
 <hr />
 
-## Individual executions
-
-1. Invoke an individual Bash script with a command like this to create various resources within Azure:
-
-* Run a Bing Search using API:
-
-   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-bing-cli.sh">az-bing-cli.sh</a>
-   </strong></pre>
-
-
-* Create an Azure Key Vault for use by scripts to follow:
-
-   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-keyvault-cli.sh">az-keyvault-cli.sh</a>
-   </strong></pre>
-
-   Optionally, put a secret in it; show secret; delete secret; recover secret; create a vm; Managed Service Identity; update permissions; Custom Script Extension; Apply the Custom Script Extension:
-
-* Create a Machine Learning Workspace to run iPython Notebooks using JupyterLab:
-
-   <pre><strong>export MY_MLWORKSPACE_NAME="mela"
-   ./<a href="https://github.com/wilsonmar/azure-quickly/blob/main/az-mlworkspace-cli.sh">az-mlworkspace-cli.sh</a>
-   </strong></pre>
-   
-
-* Use Azure Cognitive Services:
-
-   <pre><strong>export MY_COG_ACCT="cogme"
-   export MY_COG_PRICING_TIER="F0"  # or S0
-   ./<a href="https://github.com/wilsonmar/azure-quickly/blob/main/az-cog-cli.sh">az-cog-cli.sh</a>
-   </strong></pre>
-
-* Use Helm charts
-
-   <pre><strong>MY_RG="helm-$MY_LOC"
-   ./<a href="https://github.com/wilsonmar/azure-quickly/blob/main/az-helm-cli.sh">az-helm-cli.sh</a>
-   </strong></pre>
-
-* Create a VM with a public IP address:
-
-   <pre><strong>MY_RG="azuremolchapter2-$MY_LOC"
-   ./<a href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-cli.sh">az-vm-cli.sh</a>
-   </strong></pre>
-
-* Create an App Service Plan, Azure Web App, Deployment, to show MY_APPNAME.
-
-   <pre><strong>MY_RG="azuremolchapter3-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-webapp-cli.sh">az-webapp-cli.sh</a>
-   </strong></pre>
-
-* Create a network with two subnets and a network security group that secures inbound traffic. One subnet is for remote access traffic, one is web traffic for VMs that run a web server. Two VMs are then created. One allows SSH access and has the appropriate network security group rules applied. You use this VM as an <strong>SSH jumpbox</strong> to then connect to the the second VM which can be used an web server:
-
-   <pre><strong>MY_RG="azuremolchapter5-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
-   </strong></pre> 
-
-* Create a VM with a public IP address. Enabled are a storage account, boot diagnostics with the VM diagnostics extension applied:
-
-   <pre><strong>MY_RG="azuremolchapter12-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-diag-cli.sh">az-vm-diag-cli.sh</a>
-   </strong></pre>
-
-* Create a VM; Recovery Services vault, a backup policy, then creates a VM and applies the backup policy before starting the initial backup job.
-
-   <pre><strong>MY_RG="azuremolchapter13-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-backup-cli.sh">az-vm-backup-cli.sh</a>
-   </strong></pre>
-
-* Create a Docker container from a Dockerfile; Create AKS; Scale up replicas 
-
-   <pre><strong>MY_RG="azuremolchapter19-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-aks-cli.sh">az-aks-cli.sh</a>
-   </strong></pre>
-   
-   The IP shows the "Month of Pizza Lunches in a container" website (load balanced).
-
-* Create IoT for WebApp:
-
-   <pre><strong>export MY_PROJECT_FOLDER="iot-project"
-   export MY_IOT_HUB_NAME="hubahuba"
-   export MY_IOT_HUB_GROUP="hubgroupie"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/iot/az-iot-cli.sh">az-iot-cli.sh</a>
-   </strong></pre>
-
-* Create Azure Functions:
-
-   <pre><strong>MY_RG="azuremolchapter21-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-functions-temp.sh">az-functions-temp.sh</a>
-   </strong></pre>
-
-   Several Functions components are not available in the Azure CLI, so manual actions are needed on Azure portal to fill in the gaps.
-   See the "Month of Lunches" ebook.
-
-
-## Script coding tricks
-
-Bash scripts here are written with coding conventions defined at <a target="_blank" href="https://wilsonmar.github.io/bash-codng">https://wilsonmar.github.io/bash-coding</a> which include:
-
-   * <tt>set -o errexit</tt> makes it so that the script stops on the first error (instead of running on).
-
-   * A backslash \ character at the end of a line within the same az shell command continues that command.
-
-   * A new Resource Group and all resources are created new every run to reduce the complexity of coding for idempotency (the status is the same at the end of every re-run).
-
-   * <tt>--resource-group</tt> is a required argument on many commands. It's last so that missing slash line a line above it would cause the command to fail.
-
-   * Variable (specification) data controlling Python programs are passed to Python programs by saving them as variables in an <strong>.env file</strong> in the same folder as the Python program.
-   
-   
 ## References
 
 Scripts here are adapted from various experts generous with sharing their code:
@@ -324,4 +347,3 @@ Scripts here are adapted from various experts generous with sharing their code:
    * Gruntwork (Terraform)
    * CloudPosse (Terraform for AWS)
    <br /><br />
-

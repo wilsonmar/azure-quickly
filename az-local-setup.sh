@@ -27,6 +27,8 @@ brew link --overwrite azure-functions-core-tools@3
    #Resolving deltas: 100% (280/280), done.
    #Tapped 4 formulae (32 files, 112.8KB).
 
+az extension add -n ml
+
 npm
 
 # If you're using Azure Functions:

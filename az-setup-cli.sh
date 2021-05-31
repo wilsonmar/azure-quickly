@@ -73,6 +73,9 @@ echo ">>> Install Azure Providers  "
 # Per https://microsoftlearning.github.io/AI-102-AIEngineer/Instructions/00-update-resource-providers.html
 time source az-providers-setup.sh
 
+echo ">>> az extension add -n ml [for az ml commands] "
+az extension add -n ml
+
 echo ">>> Install Python components  "
 # Per https://microsoftlearning.github.io/AI-102-AIEngineer/Instructions/00-setup.html
    pip install flask requests python-dotenv pylint matplotlib pillow

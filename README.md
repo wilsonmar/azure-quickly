@@ -6,12 +6,11 @@ Don't leave resources running, running up your credit card bill.
 
 This repo (at <a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https://github.com/wilsonmar/azure-quickly</a>) contains automation scripts to invoke instead of manually mousing and typing through the Azure Portal (which is not quickly repeatable).
 
-Most scripts in the rep are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. PowerShell scripts are used in cases where they are the only solution. Script code can run on Windowsw Git Bash Shell.
-
-We created these scripts while we took classes to learn both Azure and CLI Bash shell scripting. 
-Most scripts in the rep are Bash shell scripts for their portability. Bash runs natively on MacOS and thus familiar to most developers. Bash scripts can run on Windows Git Shell. CLI calls PowerShell commands when PowerShell is the only solution. 
-
+We created these scripts while we learned to click through the Azure Portal and reference ARM templates.
 Within script code are references to documentation and tutorials related to the commands used.
+
+Most scripts in the rep are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. PowerShell scripts are used in cases where they are the only solution. Script code can run on Windowsw Git Bash Shell. However, there is a risk that CLI functions may not work when its underlying <a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">REST API</a> does work. So Postman files are included when appropriate. Additionally, some Bash scripts calls PowerShell commands when PowerShell is the only solution. 
+
 
 ### Let's Go!
 

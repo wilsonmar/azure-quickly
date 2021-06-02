@@ -10,7 +10,7 @@
 set -o errexit
 
 if [[ -z $MY_RG ]]; then
-   source ../setup.sh   # in folder above this.
+   source ../setmem.sh   # in folder above this.
 fi
 
 
@@ -27,7 +27,7 @@ echo ">>> Create Resource Group \"$MY_RG\" used for KeyVault, Storage Acct, etc.
 # https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/overview
 # https://docs.microsoft.com/en-us/cli/azure/ml?view=azure-cli-latest
 # Python wheels 
-echo ">>> Add CLI extension \"azure-cli-ml\" "
+echo ">>> Check & Add CLI extension \"azure-cli-ml\" "
 RESPONSE=$( time az extension update -n azure-cli-ml )
 if [ "The extension azure-cli-ml is not installed." == "${RESPONSE}" ]; then
    time az extension add -n "azure-cli-ml"
@@ -60,4 +60,4 @@ fi
       --ssh-public-access False \
       --resource-group "${MY_RG}" -v
 
-
+# https://docs.microsoft.com/en-us/samples/azure/azureml-examples/azure-machine-learning-20-cli-preview-examples/

@@ -3,6 +3,7 @@
 # ./az-setup-cli.sh
 
 # This script is meant to be run by copy and paste:
+# as described in https://wilsonmar.github.io/azure-quickly
 # bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-quickly/master/az-setup-cli.sh)" -v -i
 # within https://github.com/MicrosoftLearning/AI-102-AIEngineer/blob/master/...
 #

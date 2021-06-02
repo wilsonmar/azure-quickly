@@ -1,18 +1,25 @@
-Using this repo can save you money because you can confidently delete Resource Groups because you can get resources back with just a few commands. 
+Using this repo can <strong>save you time and money</strong> and give you some peace of mind and happiness.
 
-People leave resources running because they don't have the time to repeat the <strong>manual toil to click though the Azure Portal GUI</strong>. 
+Why and How?
 
-Don't leave resources running, running up your credit card bill.
+People leave resources running because they <strong>don't want to spend their life repeating the manual toil</strong> of clicking though the Azure Portal GUI, as described by most Azure tutorials.
 
-This repo (at <a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https://github.com/wilsonmar/azure-quickly</a>) contains automation scripts to invoke instead of manually mousing and typing through the Azure Portal (which is not quickly repeatable).
+This repo (at <a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https://github.com/wilsonmar/azure-quickly</a>) contains automation scripts which enable you to confidently <strong>delete Resource Groups</strong> when you're resting or playing becuase it enables you to <strong>get resources back</strong> with just a few commands, even with a brand-new Subscription.
 
-We created these scripts while we learned to click through the Azure Portal and reference ARM templates.
-Within script code are references to documentation and tutorials related to the commands used.
+You save money because you don't have to leave resources running, consuming credits or running up your credit card bill.
+
+It's stressful to accurately repeat the manual mousing and typing through the Azure Portal (which is not quickly repeatable).
 
 Most scripts in the rep are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. PowerShell scripts are used in cases where they are the only solution. Script code can run on Windowsw Git Bash Shell. However, there is a risk that CLI functions may not work when its underlying <a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">REST API</a> does work. So Postman files are included when appropriate. Additionally, some Bash scripts calls PowerShell commands when PowerShell is the only solution. 
 
+## How it works
 
-### Let's Go!
+![azure-quickly-cli.png](https://user-images.githubusercontent.com/300046/120510665-e3370580-c386-11eb-947d-477191a8888e.png)
+
+After you get a new subscription and use the portal to create a storage account for a <strong>clouddrive</strong> within the shell, this tutorial explains how you can initiate your custom environment from scratch in the CLI Bash terminal. In there, from the github README we copy a bash command and <strong>paste</strong> it in the shell. The script both downloads and runs an initialization script. That init script clones from GitHub a repo containing various scripts that can run alone or be called by the <strong>deploy</strong> script. The init script also establishes from a sample the <strong>setmem script</strong> which defines environment variable values in memory to control script operation. Note that the setmen file is in a higher folder than where script code may be pushed to github. That's because the setmem file is manually edited with values private to the individual subscription. There may be a different file for each environment (such as dev vs. prod). When one of the scripts run, it can call setmem to establish the memory variables it needs. Optionally, parameter flags such as <strong>–v for verbose</strong> display can be specified. A <strong>variables vetting</strong> script may also be called to validate the memory variables before invocation. Alternately, instead of a setmem script, we can edit a JSON specification file and which a Python program reads to update environment variables.
+
+
+## Let's Go!
 
 1. First, get skill at using Azure Portal and CLI Bash by following my deep but concise tutorial at 
 

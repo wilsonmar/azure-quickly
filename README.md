@@ -12,7 +12,7 @@ It's stressful to accurately repeat the manual mousing and typing through the Az
 
 Most scripts in the rep are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. PowerShell scripts are used in cases where they are the only solution. Script code can run on Windowsw Git Bash Shell. However, there is a risk that CLI functions may not work when its underlying <a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">REST API</a> does work. So Postman files are included when appropriate. Additionally, some Bash scripts calls PowerShell commands when PowerShell is the only solution. 
 
-## How it works
+## How it works internally
 
 ![azure-quickly-cli.png](https://user-images.githubusercontent.com/300046/120510665-e3370580-c386-11eb-947d-477191a8888e.png)
 
@@ -34,17 +34,17 @@ After you get a new subscription and use the portal to create a storage account 
 
    ### Setup an environment for new Subscription
 
-1. Triple-click this command below:
+1. Triple-click the command below to highlight it:
 
    <pre><strong>bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-quickly/master/az-setup-cli.sh)" -v -i</strong></pre>
 
-1. Right-click the highlighted and select "Copy".
+1. Right-click and select "Copy" to save the highlighted temporarily in your Clipboard.
 
 1. Get in <a target="_blank" href="https://shell.azure.com/">https://shell.azure.com</a>
    or click the CLI icon after entering
    <a target="_blank" href="https://portal.azure.com/">https://portal.azure.com</a>
 
-1. Right-click anywhere on the CLI Terminal window, then press command+V to paste from the Clipboard:
+1. Right-click anywhere on the CLI Bash terminal window, then press <strong>command+V</strong> to paste from the Clipboard.
 
 1. Press Enter to run the script. It takes several minutes to run.
 
@@ -70,6 +70,12 @@ After you get a new subscription and use the portal to create a storage account 
 
    Now you can run scripts to create and manage resources. 
    Most of the scripts reference a tutorial at Microsoft Learn, CloudAcademy, Pluralsight, Coursera, etc.
+
+* Run the script I've modified from the ML CLI v2 (Preview) <a target="_blank" href="https://github.com/Azure/azureml-examples/blob/main/cli/setup.sh">github.com/Azure/azureml-examples/blob/main/cli/setup.sh</a>:
+
+   <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-mlcli2.sh">az-mlcli2.sh</a>
+   </strong></pre>
+
 
 * Run a Bing Search using API:
 

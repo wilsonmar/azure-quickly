@@ -75,7 +75,13 @@ echo ">>> Install Azure Providers  "
 time source az-providers-setup.sh
 
 echo ">>> az extension add -n ml [for az ml commands] "
+# Per https://docs.microsoft.com/en-us/azure/machine-learning/how-to-configure-cli
+# Ensure no conflicting extension using the ml namespace:
+az extension remove -n azure-cli-ml
+az extension remove -n ml
 az extension add -n ml
+   # The installed extension 'ml' is experimental and not covered by customer support. Please use with discretion.
+
 
 echo ">>> Install Python components  "
 # Per https://microsoftlearning.github.io/AI-102-AIEngineer/Instructions/00-setup.html

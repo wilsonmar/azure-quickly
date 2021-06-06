@@ -63,7 +63,7 @@ if [[ -z "${MY_STORAGE_ACCT}" ]]; then  # not defined
          # LIMIT: Max. 24 lower-case char & numbers, no dashes. globally unique 
          # MY_STORAGE_ACCT.core.windows.net
 fi
-   export MY_STORAGE_SKU="standard_lrs"
+   export MY_STORAGE_SKU="standard_lrs"  # Standard_NC12
    export MY_STORAGE_TAGS=""   # env=dev"
    export MY_STORAGE_CONTAINER="wooz"
 #

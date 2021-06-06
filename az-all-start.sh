@@ -23,12 +23,11 @@ echo "=========================== $LOG_DATETIME $THIS_PROGRAM $SCRIPT_VERSION"
 ### 3. Define devault values for script invocation parameter "feature flags" not specified:
    CLONE_GITHUB=false           # -c
    CONTINUE_ON_ERR=false        # -E
-   REMOVE_GITHUB_AFTER=false    # -R
    RUN_DEBUG=false              # -vv
    RUN_QUIET=false              # -q
    RUN_VERBOSE=false            # -v
    SET_TRACE=false              # -x
-   RMV_RG_BEFORE=true       # parm -RRGb
+   RMV_RG_BEFORE=true        # parm -RRGb
    RMV_RG_AT_END=false       # parm -RRGe
    RMV_GITHUB_BEFORE=false   # parm -RGb
    RMV_GITHUB_AT_END=false   # parm -RGe

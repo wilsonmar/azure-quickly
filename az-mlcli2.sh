@@ -13,9 +13,9 @@ set -o errexit   # So don't have any errors ;)
 echo ">>> az extension version check ... "
 EXT_VERSION=$( az extension list -o table --query "[?contains(name, 'ml')].{Version:version}" -o tsv )
 if [ -z "${EXT_VERSION}" ]; then
-   echo "found"
+   echo ">>> EXT_VERSION=$EXT_VERSION"
 else
-   echo "not found"
+   echo ">>> EXT_VERSION=$EXT_VERSION"
 fi
 
 exit

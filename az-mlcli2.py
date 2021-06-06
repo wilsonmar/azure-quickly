@@ -8,6 +8,10 @@ f
    # https://ms.portal.azure.com/#blade/HubsExtension/DeploymentDetailsBlade/overview/id/%2Fsubscriptions%2F32f0f1ee-690d-4b02-9e58-baa3715aabf7%2FresourceGroups%2Fazureml-examples-rg%2Fproviders%2FMicrosoft.Resources%2Fdeployments%2Fmain-5626528
    # shows "Your deployment is complete"
 
+if [[ -z $MY_RG ]]; then
+   source ../setmem.sh   # in folder above this.
+fi
+
 # MY_LOC="uswest"
 # MY_RG="devml"
 # MY_MLWORKSPACE_NAME="devml01"
@@ -57,11 +61,6 @@ else   #  "$MY_REPO_FOLDER" not found:
 fi
 # </az_ml_code_download>
 
-exit
-
-if [[ -z $MY_RG ]]; then
-   source ../setmem.sh   # in folder above this.
-fi
 
 # <az_ml_install>
 echo ">>> Check & Add CLI extension \"azure-cli-ml\" "
@@ -109,8 +108,20 @@ fi
 
 
 # <create_computes>
+# echo ">>> Create Compute using \"$MY_STORAGE_SKU\":"
+   # CLI DOC: https://docs.microsoft.com/en-us/cli/azure/ml/computetarget/create?view=azure-cli-latest#az_ml_computetarget_create_computeinstance
+#   time az ml computetarget create computeinstance \
+#      -n "${MY_COMPUTE_NAME}" \
+#      -s "${MY_COMPUTE_SPEC}"  \
+#      --workspace-name "${MY_MLWORKSPACE_NAME}" \
+#      --ssh-public-access False \
+#      --resource-group "${MY_RG}" -v
+
+echo ">>> Create Compute 10 ... "
 az ml compute create -n cpu-cluster --type AmlCompute \
     --min-instances 0 --max-instances 10 
+
+echo ">>> Create Compute 4 using \"$MY_STORAGE_SKU\" :"
 az ml compute create -n gpu-cluster --type AmlCompute \
     --min-instances 0 --max-instances 4 --size "${MY_STORAGE_SKU}"
 # </create_computes>
@@ -122,15 +133,4 @@ az ml job create -f jobs/hello-world-env-var.yml --web --stream
 #az ml job create -f jobs/hello-world.yml --web --stream
 # </ml_run>
 
-
-exit
-
-   echo ">>> Create Compute \"$MY_COMPUTE_NAME\" using \"$MY_COMPUTE_SPEC\":"
-   # CLI DOC: https://docs.microsoft.com/en-us/cli/azure/ml/computetarget/create?view=azure-cli-latest#az_ml_computetarget_create_computeinstance
-   time az ml computetarget create computeinstance \
-      -n "${MY_COMPUTE_NAME}" \
-      -s "${MY_COMPUTE_SPEC}"  \
-      --workspace-name "${MY_MLWORKSPACE_NAME}" \
-      --ssh-public-access False \
-      --resource-group "${MY_RG}" -v
 

@@ -73,20 +73,42 @@ After you get a new subscription and use the portal to create a storage account 
 
    ### Create Workspace using az ml cli v2
 
-   The ML CLI v2 (Preview) provides one approach:<br /><a target="_blank" href="https://github.com/Azure/azureml-examples/blob/main/cli/setup.sh">github.com/Azure/azureml-examples/blob/main/cli/setup.sh</a>
+   The ML CLI v2 (Preview) provides one automation approach:<br /><a target="_blank" href="https://github.com/Azure/azureml-examples/blob/main/cli/setup.sh">github.com/Azure/azureml-examples/blob/main/cli/setup.sh</a>.
 
-1. Run the script I've modified from that:
+1. Run the script I've modified from that to use environment variables and additional edits:
 
    <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-mlcli2.sh">az-mlcli2.sh</a>
    </strong></pre>
+
+   The scipt performs a git clone into the environment.
 
    Now that you have the Resources needed:
 
    ### Run individual .ipynb file
 
-   # https://docs.microsoft.com/en-us/azure/machine-learning/how-to-run-jupyter-notebooks
+   According to <a target="_blank" href="https://docs.microsoft.com/en-us/azure/machine-learning/how-to-run-jupyter-notebooks">How to run Jupyter</a>:
 
+1. Go to the <a target="_blank" href="https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.MachineLearningServices%2Fworkspaces">Azure Machine Learning Studio</a>
 
+1. Click the instance created.
+1. Click the "https://ml.azure.com/?tid=..." URL under the "Studio web URL".
+1. If the "get started" pop-up dialog appears, click X to dismiss it.
+1. Click "Notebooks".
+1. Mouse over your user name (among Users) and click the "..." to choose "Upload files".
+
+   <img width="361" alt="az-ml-notebooks-722x312" src="https://user-images.githubusercontent.com/300046/120910778-eeb45600-c63e-11eb-8bd2-24725c7fd74e.png">
+
+1. Navigate to the folders as <a target="_blank" href="https://github.com/Azure/azureml-examples/blob/main/cli/">github.com/Azure/azureml-examples/blob/main/cli</a>:
+
+   * fastai
+   * lightbm
+   * pytorch
+   * r
+   * tensorflow
+   <br /><br />
+
+1. 
+1. In the <strong>User files</strong> section of your workspace. Click on the cell you wish to edit. If you don't have any notebooks in this section, see Create and manage files in your workspace.
 
 More scripts from my azure-quickly repo:
 

@@ -121,7 +121,6 @@ fi
 # </az_ml_workspace_create>
 
 
-
 # <create_computes>
 echo ">>> az ml compute create AmlCompute 10 (default size)..."
 az ml compute create -n cpu-cluster --type AmlCompute --min-instances 0  --max-instances 10 
@@ -130,7 +129,6 @@ echo ">>> az ml compute create AmlCompute 4 of \"${MY_STORAGE_SKU}\" ..."
 az ml compute create -n gpu-cluster --type AmlCompute --min-instances 0 --max-instances 4 \
 --size "${MY_STORAGE_SKU}"
 # </create_computes>
-
 
 
 # <ml_run>

@@ -11,7 +11,7 @@ set -o errexit   # So don't have any errors ;)
 
 # <az_ml_install>
 echo ">>> az extension version check ... "
-EXT_VERSION=$( az extension list -o table --query "[?contains(name, 'ml')].{Version:version}" -o tsv )
+EXT_VERSION=$( az extension list -o table --query "[?contains(name, 'xx')].{Version:version}" -o tsv )
 if [ -z "${EXT_VERSION}" ]; then
    echo ">>> EXT_VERSION=$EXT_VERSION"
 else

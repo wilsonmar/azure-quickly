@@ -14,8 +14,8 @@ export MY_GITHUB_ACCT="wilsonmar"
 export MY_GITHUB_REPO="azure-quickly"
 export MY_REPO_FOLDER="azure-quickly"
 # To be specified in script call parms:"
-export RMV_GITHUB_BEFORE=false    # parm -d
-export DO_GITHUB_CLONE=false      # parm -c
+export RMV_GITHUB_BEFORE=true    # parm -d
+export DO_GITHUB_CLONE=true      # parm -c
 export RMV_SETMEM_BEFORE=false    # parm -?
 
 echo ">>> At root for first-time setup ..."

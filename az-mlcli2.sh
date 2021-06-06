@@ -69,44 +69,23 @@ fi
 
 
 # <az_ml_install>
-echo ">>> az extension version check ... "
-EXT_VERSION=$( az extension list -o table --query "[?contains(name, 'xx')].{Version:version}" -o tsv )
-if [ -z "${EXT_VERSION}" ]; then
-   echo ">>> 1 EXT_VERSION=$EXT_VERSION"
-else
-   echo ">>> 2 EXT_VERSION=$EXT_VERSION"
-fi
-
-exit
-
-
-# <az_ml_install>
-echo ">>> az extension list ... "
-EXT_VERSION=$( az extension list -o table --query "[?contains(name, 'ml')].{Version:version}" -o tsv )
-if [ "not installed." == *"${RESPONSE}"* ]; then
-fi
-
-az extension list --query "[].{Name:name, Version:version}" -o tsv
-
 function thisfile_ADD_EXTENSION_ML() {
    echo ">>> az extension add -n ml "
    az extension add -n ml
    # The installed extension 'ml' is experimental and not covered by customer support. Please use with discretion.
 }
-RESPONSE=$( time az extension update -n azure-cli-ml )
-if [ "not installed." == *"${RESPONSE}"* ]; then
-   echo ">>> $RESPONSE "  # not installed:
+echo ">>> az extension version check ... "
+EXT_VERSION=$( az extension list -o table --query "[?contains(name, 'ml')].{Version:version}" -o tsv )
+if [ -z "${EXT_VERSION}" ]; then
+   echo ">>> az extension \"ml\" not found."
    thisfile_ADD_EXTENSION_ML
 else
-   echo ">>> ML CLI extension already installed. Removing. "
+   echo ">>> az extionsion \"ml\" version $EXT_VERSION found."
    # Per https://docs.microsoft.com/en-us/azure/machine-learning/how-to-configure-cli
    # Ensure no conflicting extension using the ml namespace:
-   az extension remove -n azure-cli-ml
    az extension remove -n ml
    thisfile_ADD_EXTENSION_ML
 fi
-# Check:
-   # az extension list-available -o table | grep azure-cli-ml 
 # </az_ml_install>
 
 

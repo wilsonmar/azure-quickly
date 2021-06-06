@@ -54,7 +54,7 @@ if [ -d "$MY_REPO_FOLDER" ]; then
       time rm -rf "$MY_REPO_FOLDER"
       thisfile_DO_GITHUB_CLONE
    else
-      echo ">>> Found folder $MY_REPO_FOLDER "
+      echo ">>> Pulling into folder \"$MY_REPO_FOLDER\" "
       cd "$MY_REPO_FOLDER"
       git config pull.rebase false
       git pull
@@ -133,8 +133,13 @@ az ml compute create -n gpu-cluster --type AmlCompute --min-instances 0 --max-in
 
 # <ml_run>
 echo ">>> az ml job create -f jobs/hello-world-env-var.yml ..."
-cd jobs  # https://github.com/Azure/azureml-examples/tree/main/cli/jobs
-az ml job create -f jobs/hello-world-env-var.yml --web --stream
+cd
+cd "~/${MY_PROJECTS_FOLDER}/${MY_REPO_FOLDER}/cli"
+pwd
+# cd jobs  # https://github.com/Azure/azureml-examples/tree/main/cli/jobs
+# https://docs.microsoft.com/en-us/cli/azure/ml/job
+az ml job create -f jobs/train/lightgbm/iris/job.yml --set compute.target=local --web --stream
+#az ml job create -f jobs/hello-world-env-var.yml --web --stream
 #az ml job create -f jobs/hello-world.yml --web --stream
 # QUESTION: Where is the output "hello world"?
 # </ml_run>

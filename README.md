@@ -114,6 +114,8 @@ After you get a new subscription and use the portal to create a storage account 
 
    ### MNIST
 
+az ml job create -f jobs/train/lightgbm/iris/job.yml --set compute.target=local --web --stream
+
 1. Navigate to https://github.com/Azure/azureml-examples/blob/main/cli/jobs/train/fastai/mnist/
 1. Select "job.yml".
 1. Click "Upload".

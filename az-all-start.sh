@@ -27,8 +27,10 @@ echo "=========================== $LOG_DATETIME $THIS_PROGRAM $SCRIPT_VERSION"
    RUN_QUIET=false              # -q
    RUN_VERBOSE=false            # -v
    SET_TRACE=false              # -x
+
    RMV_RG_BEFORE=true        # parm -RRGb
    RMV_RG_AT_END=false       # parm -RRGe
+
    RMV_GITHUB_BEFORE=false   # parm -RGb
    RMV_GITHUB_AT_END=false   # parm -RGe
    DO_GITHUB_CLONE=true      # parm -c
@@ -176,4 +178,9 @@ fi
 
 echo ">>> Set Resource Group \"$MY_RG\" and Location \"${MY_LOC}\" as defaults. "
 # See https://docs.microsoft.com/en-us/cli/azure/azure-cli-configuration
+# https://docs.microsoft.com/en-us/azure/machine-learning/how-to-train-cli
+# The Azure 2.0 CLI extension for Machine Learning (preview) accelerates the model training process while 
+# , with the model lifecycle tracked and auditable.
+# The Azure Machine Learning CLI tracks your jobs (and models) in a workspace with hyperparameter sweeps, 
+# scale-up on high-performance Azure compute, and scale-out utilizing distributed training.
 az configure --defaults group="${MY_RG}" location="${MY_LOC}"  # for subsequent commands.

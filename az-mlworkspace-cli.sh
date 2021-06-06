@@ -29,7 +29,7 @@ echo ">>> Create Resource Group \"$MY_RG\" used for KeyVault, Storage Acct, etc.
 # Python wheels 
 echo ">>> Check & Add CLI extension \"azure-cli-ml\" "
 RESPONSE=$( time az extension update -n azure-cli-ml )
-if [ "The extension azure-cli-ml is not installed." == "${RESPONSE}" ]; then
+if [ "is not installed." == "${RESPONSE}" ]; then
    time az extension add -n "azure-cli-ml"
 fi
 # Check:

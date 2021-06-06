@@ -79,8 +79,9 @@ echo ">>> az extension add -n ml [for az ml commands] "
 # Ensure no conflicting extension using the ml namespace:
 az extension remove -n azure-cli-ml
 az extension remove -n ml
-az extension add -n ml
+RESPONSE=$( az extension add -n ml )
    # The installed extension 'ml' is experimental and not covered by customer support. Please use with discretion.
+echo ">>> $RESPONSE"
 
 
 echo ">>> Install Python components  "

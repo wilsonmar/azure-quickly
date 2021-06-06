@@ -65,17 +65,30 @@ After you get a new subscription and use the portal to create a storage account 
 1. Switch to the Code editor window. Highlight the existing text in variable MY_SUBSCRIPTION_ID and press Paste (Command+V on Macs or Ctrl+V on Windows).
 1. Click the "..." menu to the right of the Code editor window to save, then exit.
 
-
-### Run your commands:
-
    Now you can run scripts to create and manage resources. 
    Most of the scripts reference a tutorial at Microsoft Learn, CloudAcademy, Pluralsight, Coursera, etc.
 
-* Run the script I've modified from the ML CLI v2 (Preview) <a target="_blank" href="https://github.com/Azure/azureml-examples/blob/main/cli/setup.sh">github.com/Azure/azureml-examples/blob/main/cli/setup.sh</a>:
+   To run in the Azure Machine Learning studio, you need one or more instances an Azure ML Workspace, Compute, Insights, and Key Vault.
+   To create them:
+
+   ### Create Workspace using az ml cli v2
+
+   The ML CLI v2 (Preview) provides one approach:<br /><a target="_blank" href="https://github.com/Azure/azureml-examples/blob/main/cli/setup.sh">github.com/Azure/azureml-examples/blob/main/cli/setup.sh</a>
+
+1. Run the script I've modified from that:
 
    <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-mlcli2.sh">az-mlcli2.sh</a>
    </strong></pre>
 
+   Now that you have the Resources needed:
+
+   ### Run individual .ipynb file
+
+   # https://docs.microsoft.com/en-us/azure/machine-learning/how-to-run-jupyter-notebooks
+
+
+
+More scripts from my azure-quickly repo:
 
 * Run a Bing Search using API:
 

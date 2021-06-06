@@ -1,3 +1,9 @@
+function thisfile_DO_GITHUB_CLONE() {
+   echo ">>> Cloning $MY_REPO_FOLDER "
+   time git clone "https://github.com/${MY_GITHUB_ACCT}/${MY_GITHUB_REPO}.git"  "$MY_REPO_FOLDER" --depth 1 
+   cd "$MY_REPO_FOLDER"
+   pwd
+}
 #!/usr/bin/env bash
 # ./az-mlcli2.sh within https://github.com/wilsonmar/azure-quickly
 # This script incorporats into a single script the setup.sh and hello-world in 
@@ -67,14 +73,23 @@ fi
 
 
 # <az_ml_install>
-#echo ">>> Check & Add CLI extension \"azure-cli-ml\" "
-#RESPONSE=$( time az extension update -n azure-cli-ml )
-#echo "$RESPONSE"
-#if [ "not installed." == *"${RESPONSE}"* ]; then
-#   time az extension add -n "azure-cli-ml"
-#else
-#   echo ">>> ML CLI extension already installed. "
-#fi
+function thisfile_ADD_EXTENSION_ML() {
+   echo ">>> az extension add -n ml "
+   az extension add -n ml
+   # The installed extension 'ml' is experimental and not covered by customer support. Please use with discretion.
+}
+RESPONSE=$( time az extension update -n azure-cli-ml )
+if [ "not installed." == *"${RESPONSE}"* ]; then
+   echo ">>> $RESPONSE "  # not installed:
+   thisfile_ADD_EXTENSION_ML
+else
+   echo ">>> ML CLI extension already installed. Removing. "
+   # Per https://docs.microsoft.com/en-us/azure/machine-learning/how-to-configure-cli
+   # Ensure no conflicting extension using the ml namespace:
+   az extension remove -n azure-cli-ml
+   az extension remove -n ml
+   thisfile_ADD_EXTENSION_ML
+fi
 # Check:
    # az extension list-available -o table | grep azure-cli-ml 
 # </az_ml_install>

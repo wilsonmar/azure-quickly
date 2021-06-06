@@ -1,9 +1,3 @@
-function thisfile_DO_GITHUB_CLONE() {
-   echo ">>> Cloning $MY_REPO_FOLDER "
-   time git clone "https://github.com/${MY_GITHUB_ACCT}/${MY_GITHUB_REPO}.git"  "$MY_REPO_FOLDER" --depth 1 
-   cd "$MY_REPO_FOLDER"
-   pwd
-}
 #!/usr/bin/env bash
 # ./az-mlcli2.sh within https://github.com/wilsonmar/azure-quickly
 # This script incorporats into a single script the setup.sh and hello-world in 
@@ -13,11 +7,23 @@ function thisfile_DO_GITHUB_CLONE() {
    # https://ms.portal.azure.com/#blade/HubsExtension/DeploymentDetailsBlade/overview/id/%2Fsubscriptions%2F32f0f1ee-690d-4b02-9e58-baa3715aabf7%2FresourceGroups%2Fazureml-examples-rg%2Fproviders%2FMicrosoft.Resources%2Fdeployments%2Fmain-5626528
    # shows "Your deployment is complete"
 
-set -o errexit
+set -o errexit   # So don't have any errors ;)
+
+# <az_ml_install>
+echo ">>> az extension version check ... "
+EXT_VERSION=$( az extension list -o table --query "[?contains(name, 'ml')].{Version:version}" -o tsv )
+if [ -z "${EXT_VERSION}" ]; then
+   echo "found"
+else
+   echo "not found"
+fi
+
+exit
 
 if [[ -z $MY_RG ]]; then
    source ../setmem.sh   # in folder above this.
 fi
+
 
 # MY_LOC="westus2"
 # MY_RG="devml"
@@ -27,7 +33,7 @@ fi
    RMV_RG_BEFORE=true        # parm -RRGb
    RMV_GITHUB_BEFORE=false   # parm -RGb
    DO_GITHUB_CLONE=true      # parm -c
-MY_PROJECTS_FOLDER="projects"
+# MY_PROJECTS_FOLDER="projects"   # "projects" if local, "clouddrive" if cloud shell 
 MY_GITHUB_ACCT="Azure"
 MY_GITHUB_REPO="azureml-examples"
 MY_REPO_FOLDER="$MY_GITHUB_REPO"
@@ -73,6 +79,13 @@ fi
 
 
 # <az_ml_install>
+echo ">>> az extension list ... "
+EXT_VERSION=$( az extension list -o table --query "[?contains(name, 'ml')].{Version:version}" -o tsv )
+if [ "not installed." == *"${RESPONSE}"* ]; then
+fi
+
+az extension list --query "[].{Name:name, Version:version}" -o tsv
+
 function thisfile_ADD_EXTENSION_ML() {
    echo ">>> az extension add -n ml "
    az extension add -n ml

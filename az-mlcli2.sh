@@ -9,16 +9,6 @@
 
 set -o errexit   # So don't have any errors ;)
 
-# <az_ml_install>
-echo ">>> az extension version check ... "
-EXT_VERSION=$( az extension list -o table --query "[?contains(name, 'xx')].{Version:version}" -o tsv )
-if [ -z "${EXT_VERSION}" ]; then
-   echo ">>> EXT_VERSION=$EXT_VERSION"
-else
-   echo ">>> EXT_VERSION=$EXT_VERSION"
-fi
-
-exit
 
 if [[ -z $MY_RG ]]; then
    source ../setmem.sh   # in folder above this.
@@ -76,6 +66,18 @@ else   #  "$MY_REPO_FOLDER" not found:
    fi
 fi
 # </az_ml_code_download>
+
+
+# <az_ml_install>
+echo ">>> az extension version check ... "
+EXT_VERSION=$( az extension list -o table --query "[?contains(name, 'xx')].{Version:version}" -o tsv )
+if [ -z "${EXT_VERSION}" ]; then
+   echo ">>> 1 EXT_VERSION=$EXT_VERSION"
+else
+   echo ">>> 2 EXT_VERSION=$EXT_VERSION"
+fi
+
+exit
 
 
 # <az_ml_install>

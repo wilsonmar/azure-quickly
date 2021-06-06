@@ -28,7 +28,7 @@ MY_GITHUB_ACCT="Azure"
 MY_GITHUB_REPO="azureml-examples"
 MY_REPO_FOLDER="$MY_GITHUB_REPO"
 
-MY_STORAGE_SKU="Standard_NC12"
+MY_COMPUTE_SPEC="STANDARD_D3_V2"  # Standard_NC12"
 
    RUN_DEBUG=false              # -vv
    RUN_QUIET=false              # -q
@@ -125,9 +125,9 @@ fi
 echo ">>> az ml compute create AmlCompute 10 (default size)..."
 az ml compute create -n cpu-cluster --type AmlCompute --min-instances 0  --max-instances 10 
 
-echo ">>> az ml compute create AmlCompute 4 of \"${MY_STORAGE_SKU}\" ..."
+echo ">>> az ml compute create AmlCompute 4 of \"${MY_COMPUTE_SPEC}\" ..."
 az ml compute create -n gpu-cluster --type AmlCompute --min-instances 0 --max-instances 4 \
---size "${MY_STORAGE_SKU}"
+--size "${MY_COMPUTE_SPEC}"
 # </create_computes>
 
 

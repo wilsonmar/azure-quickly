@@ -94,20 +94,38 @@ After you get a new subscription and use the portal to create a storage account 
 1. Click the "https://ml.azure.com/?tid=..." URL under the "Studio web URL".
 1. If the "get started" pop-up dialog appears, click X to dismiss it.
 1. Click "Notebooks".
+ 
+   ### Clone Git repositories into your workspace file system
+
+   <a target="_blank" href="https://docs.microsoft.com/en-us/azure/machine-learning/concept-train-model-git-integration?WT.mc_id=Portal-Microsoft_Azure_Support#clone-git-repositories-into-your-workspace-file-system">*</a>
+
 1. Mouse over your user name (among Users) and click the "..." to choose "Upload files".
 
    <img width="361" alt="az-ml-notebooks-722x312" src="https://user-images.githubusercontent.com/300046/120910778-eeb45600-c63e-11eb-8bd2-24725c7fd74e.png">
 
-1. Navigate to the folders as <a target="_blank" href="https://github.com/Azure/azureml-examples/blob/main/cli/">github.com/Azure/azureml-examples/blob/main/cli</a>:
+1. Navigate to the folders as <a target="_blank" href="https://github.com/Azure/azureml-examples/tree/main/cli/jobs/train">https://github.com/Azure/azureml-examples/tree/main/cli/jobs/train</a>:
 
-   * fastai
+   * <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">fastai</a>
    * lightbm
    * pytorch
    * r
    * tensorflow
    <br /><br />
 
+   ### MNIST
+
+1. Navigate to https://github.com/Azure/azureml-examples/blob/main/cli/jobs/train/fastai/mnist/
+1. Select "job.yml".
+1. Click "Upload".
 1. 
+1. Select the compute where to run the Notebook.
+
+   A stopped compute instance will automatically start when the first cell is run.
+
+1. Click the "Run" icon.
+
+   ### Alternately
+
 1. In the <strong>User files</strong> section of your workspace. Click on the cell you wish to edit. If you don't have any notebooks in this section, see Create and manage files in your workspace.
 
 More scripts from my azure-quickly repo:
@@ -211,6 +229,10 @@ Bash scripts here are written with coding conventions defined at <a target="_bla
    * <tt>--resource-group</tt> is a required argument on many commands. It's last so that missing slash line a line above it would cause the command to fail.
 
    * Variable (specification) data controlling Python programs are passed to Python programs by saving them as variables in an <strong>.env file</strong> in the same folder as the Python program.
+
+Jupyter's Gallery of Python Notebooks:
+
+   * https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks
 
 <hr />
    

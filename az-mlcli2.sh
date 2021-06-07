@@ -137,7 +137,11 @@ pwd
 echo ">>> MY_PROJECTS_FOLDER=${MY_PROJECTS_FOLDER}, MY_REPO_FOLDER=${MY_REPO_FOLDER} "
 cd
 #cd "~/${MY_PROJECTS_FOLDER}/${MY_REPO_FOLDER}/cli"
-cd "~/clouddrive/${MY_REPO_FOLDER}/cli"
+cd "${MY_PROJECTS_FOLDER}"
+pwd
+cd "${MY_REPO_FOLDER}"
+pwd
+cd "cli"
 pwd
 # cd jobs  # https://github.com/Azure/azureml-examples/tree/main/cli/jobs
 # https://docs.microsoft.com/en-us/cli/azure/ml/job

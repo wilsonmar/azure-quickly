@@ -26,7 +26,8 @@
    export MY_COST_CENTER=""             # Company-specific
    export MY_RG="${MY_ENV}"  # "x$( date +%y%m%dT%H%M%S )"        # example: x210131T1259 for always a new one
 #
-   export MY_GIT_CONTAINER="$HOME/clouddrive"      # "clouddrive" in Cloud Shell
+   export MY_PROJECTS_FOLDER="clouddrive"       # "clouddrive" in Cloud Shell, "projects" in local
+   export MY_GIT_CONTAINER="$HOME/clouddrive"   # "clouddrive" in Cloud Shell
    export MY_PROJECT_FOLDER="iot-project"
 #
    export MY_ADMIN_USER_NAME="johndoe" 

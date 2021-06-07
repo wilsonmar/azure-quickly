@@ -69,9 +69,9 @@ fi
 
 
 # <az_ml_install>
-function thisfile_ADD_EXTENSION( ext ) {
-   echo ">>> az extension add -n $ext "
-   az extension add -n $ext
+function thisfile_ADD_EXTENSION() {
+   echo ">>> az extension add -n $1 "  # $1 is the first parameter
+   az extension add -n $1
    # The installed extension 'ml' is experimental and not covered by customer support. Please use with discretion.
 }
 # echo ">>> az extension version check ... "

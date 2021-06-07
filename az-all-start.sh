@@ -184,3 +184,8 @@ echo ">>> Set Resource Group \"$MY_RG\" and Location \"${MY_LOC}\" as defaults. 
 # The Azure Machine Learning CLI tracks your jobs (and models) in a workspace with hyperparameter sweeps, 
 # scale-up on high-performance Azure compute, and scale-out utilizing distributed training.
 az configure --defaults group="${MY_RG}" location="${MY_LOC}"  # for subsequent commands.
+
+
+# Set background job to blog session from auto-sleep for # seconds (3600 = 1 hour):
+# See https://brettterpstra.com/2014/02/20/quick-tip-caffeinate-your-terminal/
+caffeinate -t 3600 &

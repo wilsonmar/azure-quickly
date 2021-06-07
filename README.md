@@ -53,6 +53,9 @@ After you get a new subscription and use the portal to create a storage account 
    <pre>~/clouddrive/azure-quickly
    $ _</pre>
 
+
+   ### Customize setmem.sh values
+
 1. Use the built-in Visual Studio Code editor to edit file setmem.sh 
 
    <pre><strong>code ../setmem.sh

@@ -24,11 +24,11 @@ fi
    RMV_GITHUB_BEFORE=false   # parm -RGb
    DO_GITHUB_CLONE=true      # parm -c
 # MY_PROJECTS_FOLDER="projects"   # "projects" if local, "clouddrive" if cloud shell 
-MY_GITHUB_ACCT="Azure"
-MY_GITHUB_REPO="azureml-examples"
-MY_REPO_FOLDER="$MY_GITHUB_REPO"
+export MY_GITHUB_ACCT="Azure"
+export MY_GITHUB_REPO="azureml-examples"
+export MY_REPO_FOLDER="$MY_GITHUB_REPO"
 
-MY_COMPUTE_SPEC="STANDARD_D3_V2"  # Standard_NC12"
+export MY_COMPUTE_SPEC="STANDARD_D3_V2"  # Standard_NC12"
 
    RUN_DEBUG=false              # -vv
    RUN_QUIET=false              # -q
@@ -40,7 +40,7 @@ MY_COMPUTE_SPEC="STANDARD_D3_V2"  # Standard_NC12"
 
 # <az_ml_code_download>
 function thisfile_DO_GITHUB_CLONE() {
-   echo ">>> Cloning $MY_REPO_FOLDER "
+   echo ">>> Cloning folder \"${MY_GITHUB_ACCT}\" from \"$MY_REPO_FOLDER\" "
    time git clone "https://github.com/${MY_GITHUB_ACCT}/${MY_GITHUB_REPO}.git"  "$MY_REPO_FOLDER" --depth 1 
    cd "$MY_REPO_FOLDER"
    pwd
@@ -123,22 +123,25 @@ fi
 
 # <create_computes>
 echo ">>> az ml compute create AmlCompute 10 (default size)..."
-az ml compute create -n cpu-cluster --type AmlCompute --min-instances 0  --max-instances 10 
+time az ml compute create -n cpu-cluster --type AmlCompute --min-instances 0  --max-instances 10 
 
 echo ">>> az ml compute create AmlCompute 4 of \"${MY_COMPUTE_SPEC}\" ..."
-az ml compute create -n gpu-cluster --type AmlCompute --min-instances 0 --max-instances 4 \
---size "${MY_COMPUTE_SPEC}"
+time az ml compute create -n gpu-cluster --type AmlCompute --min-instances 0 --max-instances 4 \
+   --size "${MY_COMPUTE_SPEC}"
 # </create_computes>
 
 
 # <ml_run>
 echo ">>> az ml job create -f jobs/hello-world-env-var.yml ..."
+pwd
+echo ">>> MY_PROJECTS_FOLDER=${MY_PROJECTS_FOLDER}, MY_REPO_FOLDER=${MY_REPO_FOLDER} "
 cd
-cd "~/${MY_PROJECTS_FOLDER}/${MY_REPO_FOLDER}/cli"
+#cd "~/${MY_PROJECTS_FOLDER}/${MY_REPO_FOLDER}/cli"
+cd "~/clouddrive/${MY_REPO_FOLDER}/cli"
 pwd
 # cd jobs  # https://github.com/Azure/azureml-examples/tree/main/cli/jobs
 # https://docs.microsoft.com/en-us/cli/azure/ml/job
-az ml job create -f jobs/train/lightgbm/iris/job.yml --set compute.target=local --web --stream
+time az ml job create -f jobs/train/lightgbm/iris/job.yml --set compute.target=local --web --stream
 #az ml job create -f jobs/hello-world-env-var.yml --web --stream
 #az ml job create -f jobs/hello-world.yml --web --stream
 # QUESTION: Where is the output "hello world"?

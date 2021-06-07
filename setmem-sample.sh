@@ -92,13 +92,13 @@ fi
    export MY_IOT_HUB_NAME="hubahuba"
    export MY_IOT_HUB_GROUP="hubgroupie"
 #
-   export MY_REPO_URL="https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies"
-   export MY_REPO_FOLDER="AZ303"
-   export MY_TEMPLATE_PATH="AllFiles/Labs/05"
-   export MY_TEMPLATE_FILE="azuredeploy30305suba.json"
-   export MY_LB_TEMPLATE="azuredeploy30305rga.json"
-   export MY_LB_PARM_FILE="azuredeploy30305rga.parameters.json"
-   export MY_LB_NAME="az30305a-lb"  # defined inside JSON template file
+#   export MY_REPO_URL="https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies"
+#   export MY_REPO_FOLDER="AZ303"
+#   export MY_TEMPLATE_PATH="AllFiles/Labs/05"
+#   export MY_TEMPLATE_FILE="azuredeploy30305suba.json"
+#   export MY_LB_TEMPLATE="azuredeploy30305rga.json"
+#   export MY_LB_PARM_FILE="azuredeploy30305rga.parameters.json"
+#   export MY_LB_NAME="az30305a-lb"  # defined inside JSON template file
 # Set before calling each program:  # az-vm-lb-init.sh
    export RMV_RG_BEFORE=true         # parm -RGb
    export RMV_RG_AT_END=false        # parm -RGe

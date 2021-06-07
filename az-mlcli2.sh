@@ -69,22 +69,22 @@ fi
 
 
 # <az_ml_install>
-function thisfile_ADD_EXTENSION_ML() {
-   echo ">>> az extension add -n ml "
-   az extension add -n ml
+function thisfile_ADD_EXTENSION( ext ) {
+   echo ">>> az extension add -n $ext "
+   az extension add -n $ext
    # The installed extension 'ml' is experimental and not covered by customer support. Please use with discretion.
 }
-echo ">>> az extension version check ... "
+# echo ">>> az extension version check ... "
 EXT_VERSION=$( az extension list -o table --query "[?contains(name, 'ml')].{Version:version}" -o tsv )
 if [ -z "${EXT_VERSION}" ]; then
    echo ">>> az extension \"ml\" not found."
-   thisfile_ADD_EXTENSION_ML
+   thisfile_ADD_EXTENSION ml
 else
-   echo ">>> az extionsion \"ml\" version $EXT_VERSION found."
+   echo ">>> Remove az extionsion \"ml\" version $EXT_VERSION and add again:"
    # Per https://docs.microsoft.com/en-us/azure/machine-learning/how-to-configure-cli
    # Ensure no conflicting extension using the ml namespace:
    az extension remove -n ml
-   thisfile_ADD_EXTENSION_ML
+   thisfile_ADD_EXTENSION ml
 fi
 # </az_ml_install>
 

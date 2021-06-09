@@ -10,7 +10,10 @@ You save money because you don't have to leave resources running, consuming cred
 
 It's stressful to accurately repeat the manual mousing and typing through the Azure Portal (which is not quickly repeatable).
 
-Most scripts in the rep are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. PowerShell scripts are used in cases where they are the only solution. Script code can run on Windowsw Git Bash Shell. However, there is a risk that CLI functions may not work when its underlying <a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">REST API</a> does work. So Postman files are included when appropriate. Additionally, some Bash scripts calls PowerShell commands when PowerShell is the only solution. 
+Most scripts in the rep are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. PowerShell scripts are used in cases where they are the only solution. Script code can run on Windowsw Git Bash Shell. However, there is a risk that CLI functions may not work when its underlying <a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">REST API</a> does work. So Postman files are included when appropriate. 
+
+Additionally, some Bash scripts calls PowerShell commands when PowerShell is the only solution. 
+Python or Go programs may be called <a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">when appropriate</a> to take advantage of their capabilities.
 
 ## How it works internally
 

@@ -176,7 +176,8 @@ else  # don't delete before
    fi
 fi
 
-echo ">>> Set Resource Group \"$MY_RG\" and Location \"${MY_LOC}\" as defaults. "
+echo ">>> ACC_LOCATION=\"$ACC_LOCATION\" "
+echo ">>>  MY_LOCation=\"${MY_LOC}\" & MY_RG Resource Group \"$MY_RG\" set as defaults. "
 # See https://docs.microsoft.com/en-us/cli/azure/azure-cli-configuration
 # https://docs.microsoft.com/en-us/azure/machine-learning/how-to-train-cli
 # The Azure 2.0 CLI extension for Machine Learning (preview) accelerates the model training process while 

@@ -90,6 +90,9 @@ fi
    export MY_DOCKERHUB_ACCT="iainfoulds"     # globally unique in Docker.io (DockerHub)
    export MY_CONTAINER="azuremol"            # within DockerHub
 #
+   export MY_LUIS_AUTHORING_KEY=""
+   export MY_LUIS_ENDPOINT=""
+
    export MY_IOT_HUB_NAME="hubahuba"
    export MY_IOT_HUB_GROUP="hubgroupie"
 #
@@ -107,4 +110,4 @@ fi
    export RMV_GITHUB_AT_END=false    # parm -RGe
    export DO_GITHUB_CLONE=true       # parm -c
 
-echo "setmem.sh $MY_SCRIPT_VERSION MY_LOC=$MY_LOC"
+echo "setmem.sh $MY_SCRIPT_VERSION MY_LOC=$MY_LOC, MY_RG=$MY_RG [$ACC_LOCATION] "

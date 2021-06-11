@@ -13,6 +13,8 @@
 # az cli
 brew install az
 
+brew install 
+
 # https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=macos%2Ccsharp%2Cbash
 brew tap azure/functions
 brew install azure-functions-core-tools@3

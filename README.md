@@ -10,15 +10,13 @@
   - [Table of Contents](#table-of-contents)
   - [Language](#Language)
   - [Vision](#Vision)
-  - [Infrastructure](#Infrastructure)
+  - [Todo List](#Todos)
   - [Install](#Install)
-  
+  - [Shell script coding tricks](#ShellCoding)  
   - [Usage](#Usage)
-  - [Shell Coding](#ShellCoding)
   - [az-setup-cli.sh](#az-setup-cli.sh)
   
   - [References](#References)
-  - [Todo List](#Todos)
   - [Maintainers](#maintainers)
   - [Contributing](#contributing)
   - [License](#license)
@@ -26,14 +24,21 @@
 
 ## Language
 
-The development language is English. All comments and documentation should be written in English, so that we don't end up with “franglais” methods, and so we can share our learnings with developers around the world.
+All code, comments, and documentation here are written in U.S. English so we can share our learnings with developers around the world.
+
+Most scripts in the rep are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. 
+
+Script code can run on Windowsw Git Bash Shell. 
+PowerShell scripts are used in cases where that's the only solution. 
+
+To handle more complexity, Python or Go programs may be called <a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">when appropriate</a> to take advantage of their capabilities.
+
+There is a risk that CLI functions may not work when its underlying <a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">REST API</a> does work. So Postman files are included when appropriate. 
 
 
 ## Vision
 
 Using this repo can <strong>save you time and money</strong> and give you some peace of mind and happiness.
-
-Why and How?
 
 People leave resources running because they <strong>don't want to spend their life repeating the manual toil</strong> of clicking though the Azure Portal GUI, as described by most Azure tutorials.
 
@@ -43,34 +48,38 @@ You save money because you don't have to leave resources running, consuming cred
 
 It's stressful to accurately repeat the manual mousing and typing through the Azure Portal (which is not quickly repeatable).
 
-Most scripts in the rep are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. PowerShell scripts are used in cases where they are the only solution. Script code can run on Windowsw Git Bash Shell. However, there is a risk that CLI functions may not work when its underlying <a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">REST API</a> does work. So Postman files are included when appropriate. 
-
-Additionally, some Bash scripts calls PowerShell commands when PowerShell is the only solution. 
-Python or Go programs may be called <a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">when appropriate</a> to take advantage of their capabilities.
+So, this README explains how you can initiate your custom environment from scratch using the CLI Bash terminal.
 
 
-<a name="Infrastructure"></a>
+<a name="Todos"></a>
 
-## Infrastructure: How this works internally
+## Todo List
 
-![azure-quickly-cli.png](https://user-images.githubusercontent.com/300046/120510665-e3370580-c386-11eb-947d-477191a8888e.png)
-
-After you get a new subscription and use the portal to create a storage account for a <strong>clouddrive</strong> within the shell, this tutorial explains how you can initiate your custom environment from scratch in the CLI Bash terminal. In there, from the github README we copy a bash command and <strong>paste</strong> it in the shell. The script both downloads and runs an initialization script. That init script clones from GitHub a repo containing various scripts that can run alone or be called by the <strong>deploy</strong> script. The init script also establishes from a sample the <strong>setmem script</strong> which defines environment variable values in memory to control script operation. Note that the setmen file is in a higher folder than where script code may be pushed to github. That's because the setmem file is manually edited with values private to the individual subscription. There may be a different file for each environment (such as dev vs. prod). When one of the scripts run, it can call setmem to establish the memory variables it needs. Optionally, parameter flags such as <strong>–v for verbose</strong> display can be specified. A <strong>variables vetting</strong> script may also be called to validate the memory variables before invocation. Alternately, instead of a setmem script, we can edit a JSON specification file and which a Python program reads to update environment variables.
+- Add alias.sh
+- Test to ensure script code can run on Windowsw Git Bash Shell.
+- A <strong>variables vetting</strong> script may also be called to validate the memory variables before invocation. 
 
 
 <a name="Install"></a>
 
 ## Install
 
-1. First, get fundamental skill at installing and using Azure Portal and CLI Bash by following my deep yet concise tutorial at:
+![azure-quickly-cli.png](https://user-images.githubusercontent.com/300046/120510665-e3370580-c386-11eb-947d-477191a8888e.png)
 
-   <a target="_blank" href="https://wilsonmar.github.io/azure-cloud-onramp/">https://wilsonmar.github.io/azure-cloud-onramp</a>
+The following are one-time activities for each Azure subscription, covered in my deep yet concise tutorial at:
 
-   It covers creation of free Azure accounts and Azure Storage accounts to hold files in a clouddrive.
+   <ul><a target="_blank" href="https://wilsonmar.github.io/azure-cloud-onramp/">https://wilsonmar.github.io/azure-cloud-onramp</a>
+   </ul>
 
-1. Be in <a target="_blank" href="https://shell.azure.com/">https://shell.azure.com</a><br />
-   or click the CLI icon after entering<br />
-   <a target="_blank" href="https://portal.azure.com/">https://portal.azure.com</a>
+   It covers creation of free Azure accounts and Azure Storage accounts to hold files in a clouddrive:
+   
+1. Get a Azure subscription (such as by buying a Visual Studio license).
+
+1. Use an internet browser (Google Chrome) to address <a target="_blank" href="https://portal.azure.com/">https://portal.azure.com</a> and login.
+
+1. Be in <a target="_blank" href="https://shell.azure.com/">https://shell.azure.com</a> or click the CLI icon within the portal.
+
+1. Create a storage account for a <strong>clouddrive</strong> within the shell. 
 
 
    ### Setup an environment for new Subscription
@@ -89,7 +98,9 @@ After you get a new subscription and use the portal to create a storage account 
 
 1. Press Enter to run the script. It takes several minutes to run.
 
-   Steps executed by the script "az-setup-cli.sh" are <a href="#az-setup-cli.sh">described in the section below</a>. When done, you should see the folder containing scripts and the prompt at the left, where it will stay after each command (instead of at the end of the folder path):
+   Steps executed by the <a href="#az-setup-cli.sh">script "az-setup-cli.sh" are described below</a>. 
+   
+   When done, you should see the folder containing scripts and the prompt at the left, where it will stay after each command (instead of at the end of the folder path):
 
    <pre>~/clouddrive/azure-quickly
    $ _</pre>
@@ -97,7 +108,9 @@ After you get a new subscription and use the portal to create a storage account 
 
    ### Customize setmem.sh values
 
-1. Use the built-in Visual Studio Code editor to edit file setmem.sh 
+   The init script also establishes from a sample the <strong>setmem script</strong> which defines environment variable values in memory to control script operation. Note that the setmen file is in a higher folder than where script code may be pushed to github. That's because
+
+1. Use the built-in Visual Studio Code editor to edit file setmem.sh:
 
    <pre><strong>code ../setmem.sh
    </strong></pre>
@@ -107,13 +120,17 @@ After you get a new subscription and use the portal to create a storage account 
 1. Click the copy icon next to the Subscription code (so it gets saved to your Clipboard).
 
 1. Switch to the Code editor window. Highlight the existing text in variable MY_SUBSCRIPTION_ID and press Paste (Command+V on Macs or Ctrl+V on Windows).
+
+   There may be a different file for each environment (such as dev vs. prod). 
+
 1. Click the "..." menu to the right of the Code editor window to save, then exit.
 
    Now you can run scripts to create and manage resources. 
    Most of the scripts reference a tutorial at Microsoft Learn, CloudAcademy, Pluralsight, Coursera, etc.
 
    To run in the Azure Machine Learning studio, you need one or more instances an Azure ML Workspace, Compute, Insights, and Key Vault.
-   To create them:
+   To create them:   
+
 
    ### Create Workspace using az ml cli v2
 
@@ -126,13 +143,43 @@ After you get a new subscription and use the portal to create a storage account 
 
    The scipt performs a git clone into the environment.
 
-   Now that you have the Resources needed:
+   ### Configure aliases to your liking
 
+1. Edit the <tt>aliases.sh</tt> file and remove or add keyboard macros.
+
+
+Now that you have the Resources needed:
+
+
+<a name="ShellCoding"></a>
+
+## Shell script coding tricks
+
+Contents within Bash scripts within this repo are written using coding conventions defined at <a target="_blank" href="https://wilsonmar.github.io/bash-codng">https://wilsonmar.github.io/bash-coding</a> which include:
+
+   * <tt>source ./az-all-start.sh </tt> sets up environment variables and utility functions.
+
+   * <tt>set -o errexit</tt> makes it so that the script stops on the first error (instead of running on).
+
+   * A new Resource Group and all resources are created <strong>new every run</strong> to reduce the complexity of coding for idempotency (where the status is the same at the end of every re-run).
+
+   * <tt>--resource-group</tt> is a required argument on many commands. It's last so that missing slash line a line above it would cause the command to fail.
+
+   * A backslash \ character at the end of a line within the same az shell command continues that command.
+
+   * Variable (specification) data controlling Python programs are passed to Python programs by saving them as variables in an <strong>.env file</strong> in the same folder as the Python program.
+
+Jupyter's Gallery of Python Notebooks:
+
+   * https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks
+
+<hr />
 
 <a name="Usage"></a>
 
-## Usage: Let's Go!
+## Usage
 
+Try each of the activities below for each session (assuming you performed the install above):
 
    ### Run individual .ipynb file
 
@@ -169,7 +216,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --set compute.target=local 
 1. Navigate to https://github.com/Azure/azureml-examples/blob/main/cli/jobs/train/fastai/mnist/
 1. Select "job.yml".
 1. Click "Upload".
-1. 
+
 1. Select the compute where to run the Notebook.
 
    A stopped compute instance will automatically start when the first cell is run.
@@ -266,30 +313,6 @@ https://github.com/Azure/azure-quickstart-templates
 
 <hr />
 
-<a name="ShellCoding"></a>
-
-## Shell Script coding tricks
-
-Bash scripts here are written with coding conventions defined at <a target="_blank" href="https://wilsonmar.github.io/bash-codng">https://wilsonmar.github.io/bash-coding</a> which include:
-
-   * <tt>source ./az-all-start.sh </tt> sets up environment variables and utility functions.
-
-   * <tt>set -o errexit</tt> makes it so that the script stops on the first error (instead of running on).
-
-   * A backslash \ character at the end of a line within the same az shell command continues that command.
-
-   * A new Resource Group and all resources are created new every run to reduce the complexity of coding for idempotency (the status is the same at the end of every re-run).
-
-   * <tt>--resource-group</tt> is a required argument on many commands. It's last so that missing slash line a line above it would cause the command to fail.
-
-   * Variable (specification) data controlling Python programs are passed to Python programs by saving them as variables in an <strong>.env file</strong> in the same folder as the Python program.
-
-Jupyter's Gallery of Python Notebooks:
-
-   * https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks
-
-<hr />
-   
 <a name="az-setup-cli.sh"></a>
 
 ## az-setup-cli.sh
@@ -471,11 +494,6 @@ Scripts here are adapted from various experts generous with sharing their code:
    * CloudPosse (Terraform for AWS)
    <br /><br />
 
-<a name="Todos"></a>
-
-## Todo List
-
-- Add alias.sh
 
 ## Maintainers
 

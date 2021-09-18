@@ -1,3 +1,38 @@
+# azure-quickly
+
+![ci](https://img.shields.io/github/workflow/status/wilsonmar/terraform-aws-staticwebsite/CI_Pipeline)
+![git-tag](https://img.shields.io/github/v/tag/wilsonmar/terraform-aws-staticwebsite)
+![license](https://img.shields.io/github/license/wilsonmar/terraform-aws-staticwebsite)
+[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg)](https://github.com/RichardLitt/standard-readme)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+
+## Table of Contents
+
+- [terraform-aws-staticwebsite](#terraform-aws-staticwebsite)
+  - [Table of Contents](#table-of-contents)
+  - [Language](#Language)
+  - [Vision](#Vision)
+  - [Infrastructure](#Infrastructure)
+  - [Install](#Install)
+  
+  - [Usage](#Usage)
+  - [Shell Coding](#ShellCoding)
+  - [az-setup-cli.sh](#az-setup-cli.sh)
+  
+  - [References](#References)
+  - [Todo List](#Todos)
+  - [Maintainers](#maintainers)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Ethics](#Ethics)
+
+## Language
+
+The development language is English. All comments and documentation should be written in English, so that we don't end up with “franglais” methods, and so we can share our learnings with developers around the world.
+
+
+## Vision
+
 Using this repo can <strong>save you time and money</strong> and give you some peace of mind and happiness.
 
 Why and How?
@@ -15,16 +50,21 @@ Most scripts in the rep are <strong>Bash shell scripts that run natively on MacO
 Additionally, some Bash scripts calls PowerShell commands when PowerShell is the only solution. 
 Python or Go programs may be called <a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">when appropriate</a> to take advantage of their capabilities.
 
-## How it works internally
+
+<a name="Infrastructure"></a>
+
+## Infrastructure: How this works internally
 
 ![azure-quickly-cli.png](https://user-images.githubusercontent.com/300046/120510665-e3370580-c386-11eb-947d-477191a8888e.png)
 
 After you get a new subscription and use the portal to create a storage account for a <strong>clouddrive</strong> within the shell, this tutorial explains how you can initiate your custom environment from scratch in the CLI Bash terminal. In there, from the github README we copy a bash command and <strong>paste</strong> it in the shell. The script both downloads and runs an initialization script. That init script clones from GitHub a repo containing various scripts that can run alone or be called by the <strong>deploy</strong> script. The init script also establishes from a sample the <strong>setmem script</strong> which defines environment variable values in memory to control script operation. Note that the setmen file is in a higher folder than where script code may be pushed to github. That's because the setmem file is manually edited with values private to the individual subscription. There may be a different file for each environment (such as dev vs. prod). When one of the scripts run, it can call setmem to establish the memory variables it needs. Optionally, parameter flags such as <strong>–v for verbose</strong> display can be specified. A <strong>variables vetting</strong> script may also be called to validate the memory variables before invocation. Alternately, instead of a setmem script, we can edit a JSON specification file and which a Python program reads to update environment variables.
 
 
-## Let's Go!
+<a name="Install"></a>
 
-1. First, get skill at using Azure Portal and CLI Bash by following my deep but concise tutorial at 
+## Install
+
+1. First, get fundamental skill at installing and using Azure Portal and CLI Bash by following my deep yet concise tutorial at:
 
    <a target="_blank" href="https://wilsonmar.github.io/azure-cloud-onramp/">https://wilsonmar.github.io/azure-cloud-onramp</a>
 
@@ -89,6 +129,12 @@ After you get a new subscription and use the portal to create a storage account 
    The scipt performs a git clone into the environment.
 
    Now that you have the Resources needed:
+
+
+<a name="Usage"></a>
+
+## Usage: Let's Go!
+
 
    ### Run individual .ipynb file
 
@@ -222,7 +268,9 @@ https://github.com/Azure/azure-quickstart-templates
 
 <hr />
 
-## Script coding tricks
+<a name="ShellCoding"></a>
+
+## Shell Script coding tricks
 
 Bash scripts here are written with coding conventions defined at <a target="_blank" href="https://wilsonmar.github.io/bash-codng">https://wilsonmar.github.io/bash-coding</a> which include:
 
@@ -376,7 +424,7 @@ Jupyter's Gallery of Python Notebooks:
 1. Save the file. In Cloud Shell, press command+Q or clicking the "..." to press Save, then Close.
 
 
-   ## Each work session
+   ### Each work session
 
 1. At the beginning of each session invoke the script in the folder just above your custom scripts repo:
 
@@ -424,3 +472,44 @@ Scripts here are adapted from various experts generous with sharing their code:
    * Gruntwork (Terraform)
    * CloudPosse (Terraform for AWS)
    <br /><br />
+
+<a name="Todos"></a>
+
+## Todo List
+
+- Add alias.sh
+
+## Maintainers
+
+[@wilsonmar](https://github.com/wilsonmar)
+
+## Contributing
+
+PRs accepted.
+
+If editing this README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
+
+## License
+
+MIT © 2021 Wilson Mar
+
+## Ethics
+
+This project operates under the W3C's
+[Code of Ethics and Professional Conduct](https://www.w3.org/Consortium/cepc):
+
+> W3C is a growing and global community where participants choose to work
+> together, and in that process experience differences in language, location,
+> nationality, and experience. In such a diverse environment, misunderstandings
+> and disagreements happen, which in most cases can be resolved informally. In
+> rare cases, however, behavior can intimidate, harass, or otherwise disrupt one
+> or more people in the community, which W3C will not tolerate.
+>
+> A Code of Ethics and Professional Conduct is useful to define accepted and
+> acceptable behaviors and to promote high standards of professional
+> practice. It also provides a benchmark for self evaluation and acts as a
+> vehicle for better identity of the organization.
+
+We hope that our community group act according to these guidelines, and that
+participants hold each other to these high standards. If you have any questions
+or are worried that the code isn't being followed, please contact the owner of the repository.

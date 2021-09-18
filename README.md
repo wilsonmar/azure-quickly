@@ -1,14 +1,12 @@
 # azure-quickly
 
-![ci](https://img.shields.io/github/workflow/status/wilsonmar/terraform-aws-staticwebsite/CI_Pipeline)
-![git-tag](https://img.shields.io/github/v/tag/wilsonmar/terraform-aws-staticwebsite)
-![license](https://img.shields.io/github/license/wilsonmar/terraform-aws-staticwebsite)
+![git-tag](https://img.shields.io/github/v/tag/wilsonmar/azure-quickly)
+![license](https://img.shields.io/github/license/wilsonmar/azure-quickly)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg)](https://github.com/RichardLitt/standard-readme)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
 ## Table of Contents
 
-- [terraform-aws-staticwebsite](#terraform-aws-staticwebsite)
   - [Table of Contents](#table-of-contents)
   - [Language](#Language)
   - [Vision](#Vision)

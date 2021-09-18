@@ -81,7 +81,7 @@ After you get a new subscription and use the portal to create a storage account 
 
    <pre><strong>bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-quickly/master/az-setup-cli.sh)" -v -i</strong></pre>
 
-1. Right-click and select "Copy" to save the highlighted temporarily in your Clipboard.
+1. Right-click the highlighted     and select "Copy" to save the highlighted temporarily in your Clipboard.
 
 1. Get in <a target="_blank" href="https://shell.azure.com/">https://shell.azure.com</a>
    or click the CLI icon after entering

@@ -1,13 +1,11 @@
 # azure-quickly
 
-![git-tag](https://img.shields.io/github/v/tag/wilsonmar/azure-quickly)
 ![license](https://img.shields.io/github/license/wilsonmar/azure-quickly)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg)](https://github.com/RichardLitt/standard-readme)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
 ## Table of Contents
 
-  - [Table of Contents](#table-of-contents)
   - [Language](#Language)
   - [Vision](#Vision)
   - [Todo List](#Todos)
@@ -26,14 +24,14 @@
 
 All code, comments, and documentation here are written in U.S. English so we can share our learnings with developers around the world.
 
-Most scripts in the rep are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. 
+Most scripts in this repo are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. 
 
 Script code can run on Windowsw Git Bash Shell. 
 PowerShell scripts are used in cases where that's the only solution. 
 
-To handle more complexity, Python or Go programs may be called <a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">when appropriate</a> to take advantage of their capabilities.
+To handle more complexity, programs coded in <a target="_blank" href="https://wilsonmar.github.io/python/">Python</a> or <a target="_blank" href="https://wilsonmar.github.io/golang">Go</a> language may be called <a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">when appropriate</a> to take advantage of their capabilities.
 
-There is a risk that CLI functions may not work when its underlying <a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">REST API</a> does work. So Postman files are included when appropriate. 
+There is a risk that CLI functions may not work when its underlying <a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">Azure REST API</a> does work. So Postman files are included when appropriate. 
 
 
 ## Vision
@@ -42,7 +40,7 @@ Using this repo can <strong>save you time and money</strong> and give you some p
 
 People leave resources running because they <strong>don't want to spend their life repeating the manual toil</strong> of clicking though the Azure Portal GUI, as described by most Azure tutorials.
 
-This repo (at <a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https://github.com/wilsonmar/azure-quickly</a>) contains automation scripts which enable you to confidently <strong>delete Resource Groups</strong> when you're resting or playing becuase it enables you to <strong>get resources back</strong> with just a few commands, even with a brand-new Subscription.
+This repo (at <a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https://github.com/wilsonmar/azure-quickly</a>) contains automation scripts which enable you to confidently <strong>delete Resource Groups</strong> when you're resting or playing because it enables you to <strong>get resources back</strong> with just a few commands, even with a brand-new Subscription.
 
 You save money because you don't have to leave resources running, consuming credits or running up your credit card bill.
 

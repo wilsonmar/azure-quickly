@@ -10,7 +10,7 @@
 
 # SETUP STEP 01 - Capture starting timestamp and display no matter how it ends:
 THIS_PROGRAM="$0"
-SCRIPT_VERSION="v0.1.14" # "move az-info menu"
+SCRIPT_VERSION="v0.1.15" # "add -netinfo in az-info.sh"
 # clear  # screen (but not history)
 
 EPOCH_START="$( date -u +%s )"  # such as 1572634619
@@ -47,11 +47,12 @@ args_prompt() {
    echo "   -storage     to show Storage info."
    echo "   -vms         to show Virtual Machine sizes for Region."
 
-#   echo "   -netinfo     to show Network info."
+   echo "   -netinfo     to show Network info."
 #   echo "   -svcinfo     to show Services info with cost history."
 #   echo "   -funcs       to show Functions info."
 #   echo "   -webapp      to show Web Applications info."
 #   echo "   -sql         to show SQL Server database info."
+    echo "   -sentinel    to show Sentinel logs/alerts."
 
 #   echo " "
 #CosmosDB	az cosmosdb
@@ -110,6 +111,7 @@ exit_abnormal() {            # Function: Exit with error.
    DISK_INFO=false              # -diskinfo
    CERT_INFO=false              # -diskinfo
    LOG_INFO=false               # -loginfo
+   SENTINEL_INFO=false          # -sentinel
 
    MY_AMI_TYPE="Amazon Linux 2"
    MY_AMI_CONTAINS=".NET Core 2.1"
@@ -189,6 +191,10 @@ while test $# -gt 0; do
       shift
              AZ_REGION_IN=$( echo "$1" | sed -e 's/^[^=]*=//g' )
       export AZ_REGION_IN
+      shift
+      ;;
+    -sentinel)
+      export SENTINEL_INFO=true
       shift
       ;;
     -storage)
@@ -402,7 +408,7 @@ this_ending() {
       FREE_DISKBLOCKS_END=$(read -d '' -ra df_arr < <(LC_ALL=C df -P /); echo "${df_arr[10]}" )
    fi
    FREE_DIFF=$(((FREE_DISKBLOCKS_END-FREE_DISKBLOCKS_START)))
-   MSG="End of script $SCRIPT_VERSION after $((EPOCH_DIFF/360)) seconds and $((FREE_DIFF*512)) bytes on disk."
+   MSG="End of script $SCRIPT_VERSION after $((EPOCH_DIFF/360)) seconds."  # and $((FREE_DIFF*512)) bytes on disk."
    # echo 'Elapsed HH:MM:SS: ' $( awk -v t=$beg-seconds 'BEGIN{t=int(t*1000); printf "%d:%02d:%02d\n", t/3600000, t/60000%60, t/1000%60}' )
    success "$MSG"
    # note "Disk $FREE_DISKBLOCKS_START to $FREE_DISKBLOCKS_END"
@@ -443,6 +449,7 @@ fi
 
 
 # SETUP STEP 10 - Define run error handling:
+
 EXIT_CODE=0
 if [ "${SET_EXIT}" = true ]; then  # don't
    debug_echo "Set -e (no -E parameter  )..."
@@ -456,6 +463,14 @@ if [ "${SET_XTRACE}" = true ]; then
    set -x  # (-o xtrace) to show commands for specific issues.
 fi
 # set -o nounset
+
+
+# SETUP STEP 11 - Set Azure environment variables defaults:
+
+if [ -z "$AZ_REGION_IN" ]; then  # NOT specified
+   AZ_REGION="eastus"
+   warning "-Region \"$AZ_REGION\" by default..."
+fi
 
 ##############################################################################
 
@@ -485,12 +500,18 @@ fi
 ##############################################################################
 
 if [ "${REGIONS}" = true ] || [ "${ALL_INFO}" = true ]; then   # -regions
-    RESPONSE=$( az account list-locations --output table | wc -l | tr -d '[:space:]' )
-    h2 "============= -regions [$RESPONSE SORTED by Region]"
+    if [ "${RUN_VERBOSE}" = true ]; then   # -v
+      RESPONSE=$( az account list-locations --output table | wc -l | tr -d '[:space:]' )
+      h2 "============= -regions [$RESPONSE SORTED by Region]"
+      az account list-locations --output table \
+         --query "sort_by([].{DisplayName:displayName, Name:name, Region:regionalDisplayName}, &Name)" 
+         # DisplayName  Name  RegionalDisplayName
+    fi
 
-    az account list-locations --output table \
-        --query "sort_by([].{DisplayName:displayName, Name:name, Region:regionalDisplayName}, &Name)" 
-        # DisplayName  Name  RegionalDisplayName
+    # TODO: echo "Regions in Southern Hemisphere (Longitude < 0):"
+    #rgArray=($( az account list-locations list --output tsv --query "[?metadata:Longitude < 0].metadata:Longitude"))
+    #echo ${rgArray[0]}
+    #echo ${rgArray[*]}
 fi
 
 
@@ -507,6 +528,8 @@ if [ "${SUBS_INFO}" = true ] || [ "${ALL_INFO}" = true ]; then   # -subs
     echo -e "/n"  # blank line
     az account show --output table
        # EnvironmentName  HomeTenantId  IsDefault  Name  State  TenantId
+
+    # https://learn.microsoft.com/en-us/cli/azure/use-cli-effectively?tabs=bash%2Cbash2
 
 fi # SUBS_INFO
 
@@ -564,10 +587,13 @@ if [ "${BICEP_INFO}" = true ] || [ "${ALL_INFO}" = true ]; then   # -bicep
     # https://learn.microsoft.com/en-us/cli/azure/bicep?view=azure-cli-latest
     h2 "============= -bicep"
     az bicep version
-    echo "All available versions of Bicep CLI app:"
-    az bicep list-versions --output json
 
-    if [ "${RUN_VERBOSE}" = true ]; then   # -U
+    if [ "${RUN_VERBOSE}" = true ]; then   # -v
+      echo "All available versions of Bicep CLI app:"
+      az bicep list-versions --output json
+    fi
+
+    if [ "${RUN_DEBUG}" = true ]; then   # -vv
         az bicep -h
     fi
 fi
@@ -619,13 +645,132 @@ fi
 
 if [ "${VMS_INFO}" = true ] || [ "${ALL_INFO}" = true ]; then   # -vms
     # https://learn.microsoft.com/en-us/cli/azure/service-page/virtual%20machines?view=azure-cli-latest
-    if [ -z "$AZ_REGION_IN" ]; then  # NOT specified
-        AZ_REGION="eastus"
-        error "-R \"$AZ_REGION\" set by default..."
+    h2 "============= -vms = Virtual Machines :"
+    # From https://www.azurecitadel.com/cli/scripting/
+    ids=$( az vm list --show-details --query "[?tags.environment != 'production' && powerState == 'VM running'].id" --output tsv)
+    if [ -n "$PSID" ]; then  # found:
+       echo "VMs: $ids" 
+       # az vm stop --ids $ids
     fi
-    h2 "============= -vms = Virtual Memory Sizes for Region $AZ_REGION"
-    az vm list-sizes -l $AZ_REGION --output table
-    az vm list-sizes -l $AZ_REGION --output table | wc -l
+
+    if [ "${RUN_DEBUG}" = true ]; then   # -vv
+       echo "az vm list-sizes -l $AZ_REGION --output table"
+       az vm list-sizes -l $AZ_REGION --output table
+       az vm list-sizes -l $AZ_REGION --output table | wc -l
+    fi
+
+fi
+
+
+if [ "${NET_INFO}" = true ] || [ "${ALL_INFO}" = true ]; then   # -netinfo
+    # https://learn.microsoft.com/en-us/cli/azure/network/vnet?view=azure-cli-latest
+    h2 "============= -netinfo "
+
+    echo "List virtual networks (vnets):"
+    az network vnet list --output table
+
+    note "List peerings:"
+    # az network vnet peering list --output table --resource-group $AZ_RESOURCE_GROUP --vnet-name $AZ_VNET_NAME
+
+    note "List subnets in a virtual network:"
+    # az network vnet subnet list --output table  --resource-group $AZ_RESOURCE_GROUP --vnet-name $AZ_VNET_NAME
+
+    note "List network vnet tap list: using extension virtual-network-tap :"
+    # To allow installing extensions without prompt: "az config set extension.use_dynamic_install=yes_without_prompt
+    az network vnet tap list --output table
+
+    # TODO: Use JMESPATH https://www.azurecitadel.com/cli/scripting/
+fi
+
+
+
+if [ "${SENTINEL_INFO}" = true ] || [ "${ALL_INFO}" = true ]; then   # -sentinel
+    # https://learn.microsoft.com/en-us/cli/azure/sentinel?view=azure-cli-latest
+    h2 "============= -sentinel (SIEM/SOAR):"
+
+   if [ -n "$RESC_GROUP" ]; then  # value found:
+   # -w/--workspace-name $WORKSPACE
+      echo "Sentinel settings for Resource Group $RESC_GROUP & Workspace:"  # requires the extension sentinel
+      az sentinel setting list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+      echo "Security ML Analytics Settings:"
+      az sentinel analytics-setting list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+      echo "Get all alert rules:"
+      az sentinel alert-rule list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+      echo "Get all alert rule templates:"
+      az sentinel alert-rule template list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+      echo "Automation rules:"
+      az sentinel automation-rule list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+      echo "Sentinel bookmarks:"
+      az sentinel bookmark list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        az sentinel bookmark relation list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+        echo "bookmark relations:"
+
+        echo "Data connectors:"
+        az sentinel data-connector list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "Entity query templates:"
+        az sentinel entity-query template list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "Entity queries:"
+        az sentinel entity-query list	
+
+
+        echo "Incident comments:"
+        az sentinel incident comment list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "Incidents:"
+        az sentinel incident list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "Incident alerts:"
+        az sentinel incident list-alert --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "Incident bookmarks:"
+        az sentinel incident list-bookmark --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "Incident related entities:"
+        az sentinel incident list-entity --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "Incident relations:"
+        az sentinel incident relation list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "Sentinel metadata:"
+        az sentinel metadata list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "office365 consents:"
+        az sentinel office-consent list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "Sentinel onboarding states:"
+        az sentinel onboarding-state list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "source controls, without source control items:"
+        az sentinel source-control list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "repositories metadata:"
+        az sentinel source-control list-repository --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "threat intelligence indicators:"
+        az sentinel threat-indicator list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "Manage watchlist with sentinel:"
+        az sentinel watchlist --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+        echo "watchlists, without watchlist items:"
+        az sentinel watchlist list --resource-group $RESC_GROUP --workspace-name $WORKSPACE
+
+      if [ -n "$RULE_NAME" ]; then  # value found:
+         echo "Get all actions of alert rule:"
+         az sentinel alert-rule action list --resource-group $RESC_GROUP --workspace-name $WORKSPACE \
+            --rule-name $RULE_NAME
+      fi
+
+   fi
+
 fi
 
 # END

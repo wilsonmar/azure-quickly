@@ -10,8 +10,9 @@
 
 # SETUP STEP 01 - Capture starting timestamp and display no matter how it ends:
 THIS_PROGRAM="$0"
-SCRIPT_VERSION="v0.1.15" # "add -netinfo in az-info.sh"
-# clear  # screen (but not history)
+SCRIPT_VERSION="v0.1.16" # " add clear, install in az-info.sh"
+
+clear  # screen (but not history)
 
 EPOCH_START="$( date -u +%s )"  # such as 1572634619
 LOG_DATETIME=$( date +%Y-%m-%dT%H:%M:%S%z)-$((1 + RANDOM % 1000))
@@ -26,9 +27,8 @@ args_prompt() {
    echo "   -q           -quiet headings for each step"
    echo "   -docs        Pop-up documentation web pages on browser"
    echo " "
-#  echo "   -I           -Install software"
-#  echo "   -U           -Upgrade packages"
-   echo "   -L           Login"
+   echo "   -I           to install software"
+   echo "   -L           to login Azure with an account"
    echo "   -R \"eastus\"  to set specific Region"
 
 #  echo "   -p \"xxx-az-##\" to use [Default] within ~/.az/credentials"
@@ -465,11 +465,50 @@ fi
 # set -o nounset
 
 
-# SETUP STEP 11 - Set Azure environment variables defaults:
+# SETUP STEP 11 - Install/Upgrade Azure CLI, Bicep, Extensions:
+
+if [ "${DOWNLOAD_INSTALL}" = true ]; then  # -I
+    # Release notes: https://docs.microsoft.com/cli/azure/release-notes-azure-cli
+    brew install azure-cli  # Now updates if already installed
+        # The above installs a bunch of packages (ansible, openssl, python, readline, sqlite, xz, zlib, etc.)
+    az version
+        # az upgrade results in fatal: couldn't find remote ref refs/heads/master
+
+    # https://medium.com/@woeterman_94/how-to-install-azure-bicep-on-your-computer-d84f8aa7988a
+    # https://azure.github.io/PSRule.Rules.Azure/setup/setup-bicep/
+    az bicep install
+    az bicep version
+
+    az bicep upgrade
+    az bicep version
+    # https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/azure-resource-manager/bicep/bicep-cli.md
+
+    # To allow installing extensions in CLI without prompting for confirmation: 
+    az config set extension.use_dynamic_install=yes_without_prompt
+
+    # https://azure.github.io/PSRule.Rules.Azure/  # Rules module for testing ARM & Bicep files.
+    # https://github.com/Azure/PSRule.Rules.Azure/ by Bernie White
+    # In .github/workflows/analyze-arm.yaml
+        # https://www.youtube.com/watch?v=L4CIDqnXLPk 
+        # https://www.youtube.com/watch?v=zdoB80PlN0Y getting started in GitHub Actions
+    # Outputs in SARIF format or to an Azure Monitor Log Analytics workspace for analysis by Power BI.
+
+    # Install VSCode add-ons:
+    # https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/install
+    # https://marketplace.visualstudio.com/items?itemName=bewhite.psrule-vscode
+
+    # .workflows folder for GitHub Actions ?
+
+fi
+
+
+# SETUP STEP 12 - Set Azure environment variables defaults:
+
+# TODO: Read from env file.
 
 if [ -z "$AZ_REGION_IN" ]; then  # NOT specified
    AZ_REGION="eastus"
-   warning "-Region \"$AZ_REGION\" by default..."
+   warning "-Region \"$AZ_REGION\" by hard-coded default..."
 fi
 
 ##############################################################################
@@ -676,7 +715,6 @@ if [ "${NET_INFO}" = true ] || [ "${ALL_INFO}" = true ]; then   # -netinfo
     # az network vnet subnet list --output table  --resource-group $AZ_RESOURCE_GROUP --vnet-name $AZ_VNET_NAME
 
     note "List network vnet tap list: using extension virtual-network-tap :"
-    # To allow installing extensions without prompt: "az config set extension.use_dynamic_install=yes_without_prompt
     az network vnet tap list --output table
 
     # TODO: Use JMESPATH https://www.azurecitadel.com/cli/scripting/

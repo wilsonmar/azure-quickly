@@ -26,7 +26,7 @@ All code, comments, and documentation here are written in U.S. English so we can
 
 Most scripts in this repo are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. 
 
-Script code can run on Windowsw Git Bash Shell. 
+Script code can run on Windows Git Bash Shell. 
 PowerShell scripts are used in cases where that's the only solution. 
 
 To handle more complexity, programs coded in <a target="_blank" href="https://wilsonmar.github.io/python/">Python</a> or <a target="_blank" href="https://wilsonmar.github.io/golang">Go</a> language may be called <a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">when appropriate</a> to take advantage of their capabilities.
@@ -40,7 +40,7 @@ Using this repo can <strong>save you time and money</strong> and give you some p
 
 People leave resources running because they <strong>don't want to spend their life repeating the manual toil</strong> of clicking though the Azure Portal GUI, as described by most Azure tutorials.
 
-This repo (at <a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https://github.com/wilsonmar/azure-quickly</a>) contains automation scripts which enable you to confidently <strong>delete Resource Groups</strong> when you're resting or playing because it enables you to <strong>get resources back</strong> with just a few commands, even with a brand-new Subscription.
+This repo (at <a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https://github.com/wilsonmar/azure-quickly</a>) contains automation scripts that enable you to confidently <strong>delete Resource Groups</strong> when you're resting or playing because it enables you to <strong>get resources back</strong> with just a few commands, even with a brand-new Subscription.
 
 You save money because you don't have to leave resources running, consuming credits or running up your credit card bill.
 
@@ -55,7 +55,7 @@ So, this README explains how you can initiate your custom environment from scrat
 
 - Add alias.sh
 - Test to ensure script code can run on Windowsw Git Bash Shell.
-- A <strong>variables vetting</strong> script may also be called to validate the memory variables before invocation. 
+- A <strong>variables vetting</strong> script to validate the memory variables before invocation. 
 
 
 <a name="Install"></a>
@@ -69,9 +69,9 @@ The following are one-time activities for each Azure subscription, covered in my
    <ul><a target="_blank" href="https://wilsonmar.github.io/azure-cloud-onramp/">https://wilsonmar.github.io/azure-cloud-onramp</a>
    </ul>
 
-   It covers creation of free Azure accounts and Azure Storage accounts to hold files in a clouddrive:
+   It covers the creation of free Azure accounts and Azure Storage accounts to hold files in a clouddrive:
    
-1. Get a Azure subscription (such as by buying a Visual Studio license).
+1. Get an Azure subscription (such as by buying a Visual Studio license).
 
 1. Use an internet browser (Google Chrome) to address <a target="_blank" href="https://portal.azure.com/">https://portal.azure.com</a> and login.
 
@@ -80,13 +80,13 @@ The following are one-time activities for each Azure subscription, covered in my
 1. Create a storage account for a <strong>clouddrive</strong> within the shell. 
 
 
-   ### Setup an environment for new Subscription
+   ### Setup an environment for a new Subscription
 
 1. Triple-click the command below to highlight it:
 
    <pre><strong>bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/azure-quickly/master/az-setup-cli.sh)" -v -i</strong></pre>
 
-1. Right-click the highlighted     and select "Copy" to save the highlighted temporarily in your Clipboard.
+1. Right-click the highlighted and select "Copy" to save the highlighted temporarily in your Clipboard.
 
 1. Get in <a target="_blank" href="https://shell.azure.com/">https://shell.azure.com</a>
    or click the CLI icon after entering
@@ -117,11 +117,11 @@ The following are one-time activities for each Azure subscription, covered in my
 1. Open the Subscription blade. Click on your current Subscription. 
 1. Click the copy icon next to the Subscription code (so it gets saved to your Clipboard).
 
-1. Switch to the Code editor window. Highlight the existing text in variable MY_SUBSCRIPTION_ID and press Paste (Command+V on Macs or Ctrl+V on Windows).
+1. Switch to the Code editor window. Highlight the existing text in the variable MY_SUBSCRIPTION_ID and press Paste (Command+V on Macs or Ctrl+V on Windows).
 
    There may be a different file for each environment (such as dev vs. prod). 
 
-1. Click the "..." menu to the right of the Code editor window to save, then exit.
+1. Click the "..." menu to the right of the Code Editor window to save, then exit.
 
    Now you can run scripts to create and manage resources. 
    Most of the scripts reference a tutorial at Microsoft Learn, CloudAcademy, Pluralsight, Coursera, etc.
@@ -139,7 +139,7 @@ The following are one-time activities for each Azure subscription, covered in my
    <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-mlcli2.sh">az-mlcli2.sh</a>
    </strong></pre>
 
-   The scipt performs a git clone into the environment.
+   The script performs a git clone into the environment.
 
    ### Configure aliases to your liking
 
@@ -269,7 +269,7 @@ More scripts from my azure-quickly repo:
    <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-webapp-cli.sh">az-webapp-cli.sh</a>
    </strong></pre>
 
-* Create a network with two subnets and a network security group that secures inbound traffic. One subnet is for remote access traffic, one is web traffic for VMs that run a web server. Two VMs are then created. One allows SSH access and has the appropriate network security group rules applied. You use this VM as an <strong>SSH jumpbox</strong> to then connect to the the second VM which can be used an web server:
+* Create a network with two subnets and a network security group that secures inbound traffic. One subnet is for remote access traffic, one is web traffic for VMs that run a web server. Two VMs are then created. One allows SSH access and has the appropriate network security group rules applied. You use this VM as an <strong>SSH jumpbox</strong> to then connect to the second VM which can be used as a web server:
 
    <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
    </strong></pre> 
@@ -421,7 +421,7 @@ https://github.com/Azure/azure-quickstart-templates
    export MY_SUBSCRIPTION_ID="11cb040d-4e32-4524-bc8e-0bee213dddae"  # for gmail 
    </pre>
 
-1. In <a target="_blank" href="https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade">portal.azure.com Tenant blade</a>, select the Tenant you wnat to use, then click the icon to Copy to Clipboard. 
+1. In <a target="_blank" href="https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade">portal.azure.com Tenant blade</a>, select the Tenant you want to use, then click the icon to Copy to Clipboard. 
 
    ![az-copy-tenant-129x71](https://user-images.githubusercontent.com/300046/117761778-346b3380-b1e5-11eb-8d9b-4e01211db392.png)
 
@@ -434,13 +434,13 @@ https://github.com/Azure/azure-quickstart-templates
 
 1. Edit the MY_LOC (Location = Region) and other defaults.
 
-1. At the bottom of the file, add a statement which prints out one of the variables, so you know the export statements took:
+1. At the bottom of the file, add a statement that prints out one of the variables, so you know the export statements took:
 
    In a Bash script:
 
    <pre><strong>echo "MY_RG=$MY_RG"</strong></pre>
 
-1. Save the file. In Cloud Shell, press command+Q or clicking the "..." to press Save, then Close.
+1. Save the file. In Cloud Shell, press command+Q or click the "..." to press Save, then Close.
 
 
    ### Each work session
@@ -450,7 +450,7 @@ https://github.com/Azure/azure-quickstart-templates
    <pre><strong>source ../setmem.sh
    </strong></pre>
 
-   NOTE: Using "source" to run the script so that environment variables defined in the script will be visible after the script is done, and be inherited by any programs you launch from it. That's because source runs the script in the current shell. But note that any exit statement would stop the run.
+   NOTE: Using "source" to run the script so that environment variables defined in the script will be visible after the script is done, and be inherited by any programs you launch from it. That's because the source runs the script in the current shell. But note that any exit statement would stop the run.
 
    Alternately,
    <pre>source <(curl -s -L https://example.com/install.sh)</pre>
@@ -513,7 +513,7 @@ This project operates under the W3C's
 [Code of Ethics and Professional Conduct](https://www.w3.org/Consortium/cepc):
 
 > W3C is a growing and global community where participants choose to work
-> together, and in that process experience differences in language, location,
+> together and in that process experience differences in language, location,
 > nationality, and experience. In such a diverse environment, misunderstandings
 > and disagreements happen, which in most cases can be resolved informally. In
 > rare cases, however, behavior can intimidate, harass, or otherwise disrupt one
@@ -521,7 +521,7 @@ This project operates under the W3C's
 >
 > A Code of Ethics and Professional Conduct is useful to define accepted and
 > acceptable behaviors and to promote high standards of professional
-> practice. It also provides a benchmark for self evaluation and acts as a
+> practice. It also provides a benchmark for self-evaluation and acts as a
 > vehicle for better identity of the organization.
 
 We hope that our community group act according to these guidelines, and that

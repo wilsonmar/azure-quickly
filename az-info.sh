@@ -10,7 +10,7 @@
 
 # SETUP STEP 01 - Capture starting timestamp and display no matter how it ends:
 THIS_PROGRAM="$0"
-SCRIPT_VERSION="v0.1.13" # "add bicep"
+SCRIPT_VERSION="v0.1.14" # "move az-info menu"
 # clear  # screen (but not history)
 
 EPOCH_START="$( date -u +%s )"  # such as 1572634619

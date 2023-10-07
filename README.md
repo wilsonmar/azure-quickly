@@ -22,7 +22,14 @@
 
 ## Language
 
-All code, comments, and documentation here are written in U.S. English so we can share our learnings with developers around the world.
+All code, comments, and documentation here are written in U.S. English. So we can share our learnings with developers around the world, translations are thanks to https://github.com/dephraiim/translate-readme
+   - [English](README.md)
+   - [简体中文](README.zh-CN.md)
+   - [繁体中文](README.zh-TW.md)
+   - [हिंदी](README.hi.md)
+   - [Française](README.fr.md)
+   - [عربى](README.ar.md)
+   <br /><br />
 
 Most scripts in this repo are <strong>Bash shell scripts that run natively on MacOS and Linux</strong>. 
 
@@ -66,7 +73,7 @@ So, this README explains how you can initiate your custom environment from scrat
 
 The following are one-time activities for each Azure subscription, covered in my deep yet concise tutorial at:
 
-   <ul><a target="_blank" href="https://wilsonmar.github.io/azure-cloud-onramp/">https://wilsonmar.github.io/azure-cloud-onramp</a>
+   <ul><a target="_blank" href="https://wilsonmar.github.io/azure-onboarding/">https://wilsonmar.github.io/azure-onboarding</a>
    </ul>
 
    It covers the creation of free Azure accounts and Azure Storage accounts to hold files in a clouddrive:

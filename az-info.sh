@@ -10,7 +10,7 @@
 
 # SETUP STEP 01 - Capture starting timestamp and display no matter how it ends:
 THIS_PROGRAM="$0"
-SCRIPT_VERSION="v0.1.16" # " add clear, install in az-info.sh"
+SCRIPT_VERSION="v0.1.16" # " add PSRule install in az-info.sh"
 
 clear  # screen (but not history)
 
@@ -491,6 +491,7 @@ if [ "${DOWNLOAD_INSTALL}" = true ]; then  # -I
     # In .github/workflows/analyze-arm.yaml
         # https://www.youtube.com/watch?v=L4CIDqnXLPk 
         # https://www.youtube.com/watch?v=zdoB80PlN0Y getting started in GitHub Actions
+        # https://www.youtube.com/watch?v=3697rG8tkOI&list=PLM4Db0UWu45Kv-QMpyEv9znqA2t0Xlcvk&index=2
     # Outputs in SARIF format or to an Azure Monitor Log Analytics workspace for analysis by Power BI.
 
     # Install VSCode add-ons:

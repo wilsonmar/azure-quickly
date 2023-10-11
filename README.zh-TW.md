@@ -55,7 +55,7 @@ PowerShell 腳本用於唯一解決方案的情況。
 
 ## 全部列表
 
--   Add alias.sh
+-   新增別名.sh
 -   進行測試以確保腳本程式碼可以在 Windows Git Bash Shell 上運行。
 -   A<strong>變數審查</strong>腳本在呼叫之前驗證記憶體變數。
 
@@ -213,7 +213,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
 2.  選擇“job.yml”。
 
-3.  按一下“上傳”。
+3.  點擊“上傳”。
 
 4.  選擇運行筆記本的計算位置。
 
@@ -269,7 +269,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-webapp-cli.sh">az-webapp-cli.sh</a>
      </strong></pre>
 
--   建立一個具有兩個子網路和一個保護入站流量的網路安全群組的網路。一個子網路用於遠端存取流量，一個子網路用於運行 Web 伺服器的虛擬機器的 Web 流量。然後創建兩個虛擬機器。一種允許 SSH 存取並應用適當的網路安全群組規則。您將此虛擬機器用作<strong>SSH 跳線盒</strong>然後連接到第二個可用作 Web 伺服器的虛擬機器：
+-   建立一個具有兩個子網路和一個保護入站流量的網路安全群組的網路。一個子網路用於遠端存取流量，一個子網路用於運行 Web 伺服器的虛擬機器的 Web 流量。然後創建兩個虛擬機器。一種允許 SSH 存取並應用適當的網路安全群組規則。您將此虛擬機器用作<strong>SSH 跳線盒</strong>然後連接到可用作 Web 伺服器的第二個虛擬機器：
 
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
      </strong></pre> 
@@ -330,8 +330,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
 2.  導航至儲存要下載的儲存庫的資料夾：
 
-    在 Cloud Shell 中，它是<br />
-    <tt><strong>cd 雲殼</strong></tt>
+    在 Cloud Shell 中，它是<br /><tt><strong>cd 雲殼</strong></tt>
 
     或者，在我的筆記型電腦上，我使用<br /><tt>cd gmail_acct</tt>
 
@@ -429,7 +428,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
     <pre>export TENANT_ID="22223348-f7f0-4cc2-addc-11021d882720"           # for gmail, in Portal
     </pre>
 
-    TODO：使用從長期運行的 Azure KeyVault 擷取機密的呼叫來取代機密的匯出語句。但其他人不會查看此文件，除非他們使用您的帳戶正確登入 Azure。
+    TODO：使用從長期運行的 Azure KeyVault 擷取機密的呼叫來取代機密的匯出語句。但其他人不會查看此文件，除非他們使用你的帳戶正確登入 Azure。
 
 13. 編輯 MY_LOC（位置 = 區域）和其他預設值。
 
@@ -525,6 +524,6 @@ PR 已被接受。
 > 實踐。它也為自我評價提供了基準，並作為
 > 更好展現組織形象的工具。
 
-We hope that our community group act according to these guidelines, and that
-participants hold each other to these high standards. If you have any questions
-or are worried that the code isn't being followed, please contact the owner of the repository.
+我們希望我們的社區團體按照這些準則行事，並且
+參與者互相要求遵守這些高標準。如有任何問題
+或擔心程式碼沒有被遵循，請聯絡儲存庫的擁有者。

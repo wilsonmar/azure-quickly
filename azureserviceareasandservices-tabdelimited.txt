@@ -1,0 +1,286 @@
+AI & machine learning	Anomaly Detector	Easily add anomaly detection capabilities to your apps.
+Integration	API Management	"Publish APIs to developers, partners, and employees securely and at scale"
+Internet of Things	API Management	"Publish APIs to developers, partners, and employees securely and at scale"
+Mobile	API Management	"Publish APIs to developers, partners, and employees securely and at scale"
+Web	API Management	"Publish APIs to developers, partners, and employees securely and at scale"
+Containers	App Configuration	"Fast, scalable parameter storage for app configuration"
+Developer tools	App Configuration	"Fast, scalable parameter storage for app configuration"
+Mobile	App Configuration	"Fast, scalable parameter storage for app configuration"
+Security	App Configuration	"Fast, scalable parameter storage for app configuration"
+Web	App Configuration	"Fast, scalable parameter storage for app configuration"
+Compute	App Service	Quickly create powerful cloud apps for web and mobile
+Mobile	App Service	Quickly create powerful cloud apps for web and mobile
+Web	App Service	Quickly create powerful cloud apps for web and mobile
+Networking	Application Gateway	"Build secure, scalable, highly available web front ends in Azure"
+Security	Application Gateway	"Build secure, scalable, highly available web front ends in Azure"
+Storage	Archive Storage	Industry leading price point for storing rarely accessed data
+Management and governance	Automation	Simplify cloud management with process automation
+Storage	Avere vFXT for Azure	"Run high-performance, file-based workloads in the cloud"
+Hybrid + multicloud	Azure Active Directory (Azure AD)	Synchronize on-premises directories and enable single sign-on
+Identity	Azure Active Directory (Azure AD)	Synchronize on-premises directories and enable single sign-on
+Security	Azure Active Directory (Azure AD)	Synchronize on-premises directories and enable single sign-on
+Identity	Azure Active Directory Domain Services	Manage your domain controllers in the cloud
+Security	Azure Active Directory Domain Services	Manage your domain controllers in the cloud
+Identity	Azure Active Directory External Identities	Consumer identity and access management in the cloud
+Management and governance	Azure Advisor	Your personalized Azure best practices recommendation engine
+Analytics	Azure Analysis Services	Enterprise-grade analytics engine as a service
+AI & machine learning	Azure Applied AI Services	Specialized services that enable organizations to accelerate time to value in applying AI to solve common scenarios
+Hybrid + multicloud	Azure Arc	"Secure, develop, and operate infrastructure, apps, and Azure services anywhere"
+DevOps	Azure Artifacts	"Create, host, and share packages with your team"
+Management and governance	Azure Automanage PREVIEW	Simplify and optimize IT management with automated operations
+Management and governance	Azure Backup	Simplify data protection with built-in backup management at scale
+Storage	Azure Backup	Simplify data protection with built-in backup management at scale
+Networking	Azure Bastion	Private and fully managed RDP and SSH access to your virtual machines
+Storage	Azure Blob Storage	Massively scalable and secure object storage
+Management and governance	Azure Blueprints PREVIEW	"Enabling quick, repeatable creation of governed environments"
+DevOps	Azure Boards	"Plan, track, and discuss work across your teams"
+AI & machine learning	Azure Bot Services	Create bots and connect them across channels
+Databases	Azure Cache for Redis	"Accelerate apps with high-throughput, low-latency data caching"
+Analytics	Azure Chaos Studio PREVIEW	Improve application resilience by introducing faults and simulating outages
+Management and governance	Azure Chaos Studio PREVIEW	Improve application resilience by introducing faults and simulating outages
+AI & machine learning	Azure Cognitive Search	Enterprise scale search for app development
+Mobile	Azure Cognitive Search	Enterprise scale search for app development
+Web	Azure Cognitive Search	Enterprise scale search for app development
+AI & machine learning	Azure Cognitive Services	Add cognitive capabilities to apps with APIs and AI services
+Mobile	Azure Cognitive Services	Add cognitive capabilities to apps with APIs and AI services
+Mobile	Azure Communication Services	Build rich communication experiences with the same secure platform used by Microsoft Teams
+Web	Azure Communication Services	Build rich communication experiences with the same secure platform used by Microsoft Teams
+Databases	Azure confidential ledger PREVIEW	"Tamperproof, unstructured data store hosted in trusted execution environments (TEEs) and backed by cryptographically verifiable evidence"
+Security	Azure confidential ledger PREVIEW	"Tamperproof, unstructured data store hosted in trusted execution environments (TEEs) and backed by cryptographically verifiable evidence"
+Storage	Azure confidential ledger PREVIEW	"Tamperproof, unstructured data store hosted in trusted execution environments (TEEs) and backed by cryptographically verifiable evidence"
+Containers	Azure Container Apps PREVIEW	Build and deploy modern apps and microservices using serverless containers
+Compute	Azure Container Instances	Launch containers with hypervisor isolation
+Containers	Azure Container Instances	Launch containers with hypervisor isolation
+Containers	Azure Container Registry	"Build, store, secure, and replicate container images and artifacts"
+Databases	Azure Cosmos DB	"Build or modernize scalable, high-performance apps"
+Internet of Things	Azure Cosmos DB	"Build or modernize scalable, high-performance apps"
+Management and governance	Azure Cost Management and Billing	Manage your cloud spending with confidence
+Migration	Azure Cost Management and Billing	Manage your cloud spending with confidence
+Compute	Azure CycleCloud	"Create, manage, operate, and optimize HPC and big compute clusters of any scale"
+Analytics	Azure Data Explorer	Fast and highly scalable data exploration service
+Analytics	Azure Data Factory	"Hybrid data integration at enterprise scale, made easy"
+Databases	Azure Data Factory	"Hybrid data integration at enterprise scale, made easy"
+Analytics	Azure Data Lake Storage	"Scalable, secure data lake for high-performance analytics"
+Storage	Azure Data Lake Storage	"Scalable, secure data lake for high-performance analytics"
+Analytics	Azure Data Lake Storage Gen1	Hyperscale repository for big data analytics workloads
+Storage	Azure Data Lake Storage Gen1	Hyperscale repository for big data analytics workloads
+Analytics	Azure Data Share	A simple and safe service for sharing big data with external organizations
+Storage	Azure Data Share	A simple and safe service for sharing big data with external organizations
+Databases	Azure Database for MariaDB	"Deploy applications to the cloud with enterprise-ready, fully managed community MariaDB"
+Databases	Azure Database for MySQL	"Fully managed, scalable MySQL Database"
+Databases	Azure Database for PostgreSQL	"Fully managed, intelligent, and scalable PostgreSQL"
+Hybrid + multicloud	Azure Database for PostgreSQL	"Fully managed, intelligent, and scalable PostgreSQL"
+Databases	Azure Database Migration Service	Simplify on-premises database migration to the cloud
+Migration	Azure Database Migration Service	Simplify on-premises database migration to the cloud
+AI & machine learning	Azure Databricks	Design AI with Apache Spark™-based analytics
+Analytics	Azure Databricks	Design AI with Apache Spark™-based analytics
+Networking	Azure DDoS Protection	Protect your applications from Distributed Denial of Service (DDoS) attacks
+Security	Azure DDoS Protection	Protect your applications from Distributed Denial of Service (DDoS) attacks
+Compute	Azure Dedicated Host	A dedicated physical server to host your Azure VMs for Windows and Linux
+Security	Azure Dedicated HSM	Manage hardware security modules that you use in the cloud
+Developer tools	Azure DevOps	"Services for teams to share code, track work, and ship software"
+DevOps	Azure DevOps	"Services for teams to share code, track work, and ship software"
+Hybrid + multicloud	Azure DevOps	"Services for teams to share code, track work, and ship software"
+Developer tools	Azure DevTest Labs	Quickly create environments using reusable templates and artifacts
+DevOps	Azure DevTest Labs	Quickly create environments using reusable templates and artifacts
+Internet of Things	Azure Digital Twins	Use IoT spatial intelligence to create models of physical environments
+Mixed reality	Azure Digital Twins	Use IoT spatial intelligence to create models of physical environments
+Storage	Azure Disk Storage	"High-performance, highly durable block storage"
+Networking	Azure DNS	Host your DNS domain in Azure
+Hybrid + multicloud	Azure ExpressRoute	"Experience a fast, reliable, and private connection to Azure"
+Networking	Azure ExpressRoute	"Experience a fast, reliable, and private connection to Azure"
+Storage	Azure Files	"Simple, secure and serverless enterprise-grade cloud file shares"
+Networking	Azure Firewall	Cloud-native and intelligent network firewall security
+Networking	Azure Firewall Manager	"Central network security policy and route management for globally distributed, software-defined perimeters"
+Web	Azure Fluid Relay PREVIEW	Easily add real-time collaborative experiences to your apps with Fluid Framework
+AI & machine learning	Azure Form Recognizer	The AI-powered document extraction service that understands your forms
+Networking	Azure Front Door	"Fast, reliable, and more secure cloud content delivery service with intelligent threat protection"
+Security	Azure Front Door	"Fast, reliable, and more secure cloud content delivery service with intelligent threat protection"
+Compute	Azure Functions	Execute event-driven serverless code with an end-to-end development experience
+Containers	Azure Functions	Execute event-driven serverless code with an end-to-end development experience
+Internet of Things	Azure Functions	Execute event-driven serverless code with an end-to-end development experience
+Storage	Azure FXT Edge Filer	Hybrid storage optimization solution for HPC environments
+Integration	Azure Healthcare APIs PREVIEW	A unified solution that helps protect and combine health data in the cloud and generates healthcare insights with analytics
+Storage	Azure HPC Cache	File caching for high-performance computing (HPC)
+AI & machine learning	Azure Immersive Reader	Empower users of all ages and abilities to read and comprehend text
+Identity	Azure Information Protection	"Better protect your sensitive information—anytime, anywhere"
+Security	Azure Information Protection	"Better protect your sensitive information—anytime, anywhere"
+Networking	Azure Internet Analyzer PREVIEW	Test how networking infrastructure changes will impact your customers' performance.
+Internet of Things	Azure IoT Central	Build IoT solutions on a hosted platform
+Hybrid + multicloud	Azure IoT Edge	Extend cloud intelligence and analytics to edge devices
+Internet of Things	Azure IoT Edge	Extend cloud intelligence and analytics to edge devices
+Internet of Things	Azure IoT Hub	"Connect, monitor, and manage billions of IoT assets"
+Compute	Azure Kubernetes Service (AKS)	Deploy and scale containers on managed Kubernetes
+Containers	Azure Kubernetes Service (AKS)	Deploy and scale containers on managed Kubernetes
+Developer tools	Azure Lab Services	"Set up labs for classrooms, trials, development and testing, and other scenarios"
+Management and governance	Azure Lighthouse	Empowering service providers to manage customers at scale and with precision
+Developer tools	Azure Load Testing PREVIEW	Optimize app performance with high-scale load testing
+DevOps	Azure Load Testing PREVIEW	Optimize app performance with high-scale load testing
+AI & machine learning	Azure Machine Learning	An enterprise-grade service for the end-to-end machine learning lifecycle
+Internet of Things	Azure Machine Learning	An enterprise-grade service for the end-to-end machine learning lifecycle
+Management and governance	Azure Managed Applications	Simplify management of cloud offerings
+Databases	Azure Managed Instance for Apache Cassandra	Modernize Cassandra data clusters with a managed instance in the cloud
+Internet of Things	Azure Maps	"Create location-aware web and mobile applications using simple and secure geospatial services, APIs, and SDKs in Azure"
+Mobile	Azure Maps	"Create location-aware web and mobile applications using simple and secure geospatial services, APIs, and SDKs in Azure"
+Web	Azure Maps	"Create location-aware web and mobile applications using simple and secure geospatial services, APIs, and SDKs in Azure"
+Media	Azure Media Player	A single player for all your playback needs
+AI & machine learning	Azure Metrics Advisor	An AI service that monitors metrics and diagnoses issues
+Management and governance	Azure Migrate	"Discover, assess, right-size, and migrate your on-premises virtual machines (VMs) to Azure"
+Migration	Azure Migrate	"Discover, assess, right-size, and migrate your on-premises virtual machines (VMs) to Azure"
+Management and governance	Azure mobile app	"Stay connected to your Azure resources—anytime, anywhere"
+Hybrid + multicloud	Azure Modular Datacenter	"A complete, rugged datacenter solution"
+DevOps	Azure Monitor	"Full observability into your applications, infrastructure, and network"
+Management and governance	Azure Monitor	"Full observability into your applications, infrastructure, and network"
+Storage	Azure NetApp Files	"Enterprise-grade Azure file shares, powered by NetApp"
+Networking	Azure Network Function Manager	Extend Azure management for deploying 5G and SD-WAN network functions on edge devices
+AI & machine learning	Azure Open Datasets	Cloud platform to host and share curated open datasets to accelerate development of machine learning models
+AI & machine learning	Azure OpenAI Service PREVIEW	Apply advanced language models to a variety of use cases
+Networking	Azure Orbital PREVIEW	Satellite ground station and scheduling services for fast downlinking of data
+AI & machine learning	Azure Percept PREVIEW	Accelerate edge intelligence from silicon to service
+Internet of Things	Azure Percept PREVIEW	Accelerate edge intelligence from silicon to service
+Developer tools	Azure Pipelines	"Continuously build, test, and deploy to any platform and cloud"
+DevOps	Azure Pipelines	"Continuously build, test, and deploy to any platform and cloud"
+Management and governance	Azure Policy	Implement corporate governance and standards at scale
+Networking	Azure Private 5G Core PREVIEW	Rapidly deploy and manage private 5G networks at the enterprise edge
+Networking	Azure Private Link	"Private access to services hosted on the Azure platform, keeping your data on the Microsoft network"
+Analytics	Azure Purview	A unified data governance solution that maximizes the business value of your data
+Management and governance	Azure Purview	A unified data governance solution that maximizes the business value of your data
+Compute	Azure Quantum PREVIEW	Accelerate your development lifecycle by building your quantum solution once and running it on multiple systems with little to no change
+Containers	Azure Red Hat OpenShift	Deploy and scale containers on managed Red Hat OpenShift
+DevOps	Azure Repos	"Get unlimited, cloud-hosted private Git repos for your project"
+Management and governance	Azure Resource Manager	Simplify how you manage your app resources
+Management and governance	Azure Resource Manager templates	Deliver infrastructure as code for all your Azure resources using Resource Manager
+Management and governance	Azure Resource Mover	Simplify how you move multiple resources between Azure regions
+Networking	Azure Route Server	Enable network appliances to exchange routes dynamically with virtual networks in Azure
+Internet of Things	Azure RTOS	Making embedded IoT development and connectivity easy
+Compute	Azure Service Fabric	"Deploy and operate always-on, scalable, distributed apps"
+Containers	Azure Service Fabric	"Deploy and operate always-on, scalable, distributed apps"
+Management and governance	Azure Service Health	Personalized guidance and support for when issues in Azure services affect you
+Web	Azure SignalR Service	Add real-time web functionalities easily
+Management and governance	Azure Site Recovery	Keep your business running with built-in disaster recovery service
+Migration	Azure Site Recovery	Keep your business running with built-in disaster recovery service
+Internet of Things	Azure Sphere	Securely connect MCU-powered devices from the silicon to the cloud
+Compute	Azure Spot Virtual Machines	Provision unused compute capacity at deep discounts to run interruptible workloads
+Compute	Azure Spring Cloud	Build and deploy Spring Boot apps with a fully managed service from Microsoft and VMware
+Web	Azure Spring Cloud	Build and deploy Spring Boot apps with a fully managed service from Microsoft and VMware
+Databases	Azure SQL	Modern SQL family for migration and app modernization
+Databases	Azure SQL Database	"Managed, intelligent SQL in the cloud"
+Hybrid + multicloud	Azure SQL Database	"Managed, intelligent SQL in the cloud"
+Databases	Azure SQL Edge	Consume Services privately on Azure Platform
+Hybrid + multicloud	Azure SQL Edge	Consume Services privately on Azure Platform
+Internet of Things	Azure SQL Edge	Consume Services privately on Azure Platform
+Databases	Azure SQL Managed Instance	"Managed, always up-to-date SQL instance in the cloud"
+Hybrid + multicloud	Azure Stack	Build and run innovative hybrid apps across cloud boundaries
+Hybrid + multicloud	Azure Stack Edge	"An Azure managed device that brings the compute, storage, and intelligence of Azure to the edge"
+Hybrid + multicloud	Azure Stack HCI	"Run your production workloads anywhere on hybrid, familiar hyperconverged infrastructure"
+Hybrid + multicloud	Azure Stack Hub	"Azure Stack Hub is sold as an integrated hardware system, with software pre-installed on validated hardware"
+Analytics	Azure Stream Analytics	Real-time analytics on fast-moving streaming data
+Internet of Things	Azure Stream Analytics	Real-time analytics on fast-moving streaming data
+Analytics	Azure Synapse Analytics	Limitless analytics with unmatched time to insight
+DevOps	Azure Test Plans	Test and ship confidently with an exploratory test toolkit
+Internet of Things	Azure Time Series Insights	Visualize IoT data in real time
+AI & machine learning	Azure Video Analyzer PREVIEW	An AI service for quickly building video analytics solutions
+Compute	Azure Virtual Desktop	"Enable a secure, remote desktop experience from anywhere"
+Virtual desktop infrastructure	Azure Virtual Desktop	"Enable a secure, remote desktop experience from anywhere"
+Networking	Azure Virtual Network Manager PREVIEW	Centrally manage virtual networks in Azure from a single pane of glass
+Compute	Azure VM Image Builder	Simplify your image building process with easy to use tool
+Compute	Azure VMware Solution	Run your VMware workloads natively on Azure
+Integration	Azure Web PubSub	Easily build real-time messaging web applications using WebSockets and the publish-subscribe pattern
+Web	Azure Web PubSub	Easily build real-time messaging web applications using WebSockets and the publish-subscribe pattern
+Compute	Batch	Cloud-scale job scheduling and compute management
+Virtual desktop infrastructure	Citrix Virtual Apps and Desktops for Azure	Provision Windows desktops and apps on Azure with Citrix and Azure Virtual Desktop
+Compute	Cloud Services	"Create highly-available, infinitely-scalable cloud applications and APIs"
+Management and governance	Cloud Shell	Streamline Azure administration with a browser-based shell
+AI & machine learning	Cognitive Service for Language	Add natural language capabilities with a single API call
+AI & machine learning	Computer Vision	Distill actionable information from images
+Media	Content Delivery Network	"Fast, reliable content delivery network with global reach"
+Networking	Content Delivery Network	"Fast, reliable content delivery network with global reach"
+Web	Content Delivery Network	"Fast, reliable content delivery network with global reach"
+AI & machine learning	Content Moderator	"Automated image, text, and video moderation"
+Media	Content Protection	"Securely deliver content using AES, PlayReady, Widevine, and Fairplay"
+AI & machine learning	Custom Vision	Easily customize your own state-of-the-art computer vision models for your unique use case
+Migration	Data Box	Appliances and solutions for data transfer to Azure and edge compute
+Storage	Data Box	Appliances and solutions for data transfer to Azure and edge compute
+Analytics	Data Catalog	Get more value from your enterprise data assets
+Analytics	Data Lake Analytics	Distributed analytics service that makes big data easy
+AI & machine learning	Data Science Virtual Machines	Rich pre-configured environment for AI development
+DevOps	DevOps tool integrations	Use your favorite DevOps tools with Azure
+Media	Encoding	Studio grade encoding at cloud scale
+Integration	Event Grid	Reliable event delivery at massive scale
+Internet of Things	Event Grid	Reliable event delivery at massive scale
+Analytics	Event Hubs	Receive telemetry from millions of devices
+AI & machine learning	Face API	"Detect, identify, analyze, organize, and tag faces in photos"
+Analytics	HDInsight	"Provision cloud Hadoop, Spark, R Server, HBase, and Storm clusters"
+AI & machine learning	Health Bot	A managed service purpose-built for development of virtual healthcare assistants
+Security	Key Vault	Safeguard and maintain control of keys and other secrets
+AI & machine learning	Kinect DK	Build for mixed reality using AI sensors
+Internet of Things	Kinect DK	Build for mixed reality using AI sensors
+Mixed reality	Kinect DK	Build for mixed reality using AI sensors
+AI & machine learning	Language Understanding (LUIS)	Teach your apps to understand commands from your users
+Compute	Linux Virtual Machines	"Provision virtual machines for Ubuntu, Red Hat, and more"
+Media	Live and On-Demand Streaming	Deliver content to virtually all devices with ability to scale
+Networking	Load Balancer	Deliver high availability and network performance to your apps
+Integration	Logic Apps	Automate the access and use of data across clouds
+Internet of Things	Logic Apps	Automate the access and use of data across clouds
+Media	Media Services	"Encode, store, and stream video and audio at scale"
+Security	Microsoft Azure Attestation	A unified solution for remotely verifying the trustworthiness of a platform and integrity of the binaries running inside it
+Management and governance	Microsoft Azure portal	"Build, manage, and monitor all Azure products in a single, unified console"
+Hybrid + multicloud	Microsoft Defender for Cloud	Extend threat protection to any infrastructure
+Security	Microsoft Defender for Cloud	Protect your multi-cloud and hybrid environments
+Security	Microsoft Defender for Cloud	Extend threat protection to any infrastructure
+Internet of Things	Microsoft Defender for IoT	"Continuous asset discovery, vulnerability management, and threat detection for your Internet of Things (IoT) and operational technology (OT) devices"
+Security	Microsoft Defender for IoT	"Continuous asset discovery, vulnerability management, and threat detection for your Internet of Things (IoT) and operational technology (OT) devices"
+AI & machine learning	Microsoft Genomics	Power genome sequencing & research insights
+Analytics	Microsoft Graph Data Connect PREVIEW	"A secure, high-throughput connector designed to copy select Microsoft 365 productivity datasets into your Azure tenant"
+Hybrid + multicloud	Microsoft Sentinel	Cloud-native SIEM and intelligent security analytics
+Security	Microsoft Sentinel	Cloud-native SIEM and intelligent security analytics
+Management and governance	Network Watcher	Network performance monitoring and diagnostics solution
+Networking	Network Watcher	Network performance monitoring and diagnostics solution
+Internet of Things	Notification Hubs	Send push notifications to any platform from any back end
+Mobile	Notification Hubs	Send push notifications to any platform from any back end
+Web	Notification Hubs	Send push notifications to any platform from any back end
+Mixed reality	Object Anchors PREVIEW	Automatically align and anchor 3D content to objects in the physical world
+AI & machine learning	Personalizer	"Deliver personalized, relevant experiences for each of your users"
+Analytics	Power BI Embedded	White label Power BI to quickly and easily provide exceptional customer facing dashboards and analytics in your own applications
+AI & machine learning	Project Bonsai PREVIEW	Create intelligent industrial control systems using simulations
+AI & machine learning	QnA Maker	"Distill information into conversational, easy-to-navigate answers"
+Storage	Queue Storage	Effectively scale apps according to traffic
+Analytics	R Server for HDInsight	"Predictive analytics, machine learning, and statistical modeling for big data"
+Mixed reality	Remote Rendering	"Render high-quality, interactive 3D content with real-time streaming"
+Developer tools	SDKs	Get the SDKs and command-line tools you need
+Service Area	Service	Service Description
+Integration	Service Bus	Connect across private and public cloud environments
+Mixed reality	Spatial Anchors	"Create multi-user, spatially aware mixed reality experiences"
+Mobile	Spatial Anchors	"Create multi-user, spatially aware mixed reality experiences"
+AI & machine learning	Speaker recognition	A Speech service feature that verifies and identifies speakers
+AI & machine learning	Speech to text	A Speech service feature that accurately converts spoken audio to text
+AI & machine learning	Speech translation	Easily integrate real-time speech translation to your app
+Compute	SQL Server on Azure Virtual Machines	Migrate SQL Server workloads to the cloud at lower total cost of ownership (TCO)
+Databases	SQL Server on Azure Virtual Machines	Migrate SQL Server workloads to the cloud at lower total cost of ownership (TCO)
+Compute	Static Web Apps	Streamlined full-stack development from source code to global high availability
+Web	Static Web Apps	Streamlined full-stack development from source code to global high availability
+Storage	Storage Accounts	"Durable, highly available, and massively scalable cloud storage"
+Storage	Storage Explorer	View and interact with Azure Storage resources
+Storage	StorSimple	Lower costs with an enterprise hybrid cloud storage solution
+Databases	Table Storage	NoSQL key-value store using semi-structured datasets
+AI & machine learning	Text to speech	A Speech service feature that converts text to lifelike speech
+Management and governance	Traffic Manager	Route incoming traffic for high performance and availability
+Networking	Traffic Manager	Route incoming traffic for high performance and availability
+AI & machine learning	Translator	Easily conduct machine translation with a simple REST API call
+Compute	Virtual Machine Scale Sets	Manage and scale up to thousands of Linux and Windows VMs
+Compute	Virtual Machines	Provision Windows and Linux VMs in seconds
+Networking	Virtual Network	"Provision private networks, optionally connect to on-premises datacenters"
+Networking	Virtual WAN	Optimize and automate branch to branch connectivity through Azure
+Developer tools	Visual Studio	Powerful and flexible environment to develop apps in the cloud
+Mobile	Visual Studio App Center	"Build, test, release, and monitor your mobile and desktop apps"
+Developer tools	Visual Studio Code	"A powerful, lightweight code editor for cloud development"
+Virtual desktop infrastructure	VMware Horizon Cloud on Microsoft Azure	Provision Windows desktops and apps with VMware and Azure Virtual Desktop
+Networking	VPN Gateway	"Establish secure, cross-premises connectivity"
+Security	VPN Gateway	"Establish secure, cross-premises connectivity"
+Containers	Web App for Containers	Run containerized web apps on Windows and Linux
+Web	Web App for Containers	Run containerized web apps on Windows and Linux
+Networking	Web Application Firewall	A cloud-native web application firewall (WAF) service that provides powerful protection for web apps
+Security	Web Application Firewall	A cloud-native web application firewall (WAF) service that provides powerful protection for web apps
+Internet of Things	Windows 10 IoT Core Services	Long-term OS support and services to manage device updates and assess device health
+Internet of Things	Windows for IoT	"Build intelligent edge solutions with world-class developer tools, long-term support, and enterprise-grade security."
+Mobile	Xamarin	Create cloud-powered mobile apps faster

@@ -35,3 +35,8 @@ jobs:
         uses: dephraiim/translate-readme@main
         with:
           LANG: fr
+      - name: Adding README - Norwegian
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: no
+          

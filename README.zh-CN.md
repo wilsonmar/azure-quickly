@@ -49,7 +49,7 @@ PowerShell 脚本用于唯一解决方案的情况。
 
 通过 Azure 门户准确地重复手动鼠标操作和打字（无法快速重复）是很有压力的。
 
-So, this README explains how you can initiate your custom environment from scratch using the CLI Bash terminal.
+因此，本自述文件解释了如何使用 CLI Bash 终端从头开始启动自定义环境。
 
 <a name="Todos"></a>
 
@@ -88,7 +88,7 @@ So, this README explains how you can initiate your custom environment from scrat
 
 2.  右键单击突出显示的内容并选择“复制”将突出显示的内容暂时保存在剪贴板中。
 
-3.  进来<a target="_blank" href="https://shell.azure.com/">HTTPS&#x3A;//shell.azure.com</a>或者输入后点击CLI图标<a target="_blank" href="https://portal.azure.com/">HTTPS&#x3A;//portal.azure.com</a>
+3.  进来<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>或者输入后点击CLI图标<a target="_blank" href="https://portal.azure.com/">HTTPS&#x3A;//portal.azure.com</a>
 
 4.  右键单击 CLI Bash 终端窗口上的任意位置，然后按<strong>命令+V</strong>从剪贴板粘贴。
 
@@ -165,7 +165,7 @@ ML CLI v2（预览版）提供了一种自动化方法：<br /><a target="_blank
 
 Jupyter 的 Python 笔记本图库：
 
--   [HTTPS://GitHub.com/惧怕英特尔/惧怕英特尔/wiki/A-gallery-of-interesting-J up英特尔-notebooks](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks)
+-   <https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks>
 
 <hr />
 
@@ -185,7 +185,7 @@ Jupyter 的 Python 笔记本图库：
 
 3.  点击 ”[HTTPS://美丽.azure.com/?提到=..."](https://ml.azure.com/?tid=...")“Studio Web URL”下的 URL。
 
-4.  If the "get started" pop-up dialog appears, click X to dismiss it.
+4.  如果出现“开始”弹出对话框，请单击 X 将其关闭。
 
 5.  单击“笔记本”。
 
@@ -193,7 +193,7 @@ Jupyter 的 Python 笔记本图库：
 
     <a target="_blank" href="https://docs.microsoft.com/en-us/azure/machine-learning/concept-train-model-git-integration?WT.mc_id=Portal-Microsoft_Azure_Support#clone-git-repositories-into-your-workspace-file-system">\*</a>
 
-6.  将鼠标悬停在您的用户名上（在“用户”中），然后单击“...”以选择“上传文件”。
+6.  将鼠标悬停在您的用户名上（在“用户”中）并单击“...”以选择“上传文件”。
 
     <img width="361" alt="az-ml-notebooks-722x312" src="https://user-images.githubusercontent.com/300046/120910778-eeb45600-c63e-11eb-8bd2-24725c7fd74e.png">
 
@@ -269,7 +269,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-webapp-cli.sh">az-webapp-cli.sh</a>
      </strong></pre>
 
--   创建一个具有两个子网和一个保护入站流量的网络安全组的网络。一个子网用于远程访问流量，一个子网用于运行 Web 服务器的虚拟机的 Web 流量。然后创建两个虚拟机。一种允许 SSH 访问并应用适当的网络安全组规则。您将此虚拟机用作<strong>SSH jumpbox</strong>然后连接到可用作 Web 服务器的第二个虚拟机：
+-   创建一个具有两个子网和一个保护入站流量的网络安全组的网络。一个子网用于远程访问流量，一个子网用于运行 Web 服务器的虚拟机的 Web 流量。然后创建两个虚拟机。一种允许 SSH 访问并应用适当的网络安全组规则。您将此虚拟机用作<strong>SSH 跳线盒</strong>然后连接到第二个可用作 Web 服务器的虚拟机：
 
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
      </strong></pre> 
@@ -486,7 +486,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
 -   [HTTPS://GitHub.com/John the比如IT/azure masterclass](https://github.com/johnthebrit/AzureMasterClass)PowerShell 脚本
 
--   <https://github.com/terraform-providers/terraform-provider-azurerm>
+-   [HTTPS://GitHub.com/Terra form-providers/Terra form-provider-阿祖日耳曼](https://github.com/terraform-providers/terraform-provider-azurerm)
 
 -   天际线学院
 
@@ -506,7 +506,7 @@ PR 已被接受。
 
 ## 执照
 
-© 2021 威尔逊·玛尔
+©2021 威尔逊·玛尔
 
 ## 伦理
 

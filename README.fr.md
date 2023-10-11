@@ -149,7 +149,7 @@ Maintenant que vous disposez des ressources nécessaires :
 
 ## Astuces de codage de script Shell
 
-Le contenu des scripts Bash de ce dépôt est écrit en utilisant les conventions de codage définies sur<a target="_blank" href="https://wilsonmar.github.io/bash-codng">https&#x3A;//wilsonmar.github.io/bash-coding</a>qui inclut:
+Le contenu des scripts Bash de ce référentiel est écrit en utilisant les conventions de codage définies sur<a target="_blank" href="https://wilsonmar.github.io/bash-codng">https&#x3A;//wilsonmar.github.io/bash-coding</a>qui inclut:
 
 -   <tt>source ./az-all-start.sh</tt>configure les variables d'environnement et les fonctions utilitaires.
 
@@ -269,7 +269,7 @@ Plus de scripts de mon dépôt Azure-quickly :
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-webapp-cli.sh">az-webapp-cli.sh</a>
      </strong></pre>
 
--   Créez un réseau avec deux sous-réseaux et un groupe de sécurité réseau qui sécurise le trafic entrant. Un sous-réseau est destiné au trafic d'accès à distance, l'autre est au trafic Web pour les machines virtuelles qui exécutent un serveur Web. Deux VM sont alors créées. L’un autorise l’accès SSH et applique les règles de groupe de sécurité réseau appropriées. Vous utilisez cette VM comme<strong>Boîte de connexion SSH</strong>pour ensuite vous connecter à la deuxième VM qui peut servir de serveur web :
+-   Créez un réseau avec deux sous-réseaux et un groupe de sécurité réseau qui sécurise le trafic entrant. Un sous-réseau est destiné au trafic d'accès à distance, l'autre est au trafic Web pour les machines virtuelles qui exécutent un serveur Web. Deux VM sont alors créées. L’un autorise l’accès SSH et applique les règles de groupe de sécurité réseau appropriées. Vous utilisez cette VM comme<strong>Boîte de connexion SSH</strong>pour ensuite se connecter à la deuxième VM qui peut servir de serveur web :
 
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
      </strong></pre> 

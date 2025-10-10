@@ -10,7 +10,7 @@
 -   [安装](#Install)
 -   [Shell 脚本编码技巧](#ShellCoding)
 -   [用法](#Usage)
--   [阿紫-setup-处理.是](#az-setup-cli.sh)
+-   [az-setup-cli.sh](#az-setup-cli.sh)
 -   [参考](#References)
 -   [维护者](#maintainers)
 -   [贡献](#contributing)
@@ -19,7 +19,7 @@
 
 ## 语言
 
-这里的所有代码、注释和文档都是用美国英语编写的。这样我们就可以与世界各地的开发者分享我们的经验，翻译归功于[HTTPS://GitHub.com/的pH热爱IM/translate-readme](https://github.com/dephraiim/translate-readme)
+这里的所有代码、注释和文档都是用美国英语编写的。这样我们就可以与世界各地的开发者分享我们的经验，翻译归功于<https://github.com/dephraiim/translate-readme>
 
 -   [英语](README.md)
 -   [简体中文](README.zh-CN.md)
@@ -30,7 +30,7 @@
 
 这个仓库中的大多数脚本都是<strong>在 MacOS 和 Linux 上本机运行的 Bash shell 脚本</strong>.
 
-脚本代码可以在 Windows Git Bash Shell 上运行。
+脚本代码可以在 Windows Git Bash Shell 上运行。 
 PowerShell 脚本用于唯一解决方案的情况。
 
 为了处理更多的复杂性，程序编码为<a target="_blank" href="https://wilsonmar.github.io/python/">Python</a>或者<a target="_blank" href="https://wilsonmar.github.io/golang">去</a>语言可以称为<a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">在适当的时候</a>充分利用他们的能力。
@@ -43,7 +43,7 @@ PowerShell 脚本用于唯一解决方案的情况。
 
 人们让资源保持运行是因为他们<strong>不想把一生都花在重复体力劳动上</strong>单击 Azure 门户 GUI，如大多数 Azure 教程所述。
 
-这个仓库（位于<a target="_blank" href="https://github.com/wilsonmar/azure-quickly">HTTPS&#x3A;//GitHub.com/Wilson Mar/azure-quickly</a>）包含自动化脚本，使您能够自信地<strong>删除资源组</strong>当您休息或玩耍时，因为它使您能够<strong>拿回资源</strong>即使使用全新的订阅，也只需几个命令。
+这个仓库（位于<a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https&#x3A;//github.com/wilsonmar/azure-quickly</a>）包含自动化脚本，使您能够自信地<strong>删除资源组</strong>当您休息或玩耍时，因为它使您能够<strong>拿回资源</strong>即使使用全新的订阅，也只需几个命令。
 
 您可以节省金钱，因为您不必让资源保持运行、消耗积分或增加信用卡账单。
 
@@ -57,7 +57,7 @@ PowerShell 脚本用于唯一解决方案的情况。
 
 -   添加别名.sh
 -   进行测试以确保脚本代码可以在 Windows Git Bash Shell 上运行。
--   A<strong>变量审查</strong>脚本在调用之前验证内存变量。
+-   一个<strong>变量审查</strong>脚本在调用之前验证内存变量。
 
 <a name="Install"></a>
 
@@ -74,9 +74,9 @@ PowerShell 脚本用于唯一解决方案的情况。
 
 1.  获取 Azure 订阅（例如通过购买 Visual Studio 许可证）。
 
-2.  使用互联网浏览器（Google Chrome）来解决<a target="_blank" href="https://portal.azure.com/">HTTPS&#x3A;//portal.azure.com</a>并登录。
+2.  使用互联网浏览器（Google Chrome）来解决<a target="_blank" href="https://portal.azure.com/">https&#x3A;//portal.azure.com</a>并登录。
 
-3.  处于<a target="_blank" href="https://shell.azure.com/">HTTPS&#x3A;//shell.azure.com</a>或单击门户中的 CLI 图标。
+3.  处于<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>或单击门户中的 CLI 图标。
 
 4.  创建一个存储帐户<strong>云盘</strong>壳内。
 
@@ -88,7 +88,7 @@ PowerShell 脚本用于唯一解决方案的情况。
 
 2.  右键单击突出显示的内容并选择“复制”将突出显示的内容暂时保存在剪贴板中。
 
-3.  进来<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>或者输入后点击CLI图标<a target="_blank" href="https://portal.azure.com/">HTTPS&#x3A;//portal.azure.com</a>
+3.  进来<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>或者输入后点击CLI图标<a target="_blank" href="https://portal.azure.com/">https&#x3A;//portal.azure.com</a>
 
 4.  右键单击 CLI Bash 终端窗口上的任意位置，然后按<strong>命令+V</strong>从剪贴板粘贴。
 
@@ -122,7 +122,7 @@ PowerShell 脚本用于唯一解决方案的情况。
 
 6.  单击代码编辑器窗口右侧的“...”菜单进行保存，然后退出。
 
-    现在您可以运行脚本来创建和管理资源。
+    现在您可以运行脚本来创建和管理资源。 
     大多数脚本引用了 Microsoft Learn、CloudAcademy、Pluralsight、Coursera 等的教程。
 
     要在 Azure 机器学习工作室中运行，您需要一个或多个 Azure ML 工作区、计算、见解和 Key Vault 实例。
@@ -130,7 +130,7 @@ PowerShell 脚本用于唯一解决方案的情况。
 
 ### 使用 az ml cli v2 创建工作区
 
-ML CLI v2（预览版）提供了一种自动化方法：<br /><a target="_blank" href="https://github.com/Azure/azureml-examples/blob/main/cli/setup.sh">GitHub.com/azure/azure美丽-examples/blob/卖弄/处理/setup.是</a>.
+ML CLI v2（预览版）提供了一种自动化方法：<br /><a target="_blank" href="https://github.com/Azure/azureml-examples/blob/main/cli/setup.sh">github.com/Azure/azureml-examples/blob/main/cli/setup.sh</a>.
 
 1.  运行我修改后的脚本以使用环境变量和其他编辑：
 
@@ -141,7 +141,7 @@ ML CLI v2（预览版）提供了一种自动化方法：<br /><a target="_blank
 
     ### 根据您的喜好配置别名
 
-2.  编辑<tt>aliases.是</tt>文件并删除或添加键盘宏。
+2.  编辑<tt>aliases.sh</tt>文件并删除或添加键盘宏。
 
 现在您已经拥有所需的资源：
 
@@ -149,11 +149,11 @@ ML CLI v2（预览版）提供了一种自动化方法：<br /><a target="_blank
 
 ## Shell 脚本编码技巧
 
-此存储库中的 Bash 脚本内的内容是使用以下定义的编码约定编写的<a target="_blank" href="https://wilsonmar.github.io/bash-codng">HTTPS&#x3A;//Wilson Mar.GitHub.IO/巴士-coding</a>其中包括：
+此存储库中的 Bash 脚本内的内容是使用以下定义的编码约定编写的<a target="_blank" href="https://wilsonmar.github.io/bash-codng">https&#x3A;//wilsonmar.github.io/bash-coding</a>其中包括：
 
 -   <tt>来源 ./az-all-start.sh</tt>设置环境变量和实用函数。
 
--   <tt>设置-O 凸起</tt>使脚本在出现第一个错误时停止（而不是继续运行）。
+-   <tt>设置-o 竖立</tt>使脚本在出现第一个错误时停止（而不是继续运行）。
 
 -   创建一个新的资源组和所有资源<strong>每次运行都有新内容</strong>降低幂等性编码的复杂性（每次重新运行结束时状态相同）。
 
@@ -183,7 +183,7 @@ Jupyter 的 Python 笔记本图库：
 
 2.  单击创建的实例。
 
-3.  点击 ”[HTTPS://美丽.azure.com/?提到=..."](https://ml.azure.com/?tid=...")“Studio Web URL”下的 URL。
+3.  单击“<https://ml.azure.com/?tid=...">“Studio Web URL”下的 URL。
 
 4.  如果出现“开始”弹出对话框，请单击 X 将其关闭。
 
@@ -193,13 +193,13 @@ Jupyter 的 Python 笔记本图库：
 
     <a target="_blank" href="https://docs.microsoft.com/en-us/azure/machine-learning/concept-train-model-git-integration?WT.mc_id=Portal-Microsoft_Azure_Support#clone-git-repositories-into-your-workspace-file-system">\*</a>
 
-6.  将鼠标悬停在您的用户名上（在“用户”中）并单击“...”以选择“上传文件”。
+6.  将鼠标悬停在您的用户名上（在“用户”中），然后单击“...”以选择“上传文件”。
 
     <img width="361" alt="az-ml-notebooks-722x312" src="https://user-images.githubusercontent.com/300046/120910778-eeb45600-c63e-11eb-8bd2-24725c7fd74e.png">
 
-7.  导航到文件夹<a target="_blank" href="https://github.com/Azure/azureml-examples/tree/main/cli/jobs/train">HTTPS&#x3A;//GitHub.com/azure/azure美丽-examples/tree/卖弄/处理/Jobs/train</a>:
+7.  导航到文件夹<a target="_blank" href="https://github.com/Azure/azureml-examples/tree/main/cli/jobs/train">https&#x3A;//github.com/Azure/azureml-examples/tree/main/cli/jobs/train</a>:
 
-    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">快速地</a>
+    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">就业</a>
     -   光GBM
     -   火炬
     -   r
@@ -209,11 +209,11 @@ Jupyter 的 Python 笔记本图库：
 
 az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local --web --stream
 
-1.  导航[HTTPS://GitHub.com/azure/azure美丽-examples/blob/卖弄/处理/Jobs/train/发射台/模拟试题/](https://github.com/Azure/azureml-examples/blob/main/cli/jobs/train/fastai/mnist/)
+1.  导航至<https://github.com/Azure/azureml-examples/blob/main/cli/jobs/train/fastai/mnist/>
 
 2.  选择“job.yml”。
 
-3.  单击“上传”。
+3.  点击“上传”。
 
 4.  选择运行笔记本的计算位置。
 
@@ -223,7 +223,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
     ### 交替
 
-6.  在里面<strong>用户文件</strong>您工作空间的一部分。单击您要编辑的单元格。如果您在本部分中没有任何笔记本，请参阅在工作区中创建和管理文件。
+6.  在<strong>用户文件</strong>您工作空间的一部分。单击您要编辑的单元格。如果您在本部分中没有任何笔记本，请参阅在工作区中创建和管理文件。
 
 来自我的 azure-quickly 存储库的更多脚本：
 
@@ -269,7 +269,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-webapp-cli.sh">az-webapp-cli.sh</a>
      </strong></pre>
 
--   创建一个具有两个子网和一个保护入站流量的网络安全组的网络。一个子网用于远程访问流量，一个子网用于运行 Web 服务器的虚拟机的 Web 流量。然后创建两个虚拟机。一种允许 SSH 访问并应用适当的网络安全组规则。您将此虚拟机用作<strong>SSH 跳线盒</strong>然后连接到第二个可用作 Web 服务器的虚拟机：
+-   创建一个具有两个子网和一个保护入站流量的网络安全组的网络。一个子网用于远程访问流量，一个子网用于运行 Web 服务器的虚拟机的 Web 流量。然后创建两个虚拟机。一种允许 SSH 访问并应用适当的网络安全组规则。您将此虚拟机用作<strong>SSH 跳线盒</strong>然后连接到可用作 Web 服务器的第二个虚拟机：
 
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
      </strong></pre> 
@@ -307,13 +307,13 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
     Azure CLI 中不提供多个 Functions 组件，因此需要在 Azure 门户上执行手动操作来填补空白。
      请参阅“午餐月”电子书。
 
-[HTTPS://GitHub.com/azure/azure-quick start-templates](https://github.com/Azure/azure-quickstart-templates)
+<https://github.com/Azure/azure-quickstart-templates>
 
 <hr />
 
 <a name="az-setup-cli.sh"></a>
 
-## 阿紫-setup-处理.是
+## az-setup-cli.sh
 
 该脚本应执行以下所有步骤：
 
@@ -336,7 +336,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
 3.  删除以前的 repo 文件夹：
 
-    PROTIP：在命令前面添加一个时间代理命令，用于标识每次运行该命令花费了多少时间。例如，“0m4.559s”表示大约4.6秒。
+    PROTIP：在命令前面添加一个时间代理命令，用于标识每次运行该命令花费的时间。例如，“0m4.559s”表示大约4.6秒。
 
 4.  下载此存储库以建立运行环境：
 
@@ -457,7 +457,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
     这就是您可以为多个区域/位置运行脚本的方法 - 只需更改<tt>我的位置</tt>环境变量的值并再次运行脚本。
 
-2.  原型：<strong>删除资源组</strong>阻止虚拟服务器上累积费用：
+2.  拿：<strong>删除资源组</strong>阻止虚拟服务器上累积费用：
 
     <pre><strong>time az group delete --name "${MY_RG}" --yes   # takes several minutes
     </strong></pre>
@@ -470,23 +470,23 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
 这里的脚本改编自慷慨分享代码的多位专家：
 
--   [HTTPS://GitHub.com/否灵丹圣药/azure-魔力-samples-2你的-额度](https://github.com/fouldsy/azure-mol-samples-2nd-ed)作者：Iain Foulds，解释于[HTTPS://阿卡.马上/month of lunches](https://aka.ms/monthoflunches)2020 年 4 月 30 日发布。
+-   <https://github.com/fouldsy/azure-mol-samples-2nd-ed>作者：Iain Foulds，解释于<https://aka.ms/monthoflunches> published 4/30/2020.
 
--   [HTTPS://GitHub.com/Microsoft learning/AZ-303-Microsoft-azure-architect-technologies](https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies)
+-   <https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies>
 
--   [HTTPS://GitHub.com/Microsoft learning/AZ500-azure security technologies](https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies)
+-   <https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies>
 
--   [HTTPS://GitHub.com/azure/azure-处理](https://github.com/Azure/azure-cli)由微软
+-   <https://github.com/Azure/azure-cli>由微软
 
--   [HTTPS://GitHub.com/Timothy Warner/阿紫400](https://github.com/timothywarner/az400)& 蒂姆·华纳的 az303
+-   <https://github.com/timothywarner/az400>& 蒂姆·华纳的 az303
 
--   [HTTPS://GitHub.com/在AA Lion/哦Reilly-azure-app-security](https://github.com/zaalion/oreilly-azure-app-security)拉扎·萨利赫
+-   <https://github.com/zaalion/oreilly-azure-app-security> by Reza Salehi 
 
--   [HTTPS://GitHub.com/azure/azure-quick start-templates](https://github.com/Azure/azure-quickstart-templates)（ARM 模板）
+-   <https://github.com/Azure/azure-quickstart-templates>（ARM 模板）
 
--   [HTTPS://GitHub.com/John the比如IT/azure masterclass](https://github.com/johnthebrit/AzureMasterClass)PowerShell 脚本
+-   <https://github.com/johnthebrit/AzureMasterClass>PowerShell 脚本
 
--   [HTTPS://GitHub.com/Terra form-providers/Terra form-provider-阿祖日耳曼](https://github.com/terraform-providers/terraform-provider-azurerm)
+-   <https://github.com/terraform-providers/terraform-provider-azurerm>
 
 -   天际线学院
 

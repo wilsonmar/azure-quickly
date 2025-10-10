@@ -10,7 +10,7 @@
 -   [ثَبَّتَ](#Install)
 -   [حيل ترميز نصوص شل](#ShellCoding)
 -   [الاستخدام](#Usage)
--   [عززتبكل.ش](#az-setup-cli.sh)
+-   [az-setup-cli.sh](#az-setup-cli.sh)
 -   [مراجع](#References)
 -   [المشرفون](#maintainers)
 -   [المساهمة](#contributing)
@@ -19,7 +19,7 @@
 
 ## لغة
 
-جميع التعليمات البرمجية والتعليقات والوثائق هنا مكتوبة باللغة الإنجليزية الأمريكية. حتى نتمكن من مشاركة ما تعلمناه مع المطورين في جميع أنحاء العالم، وذلك بفضل الترجمات[هتبص://جذب.كوم/ظفريم/ترانسلتردم](https://github.com/dephraiim/translate-readme)
+جميع التعليمات البرمجية والتعليقات والوثائق هنا مكتوبة باللغة الإنجليزية الأمريكية. حتى نتمكن من مشاركة ما تعلمناه مع المطورين في جميع أنحاء العالم، وذلك بفضل الترجمات<https://github.com/dephraiim/translate-readme>
 
 -   [إنجليزي](README.md)
 -   [الصينية المبسطة](README.zh-CN.md)
@@ -28,28 +28,28 @@
 -   [فرنسي](README.fr.md)
 -   [عربى](README.ar.md)<br /><br />
 
-معظم البرامج النصية في هذا الريبو هي<strong>البرامج النصية Bash Shell التي تعمل أصلاً على نظامي التشغيل MacOS وLinux</strong>.
+معظم البرامج النصية في هذا الريبو هي<strong>البرامج النصية لـ Bash Shell التي تعمل أصلاً على نظامي التشغيل MacOS وLinux</strong>.
 
-يمكن تشغيل التعليمات البرمجية النصية على Windows Git Bash Shell.
+يمكن تشغيل التعليمات البرمجية النصية على Windows Git Bash Shell. 
 يتم استخدام البرامج النصية PowerShell في الحالات التي يكون فيها هذا هو الحل الوحيد.
 
-للتعامل مع المزيد من التعقيد، يتم ترميز البرامج<a target="_blank" href="https://wilsonmar.github.io/python/">بايثون</a>أو<a target="_blank" href="https://wilsonmar.github.io/golang">يذهب</a>يمكن أن تسمى اللغة<a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">عندما يكون ذلك مناسبا</a>للاستفادة من قدراتهم.
+ولمعالجة المزيد من التعقيد، تم ترميز البرامج<a target="_blank" href="https://wilsonmar.github.io/python/">بايثون</a>أو<a target="_blank" href="https://wilsonmar.github.io/golang">يذهب</a>يمكن أن تسمى اللغة<a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">عندما يكون ذلك مناسبا</a>للاستفادة من قدراتهم.
 
-هناك خطر من أن وظائف CLI قد لا تعمل عندما تكون أساسية<a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">أزور ريست API</a>تعمل. لذلك يتم تضمين ملفات Postman عند الاقتضاء.
+هناك خطر من أن وظائف CLI قد لا تعمل عندما تكون أساسية<a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">أزور ريست API</a>لا يعمل. لذلك يتم تضمين ملفات Postman عند الاقتضاء.
 
 ## رؤية
 
 باستخدام هذا الريبو يمكن<strong>يوفر لك الوقت والمال</strong>ويعطيك بعض راحة البال والسعادة.
 
-يترك الأشخاص الموارد قيد التشغيل لأنهم<strong>لا يريدون أن يقضوا حياتهم في تكرار العمل اليدوي</strong>النقر على واجهة المستخدم الرسومية لـ Azure Portal، كما هو موضح في معظم البرامج التعليمية لـ Azure.
+يترك الأشخاص الموارد قيد التشغيل لأنهم<strong>لا يريدون قضاء حياتهم في تكرار الكدح اليدوي</strong>النقر على واجهة المستخدم الرسومية لـ Azure Portal، كما هو موضح في معظم البرامج التعليمية لـ Azure.
 
-هذا الريبو (في<a target="_blank" href="https://github.com/wilsonmar/azure-quickly">هتبص://جذب.كوم/والسنمار/أزرقكل</a>) يحتوي على نصوص برمجية للأتمتة تمكنك من ذلك بثقة<strong>حذف مجموعات الموارد</strong>عندما تستريح أو تلعب لأنه يمكّنك من ذلك<strong>الحصول على الموارد مرة أخرى</strong>مع عدد قليل من الأوامر، حتى مع اشتراك جديد تمامًا.
+هذا الريبو (في<a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https&#x3A;//github.com/wilsonmar/azure-quickly</a>) يحتوي على نصوص برمجية للأتمتة تمكنك من ذلك بثقة<strong>حذف مجموعات الموارد</strong>عندما تستريح أو تلعب لأنه يمكّنك من ذلك<strong>الحصول على الموارد مرة أخرى</strong>مع عدد قليل من الأوامر، حتى مع اشتراك جديد تمامًا.
 
 يمكنك توفير المال لأنك لا تضطر إلى ترك الموارد قيد التشغيل، أو استهلاك الاعتمادات، أو زيادة فاتورة بطاقتك الائتمانية.
 
 من المرهق تكرار استخدام الماوس والكتابة يدويًا بدقة من خلال Azure Portal (وهو أمر لا يمكن تكراره بسرعة).
 
-لذا، يشرح هذا الملف التمهيدي كيف يمكنك بدء بيئتك المخصصة من البداية باستخدام محطة CLI Bash.
+لذلك، يشرح هذا الملف التمهيدي كيف يمكنك بدء بيئتك المخصصة من البداية باستخدام محطة CLI Bash.
 
 <a name="Todos"></a>
 
@@ -74,11 +74,11 @@
 
 1.  احصل على اشتراك Azure (مثل شراء ترخيص Visual Studio).
 
-2.  استخدم متصفح الانترنت (جوجل كروم) للعنوان<a target="_blank" href="https://portal.azure.com/">هتبص://بورتال.أزور.كوم</a>وتسجيل الدخول.
+2.  استخدم متصفح الانترنت (جوجل كروم) للعنوان<a target="_blank" href="https://portal.azure.com/">https&#x3A;//portal.azure.com</a>وتسجيل الدخول.
 
-3.  كن في<a target="_blank" href="https://shell.azure.com/">هتبص://سهل.أزور.كوم</a>أو انقر على أيقونة CLI داخل البوابة.
+3.  كن في<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>أو انقر فوق أيقونة CLI داخل البوابة.
 
-4.  قم بإنشاء حساب تخزين لـ<strong>محرك سحابة</strong>داخل القشرة.
+4.  إنشاء حساب تخزين ل<strong>com.clouddrive</strong>داخل القشرة.
 
 ### قم بإعداد بيئة لاشتراك جديد
 
@@ -88,7 +88,7 @@
 
 2.  انقر بزر الماوس الأيمن فوق العنصر المميز وحدد "نسخ" لحفظ العنصر المميز مؤقتًا في الحافظة الخاصة بك.
 
-3.  أدخل<a target="_blank" href="https://shell.azure.com/">هتبص://سهل.أزور.كوم</a>أو انقر على أيقونة CLI بعد الدخول<a target="_blank" href="https://portal.azure.com/">هتبص://بورتال.أزور.كوم</a>
+3.  أدخل<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>أو انقر على أيقونة CLI بعد الدخول<a target="_blank" href="https://portal.azure.com/">https&#x3A;//portal.azure.com</a>
 
 4.  انقر بزر الماوس الأيمن في أي مكان على نافذة محطة CLI Bash، ثم اضغط<strong>الأمر+V</strong>للصق من الحافظة.
 
@@ -103,7 +103,7 @@
 
 ### تخصيص قيم setmem.sh
 
-يقوم البرنامج النصي init أيضًا بإنشاء ملف<strong>البرنامج النصي setmem</strong>الذي يحدد قيم متغيرات البيئة في الذاكرة للتحكم في تشغيل البرنامج النصي. لاحظ أن ملف setmen موجود في مجلد أعلى من حيث يمكن دفع كود البرنامج النصي إلى github. ذلك بسبب
+يقوم البرنامج النصي init أيضًا بإنشاء ملف<strong>البرنامج النصي setmem</strong>الذي يحدد قيم متغيرات البيئة في الذاكرة للتحكم في تشغيل البرنامج النصي. لاحظ أن ملف setmen موجود في مجلد أعلى من حيث يمكن دفع كود البرنامج النصي إلى github. هذا بسبب
 
 1.  استخدم محرر Visual Studio Code المدمج لتحرير الملف setmem.sh:
 
@@ -122,7 +122,7 @@
 
 6.  انقر فوق القائمة "..." الموجودة على يمين نافذة Code Editor للحفظ، ثم قم بالخروج.
 
-    يمكنك الآن تشغيل البرامج النصية لإنشاء الموارد وإدارتها.
+    يمكنك الآن تشغيل البرامج النصية لإنشاء الموارد وإدارتها. 
     تشير معظم البرامج النصية إلى برنامج تعليمي في Microsoft Learn وCloudAcademy وPluralsight وCoursera وما إلى ذلك.
 
     للتشغيل في استوديو Azure Machine Learning، تحتاج إلى مثيل واحد أو أكثر من Azure ML Workspace وCompute وInsights وKey Vault.
@@ -130,7 +130,7 @@
 
 ### إنشاء مساحة عمل باستخدام az ml cli v2
 
-يوفر ML CLI v2 (معاينة) نهجًا واحدًا للأتمتة:<br /><a target="_blank" href="https://github.com/Azure/azureml-examples/blob/main/cli/setup.sh">جذب.كوم/أزور/أزورملكسمبلص/بلب/مين/كلي/ستوب.ش</a>.
+يوفر ML CLI v2 (معاينة) نهجًا واحدًا للأتمتة:<br /><a target="_blank" href="https://github.com/Azure/azureml-examples/blob/main/cli/setup.sh">github.com/Azure/azureml-examples/blob/main/cli/setup.sh</a>.
 
 1.  قم بتشغيل البرنامج النصي الذي قمت بتعديله من ذلك لاستخدام متغيرات البيئة والتعديلات الإضافية:
 
@@ -141,7 +141,7 @@
 
     ### تكوين الأسماء المستعارة ترضيك
 
-2.  تحرير<tt>العسس.ش</tt>ملف وإزالة أو إضافة وحدات ماكرو لوحة المفاتيح.
+2.  تحرير<tt>aliases.sh</tt>ملف وإزالة أو إضافة وحدات ماكرو لوحة المفاتيح.
 
 الآن بعد أن أصبحت لديك الموارد اللازمة:
 
@@ -149,11 +149,11 @@
 
 ## حيل ترميز نصوص شل
 
-تتم كتابة المحتويات الموجودة داخل نصوص Bash داخل هذا الريبو باستخدام اصطلاحات الترميز المحددة في<a target="_blank" href="https://wilsonmar.github.io/bash-codng">هتبص://والسنمار.جذب.إيه/بشكدنج</a>التي تشمل:
+تتم كتابة المحتويات الموجودة داخل نصوص Bash داخل هذا الريبو باستخدام اصطلاحات الترميز المحددة في<a target="_blank" href="https://wilsonmar.github.io/bash-codng">https&#x3A;//wilsonmar.github.io/bash-coding</a>والتي تشمل:
 
 -   <tt>المصدر ./az-all-start.sh</tt>يقوم بإعداد متغيرات البيئة ووظائف الأداة المساعدة.
 
--   <tt>مجموعة -o مرفوعة</tt>يجعله يتوقف البرنامج النصي عند الخطأ الأول (بدلاً من الاستمرار فيه).
+-   <tt>مجموعة -o نصبت</tt>يجعله يتوقف البرنامج النصي عند الخطأ الأول (بدلاً من الاستمرار فيه).
 
 -   يتم إنشاء مجموعة موارد جديدة وجميع الموارد<strong>جديد في كل شوط</strong>لتقليل تعقيد ترميز العجز الجنسي (حيث تكون الحالة هي نفسها في نهاية كل عملية إعادة تشغيل).
 
@@ -165,7 +165,7 @@
 
 معرض Jupyter لدفاتر ملاحظات Python:
 
--   [هتبص://جذب.كوم/جوبيتر/جوبيتر/ويكي/جاليريفنترستنججبيترنتبكص](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks)
+-   <https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks>
 
 <hr />
 
@@ -183,7 +183,7 @@
 
 2.  انقر فوق المثيل الذي تم إنشاؤه.
 
-3.  انقر على "[هتبص://مل.أزور.كوم/?تعد=..."](https://ml.azure.com/?tid=...")عنوان URL ضمن "عنوان URL للويب الخاص بالاستوديو".
+3.  انقر فوق "<https://ml.azure.com/?tid=...">عنوان URL ضمن "عنوان URL للويب الخاص بالاستوديو".
 
 4.  إذا ظهر مربع الحوار المنبثق "البدء"، فانقر فوق X لتجاهله.
 
@@ -197,9 +197,9 @@
 
     <img width="361" alt="az-ml-notebooks-722x312" src="https://user-images.githubusercontent.com/300046/120910778-eeb45600-c63e-11eb-8bd2-24725c7fd74e.png">
 
-7.  انتقل إلى المجلدات باسم<a target="_blank" href="https://github.com/Azure/azureml-examples/tree/main/cli/jobs/train">هتبص://جذب.كوم/أزور/أزورملكسمبلص/تري/مين/كلي/جبس/ترين</a>:
+7.  انتقل إلى المجلدات باسم<a target="_blank" href="https://github.com/Azure/azureml-examples/tree/main/cli/jobs/train">https&#x3A;//github.com/Azure/azureml-examples/tree/main/cli/jobs/train</a>:
 
-    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">سريع</a>
+    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">التوظيف</a>
     -   com.lightgbm
     -   pytorch
     -   ص
@@ -209,7 +209,7 @@
 
 إنشاء وظيفة من الألف إلى الياء -f jobs/train/lightgbm/iris/job.yml --set compute.target=local --web --stream
 
-1.  انتقل إلى[هتبص://جذب.كوم/أزور/أزورملكسمبلص/بلب/مين/كلي/جبس/ترين/فاست/منصة/](https://github.com/Azure/azureml-examples/blob/main/cli/jobs/train/fastai/mnist/)
+1.  انتقل إلى<https://github.com/Azure/azureml-examples/blob/main/cli/jobs/train/fastai/mnist/>
 
 2.  حدد "job.yml".
 
@@ -223,7 +223,7 @@
 
     ### بالتناوب
 
-6.  في ال<strong>ملفات المستخدم</strong>قسم من مساحة العمل الخاصة بك. انقر على الخلية التي ترغب في تحريرها. إذا لم يكن لديك أي دفاتر ملاحظات في هذا القسم، فراجع إنشاء الملفات وإدارتها في مساحة العمل الخاصة بك.
+6.  في<strong>ملفات المستخدم</strong>قسم من مساحة العمل الخاصة بك. انقر على الخلية التي ترغب في تحريرها. إذا لم يكن لديك أي دفاتر ملاحظات في هذا القسم، فراجع إنشاء الملفات وإدارتها في مساحة العمل الخاصة بك.
 
 المزيد من البرامج النصية من الريبو azure-quickly الخاص بي:
 
@@ -307,17 +307,17 @@
     لا تتوفر العديد من مكونات الوظائف في Azure CLI، لذا يلزم اتخاذ إجراءات يدوية على بوابة Azure لملء الفجوات.
      راجع الكتاب الإلكتروني "شهر الغداء".
 
-[هتبص://جذب.كوم/أزور/أزرقكسترتتمبلتس](https://github.com/Azure/azure-quickstart-templates)
+<https://github.com/Azure/azure-quickstart-templates>
 
 <hr />
 
 <a name="az-setup-cli.sh"></a>
 
-## عززتبكل.ش
+## az-setup-cli.sh
 
 يجب أن يقوم البرنامج النصي بجميع الخطوات أدناه:
 
-1.  اختياري: تحرير<tt>.bashrc</tt>ملف لتخصيص المطالبة:
+1.  اختياري: قم بتحرير<tt>.bashrc</tt>ملف لتخصيص المطالبة:
 
     إذا كنت في<strong>سحابة شل</strong>(الذي يعمل بنظام التشغيل Linux)، أضف هذه السطور إلى أسفل الملف<strong>.bashrc</strong>:
 
@@ -334,7 +334,7 @@
 
     بالتناوب، على جهاز الكمبيوتر المحمول، أستخدمه<br /><tt>القرص المضغوط gmail_acct</tt>
 
-3.  إزالة مجلد الريبو السابق:
+3.  قم بإزالة مجلد الريبو السابق:
 
     PROTIP: تتم إضافة أمر وكيل الوقت أمام الأوامر لتحديد عدد الوقت المستغرق لتشغيل الأمر في كل مرة. على سبيل المثال، "0m4.559s" تعني حوالي 4.6 ثانية.
 
@@ -379,7 +379,7 @@
     >>> Microsoft.Web already Registered.
        </pre>
 
-    ما سبق يجب القيام به مرة واحدة فقط، ولكن تشغيله مرة أخرى لن يكون ضارًا.
+    ما سبق يجب القيام به مرة واحدة فقط، لكن تشغيله مرة أخرى لن يكون ضارًا.
 
 7.  امنح setmem.sh أذونات لتشغيله وتشغيله:
 
@@ -405,7 +405,7 @@
 
 10. استخدم برنامج محرر النصوص لتحرير الملف ../setmem.sh:
 
-    كانت البرامج النصية<strong>المعممة</strong>عن طريق استبدال متغيرات البيئة بالقيم المرمزة في البرامج النصية. نصيحة: يؤدي استخدام المتغير بدلاً من الترميز الثابت إلى تجنب الأخطاء المطبعية والتكوينات الخاطئة.
+    كانت البرامج النصية<strong>معمم</strong>عن طريق استبدال متغيرات البيئة بالقيم المرمزة في البرامج النصية. نصيحة: يؤدي استخدام المتغير بدلاً من الترميز الثابت إلى تجنب الأخطاء المطبعية والتكوينات الخاطئة.
 
     تحدد الأسطر الموجودة أدناه قيمًا لكل متغير بحيث يمكن لعمليات التشغيل المتعددة استخدام قيم مختلفة، دون الحاجة إلى تغيير ملف البرنامج النصي.
 
@@ -438,7 +438,7 @@
 
     <pre><strong>echo "MY_RG=$MY_RG"</strong></pre>
 
-15. حفظ الملف. في Cloud Shell، اضغط على Command+Q أو انقر على "..." للضغط على Save، ثم Close.
+15. احفظ الملف. في Cloud Shell، اضغط على Command+Q أو انقر على "..." للضغط على Save، ثم Close.
 
 ### كل جلسة عمل
 
@@ -457,12 +457,12 @@
 
     هذه هي الطريقة التي يمكنك بها تشغيل البرامج النصية لعدة مناطق/مواقع - عن طريق تغيير ملف<tt>MY_LOC</tt>قيمة متغير البيئة وتشغيل البرنامج النصي مرة أخرى.
 
-2.  النموذج:<strong>حذف مجموعات الموارد</strong>لمنع تراكم الرسوم على الخوادم الافتراضية:
+2.  يأخذ:<strong>حذف مجموعات الموارد</strong>لمنع تراكم الرسوم على الخوادم الافتراضية:
 
     <pre><strong>time az group delete --name "${MY_RG}" --yes   # takes several minutes
     </strong></pre>
 
-    <tt>--نعم</tt>قبل أن يقوم الأمر az بتغذية "y" للرد على الطلب تلقائيًا:<br />هل أنت متأكد أنك تريد تنفيذ هذه العملية؟ (ص / ن): ذ
+    <tt>--نعم</tt>قبل أن يقوم الأمر az بتغذية "y" للرد على الطلب تلقائيًا:<br />هل أنت متأكد أنك تريد إجراء هذه العملية؟ (ص / ن): ذ
 
 <hr />
 
@@ -470,23 +470,23 @@
 
 النصوص البرمجية هنا مقتبسة من خبراء مختلفين كرماء في مشاركة التعليمات البرمجية الخاصة بهم:
 
--   [هتبص://جذب.كوم/فولدس/أزورملصمبلسئندد](https://github.com/fouldsy/azure-mol-samples-2nd-ed)بواسطة إيان فولز، وأوضح في[هتبص://عكا.مص/منظفلنشس](https://aka.ms/monthoflunches)تم النشر بتاريخ 30/04/2020.
+-   <https://github.com/fouldsy/azure-mol-samples-2nd-ed>بواسطة إيان فولز، وأوضح في<https://aka.ms/monthoflunches>تم النشر بتاريخ 30/04/2020.
 
--   [هتبص://جذب.كوم/ميكروسوفتلرننج/از-٣٠٣-ميسروسوفت-ازوري-ارشيتيست-تيشنولوجييس](https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies)
+-   <https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies>
 
--   [هتبص://جذب.كوم/ميكروسوفتلرننج/ازخ٠٠-ازوريسيسوريتيتيشنولوجييس](https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies)
+-   <https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies>
 
--   [هتبص://جذب.كوم/أزور/أزوركل](https://github.com/Azure/azure-cli)بواسطة مايكروسوفت
+-   <https://github.com/Azure/azure-cli>بواسطة مايكروسوفت
 
--   [هتبص://جذب.كوم/تيموثيورنر/از٤٠٠](https://github.com/timothywarner/az400)& az303 بواسطة تيم وارنر
+-   <https://github.com/timothywarner/az400>& az303 بواسطة تيم وارنر
 
--   [هتبص://جذب.كوم/زال/ريليزربسكرت](https://github.com/zaalion/oreilly-azure-app-security)بي رزة صالح
+-   <https://github.com/zaalion/oreilly-azure-app-security>بواسطة رضا الصالحي
 
--   [هتبص://جذب.كوم/أزور/أزرقكسترتتمبلتس](https://github.com/Azure/azure-quickstart-templates)(قوالب أرم)
+-   <https://github.com/Azure/azure-quickstart-templates>(قوالب أرم)
 
--   [هتبص://جذب.كوم/جهنثبرة/أزورمصتركلس](https://github.com/johnthebrit/AzureMasterClass)البرامج النصية بوويرشيل
+-   <https://github.com/johnthebrit/AzureMasterClass>البرامج النصية بوويرشيل
 
--   [هتبص://جذب.كوم/ترافورمبرفدرص/ترافورمبرفدرزررم](https://github.com/terraform-providers/terraform-provider-azurerm)
+-   <https://github.com/terraform-providers/terraform-provider-azurerm>
 
 -   أكاديمية سكاي لاينز
 
@@ -502,7 +502,7 @@
 
 العلاقات العامة مقبولة.
 
-في حالة تحرير هذا الملف التمهيدي، يرجى الالتزام بـ[الملف التمهيدي القياسي](https://github.com/RichardLitt/standard-readme)تخصيص.
+في حالة تحرير هذا الملف التمهيدي، يرجى الالتزام بـ[الملف التمهيدي القياسي](https://github.com/RichardLitt/standard-readme)مواصفة.
 
 ## رخصة
 
@@ -525,5 +525,5 @@
 > وسيلة لتحسين هوية المنظمة.
 
 نأمل أن تتصرف مجموعة مجتمعنا وفقًا لهذه الإرشادات
-المشاركون يحملون بعضهم البعض لهذه المعايير العالية. إذا كان لديك أية أسئلة
+المشاركون يحملون بعضهم البعض لهذه المعايير العالية. إذا كان لديك أي أسئلة
 أو إذا كنت قلقًا من عدم اتباع الكود، فيرجى الاتصال بمالك المستودع.

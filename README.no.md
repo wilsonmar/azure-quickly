@@ -157,7 +157,7 @@ Innhold i bash -skript i denne repoen er skrevet ved hjelp av kodingskonvensjone
 
 -   En ny ressursgruppe og alle ressurser opprettes<strong>Ny hvert løp</strong>For å redusere kompleksiteten i koding for idempotency (der statusen er den samme på slutten av hvert omløp).
 
--   <tt>-Ressursgruppe</tt> is a required argument on many commands. It's last so that missing slash line a line above it would cause the command to fail.
+-   <tt>-Ressursgruppe</tt>er et nødvendig argument på mange kommandoer. Det er sist slik at manglende skråstrek en linje over den vil føre til at kommandoen mislykkes.
 
 -   En tilbakeslag \\ tegn på slutten av en linje innenfor den samme AZ Shell -kommandoen fortsetter den kommandoen.
 
@@ -432,7 +432,7 @@ Skriptet skal gjøre alle trinnene nedenfor:
 
 13. Rediger my_loc (plassering = region) og andre standardverdier.
 
-14. At the bottom of the file, add a statement that prints out one of the variables, so you know the export statements took:
+14. Nederst i filen, legg til en uttalelse som skriver ut en av variablene, slik at du vet at eksportuttalelsene tok:
 
     I et bashpt:
 

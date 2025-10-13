@@ -157,7 +157,7 @@ Le contenu des scripts Bash de ce dépôt est écrit en utilisant les convention
 
 -   Un nouveau groupe de ressources et toutes les ressources sont créées<strong>nouveau à chaque course</strong>pour réduire la complexité du codage de l'idempotence (où le statut est le même à la fin de chaque réexécution).
 
--   <tt>--groupe-de-ressources</tt>est un argument obligatoire sur de nombreuses commandes. C'est le dernier, de sorte que le fait de manquer une ligne barre oblique une ligne au-dessus entraînerait l'échec de la commande.
+-   <tt>--groupe-de-ressources</tt>est un argument obligatoire sur de nombreuses commandes. C'est le dernier, de sorte que le manque de ligne oblique une ligne au-dessus entraînerait l'échec de la commande.
 
 -   Une barre oblique inverse \\ à la fin d’une ligne dans la même commande az shell continue cette commande.
 
@@ -221,7 +221,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --set computation.target=lo
 
 5.  Cliquez sur l'icône "Exécuter".
 
-    ### Alternativement
+    ### Alternately
 
 6.  Dans le<strong>Fichiers utilisateur</strong>section de votre espace de travail. Cliquez sur la cellule que vous souhaitez modifier. Si vous n'avez aucun bloc-notes dans cette section, consultez Créer et gérer des fichiers dans votre espace de travail.
 
@@ -274,7 +274,7 @@ Plus de scripts de mon dépôt Azure-quickly :
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
      </strong></pre> 
 
--   Create a VM with a public IP address. Enabled are a storage account, boot diagnostics with the VM diagnostics extension applied:
+-   Créez une VM avec une adresse IP publique. Sont activés un compte de stockage, les diagnostics de démarrage avec l'extension de diagnostics de VM appliquée :
 
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-diag-cli.sh">az-vm-diag-cli.sh</a>
      </strong></pre>

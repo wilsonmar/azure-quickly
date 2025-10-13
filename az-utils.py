@@ -7,6 +7,7 @@
 #   "azure-ai-projects", 
 #   "azure-functions",
 #   "azure-identity",
+#   "azure-maps-search",
 #   "azure-mgmt-billing",
 #   "azure-mgmt-consumption",
 #   "azure-mgmt-costmanagement",
@@ -26,6 +27,9 @@
 # ///
 # https://docs.astral.sh/uv/guides/scripts/#using-a-shebang-to-create-an-executable-file
 #   "pprint",
+#   "threema-gateway",
+#   "libnacl",
+#   "pynacl",
 
 # Azure KeyVault SDK components imported below in SECTION 03
 
@@ -100,11 +104,14 @@ USAGE:
     # Add /.venv/ to .gitignore (for use by uv, instead of venv)
     deactivate       # out from within venv
     brew install uv  # new package manager
+    brew install libsodium
+    uv add pynacl, libsodium
     uv --help
     uv init   # for pyproject.toml & .python-version files https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
     uv lock
     uv sync
     uv venv  # to create an environment,
+    python -m venv .venv
     source .venv/bin/activate
         ./scripts/activate       # PowerShell only
         ./scripts/activate.bat   # Windows CMD only
@@ -115,7 +122,7 @@ USAGE:
 
 #### SECTION 01. Metadata about this program file:
 
-__last_commit__ = "25-10-10 v002 + resource list :az-utils.py"
+__last_commit__ = "25-10-13 v003 + latlong2street :az-utils.py"
 __status__      = "Run info, Resource lists working on macOS Sequoia 15.3.1"
 
 #### SECTION 02: Import internal libraries already built-in into Python:
@@ -157,7 +164,7 @@ xpt_strt_timestamp =  time.monotonic()
 # Fix SSL certificate verification issues on macOS (thank you Warp!)
 try:
     import certifi
-    import ssl
+    #import ssl     # consider using `importlib.util.find_spec` to test for availability
     # Set certificate bundle paths for requests and urllib
     os.environ['REQUESTS_CA_BUNDLE'] = certifi.where()
     os.environ['CURL_CA_BUNDLE'] = certifi.where()
@@ -166,7 +173,7 @@ except ImportError:
     # Fallback to system certificates if certifi is not available
     pass
 
-try:
+try:   # These should match the uv list at top of this file.
     #import argparse
     #import asyncio
     from azure.ai.textanalytics import TextAnalyticsClient
@@ -179,12 +186,14 @@ try:
 
     import azure.functions as func
     from azure.keyvault.secrets import SecretClient
+    from azure.maps.search import MapsSearchClient
     from azure.mgmt.billing import BillingManagementClient
                                  # accounts, profiles (payment), customers, invoices
     from azure.mgmt.costmanagement import CostManagementClient, models
     #from azure.mgmt.consumption import ConsumptionManagementClient
     # from azure.mgmt.consumption import models  # F811 Redefinition of unused `models`
     from azure.mgmt.resource import ResourceManagementClient
+    from azure.mgmt.resource.resources.models import TagsResource
     from azure.mgmt.keyvault import KeyVaultManagementClient
     from azure.mgmt.resource import SubscriptionClient
     from azure.mgmt.storage import StorageManagementClient
@@ -208,6 +217,7 @@ try:
     #import pytz   # time zones
     import requests
     from tabulate import tabulate 
+    #from threema.gateway import ( Connection, GatewayError, util, )  # to send_theema_msg()
     import uuid
 except Exception as e:
     print(f"Python module import failed: {e}")
@@ -218,6 +228,9 @@ except Exception as e:
     exit(9)
 xpt_stop_timestamp =  time.monotonic()
 
+
+#print(f"threema.gateway version: {threema.connection.__version__}")
+                                        
 # To display wall clock date & time of program start:
 # pgm_strt_datetimestamp = datetime.now() has been deprecated.
 pgm_strt_timestamp = time.monotonic()
@@ -245,7 +258,10 @@ show_print_samples = False
 
 #LOG_DOWNLOADS = args.log
 CLI_PFX = ""
-
+global_tags = {
+    "Dept": "Finance",
+    "Status": "Normal"
+}
 
 #### SECTION 05: Retry, logging, telemetry decorators:
 
@@ -463,7 +479,7 @@ def print_samples():
     return True
 
 
-#### SECTION 06: Parameters from call arguments:
+#### SECTION 07: Parameters from call arguments:
 
 # USAGE: uv run az-utils.py -kv "kv-westcentralus-897e56" -s "westcentralus2504" -v -vv
 
@@ -486,6 +502,8 @@ parser.add_argument("-t", "--text", help="Text input (for language detection)")
 
 # -h = --help (list arguments)
 args = parser.parse_args()
+
+#### SECTION 08: Edit global parameters:
 
 RUNID = "R011"  # This value should have no spaces or special characters.
    # TODO: Store and increment externally each run (usign Python Generators?) into a database for tying runs to parmeters such as the PROMPT_TEXT, etc. https://www.linkedin.com/learning/learning-python-generators-17425534/
@@ -522,12 +540,12 @@ else:
 
 SHOW_SUMMARY_COUNTS = True
 
-if args.resource:
-    #AZURE_RESOURCE_GROUP = args.resource
-    resource_group = args.resource
-else:
-    resource_group = "westcentralus-92b065"
-print(f"resource_group = {resource_group}")
+#if args.resource:
+#    #AZURE_RESOURCE_GROUP = args.resource
+#    resource_group = args.resource
+#else:
+#    resource_group = "westcentralus-92b065"
+#print(f"resource_group = {resource_group}")
 
 
 AZURE_ACCT_NAME = args.user
@@ -553,7 +571,10 @@ LIST_ALL_PROVIDERS = False
 
 # PROTIP: Global variable referenced within Python functions:
 # values obtained from .env file can be overriden in program call arguments:
- 
+
+
+#### SECTION 09: Pull in external reference data:
+
 # Python code to show regions of azure as a dictionary named AZURE_REGIONS with region name, latitude, longitude, with location with. Sort by region name.
 AZURE_REGIONS = {                               # City/Town name
     "australiasoutheast": (-37.814, 144.963),   # Melbourne
@@ -626,7 +647,7 @@ AZURE_REGIONS = {                               # City/Town name
 
 
 
-#### SECTION 07: OS level utilities
+#### SECTION 10: OS level utilities
 
 # https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts
 
@@ -666,7 +687,7 @@ def is_uv_venv_activated() -> None:
 
 
 
-#### SECTION 08: Python script control utilities:
+#### SECTION 11: Python script control utilities:
 
 
 # See https://bomonike.github.io/python-samples/#ParseArguments
@@ -764,7 +785,7 @@ def az_parms_list():
     print_info(f"region_choice_basis = {region_choice_basis}") # "cost" or "distance" or "latency" [Edit Manually]
 
 
-#### SECTION 09: Time Utility Python Functions:
+#### SECTION 12: Time Utility Python Functions:
 
 
 def get_user_local_time() -> str:
@@ -805,6 +826,7 @@ def get_log_datetime() -> str:
 
     return time_str
 
+#### SECTION 13: Run statistics reporting
 
 def show_summary() -> bool:
     """Print summary of timings together at end of run."""
@@ -840,7 +862,7 @@ def show_summary() -> bool:
     return True
 
 
-#### SECTION 10. Obtain program environment metadata:
+#### SECTION 14. Obtain program environment metadata:
 
 
 # See https://bomonike.github.io/python-samples/#run_env
@@ -1064,192 +1086,14 @@ def handle_fatal_exit():
     sys.exit(9)
 
 
-
-#### SECTION 11. Azure Resource Group:
-
-def resource_group_list(subscription_id="") -> int:
-    """List resource groups for subscription.
-
-    Equivalent to: az resource group list --output table
-    Name  ResourceGroup  Location  Type  Status
-    Based on https://learn.microsoft.com/en-us/azure/developer/python/sdk/examples/azure-sdk-example-list-resource-groups?tabs=bash
-    """
-    #from azure.identity import DefaultAzureCredential
-    #from azure.mgmt.resource import ResourceManagementClient
-    #import os
-
-    if not subscription_id:
-        subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
-    print_trace(f"resource_group_list() subscription_id: \"{subscription_id}\"")
-                
-    # Acquire a credential object:
-    credential = DefaultAzureCredential()
-
-    # Obtain the management object for resources:
-    resource_client = ResourceManagementClient(credential, subscription_id)
-    group_list = resource_client.resource_groups.list()
-    # Show the groups in formatted output:
-    column_width = 40
-
-    func_start = time.perf_counter()
-    print("Resource Group".ljust(column_width) + "Location")
-    print("-" * (column_width * 2))
-
-    row_count = 0
-    for group in list(group_list):
-        row_count += 1
-        print(f"{group.name:<{column_width}}{group.location}")
-    
-    func_elapsed = func_end = time.perf_counter() - func_start
-    print_info(f"{row_count} in {func_elapsed:.2f} secs.")
-    return row_count
+#### SECTION 15: External Messaging:
 
 
-def resource_list(subscription_id="", resource_group="") -> int:
-    """List resources in specified resource group for subscription.
 
-    Equivalent to: az resource list --output table
-    Name  ResourceGroup  Location  Type  Status
-    based on https://learn.microsoft.com/en-us/azure/developer/python/sdk/examples/azure-sdk-example-list-resource-groups?tabs=bash
-    """
-    # Import the needed credential and management objects from the libraries.
-    #from azure.identity import DefaultAzureCredential
-    #import os
-
-    # Acquire a credential object.
-    credential = DefaultAzureCredential()
-
-    # Retrieve subscription ID from environment variable.
-    if not subscription_id:
-        subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
-
-    if not resource_group:
-        resource_group = os.getenv("AZURE_RESOURCE_GROUP")
-
-    # Obtain the management object for resources.
-    resource_client = ResourceManagementClient(credential, subscription_id)
-
-    func_start = time.perf_counter()
-    # Retrieve the list of resources in "myResourceGroup" (change to any name desired).
-    #from azure.mgmt.resource import ResourceManagementClient
-    resource_list = resource_client.resources.list_by_resource_group(
-        resource_group, expand = "createdTime,changedTime")
-
-    # Show the groups in formatted output
-    column_width = 36
-
-    print("Resource".ljust(column_width) + "Type".ljust(column_width)
-        + "Create date".ljust(column_width) + "Change date".ljust(column_width))
-    print("-" * (column_width * 4))
-
-    row_count = 0
-    for resource in list(resource_list):
-        row_count += 1
-        print(f"{resource.name:<{column_width}}{resource.type:<{column_width}}"
-        f"{str(resource.created_time):<{column_width}}{str(resource.changed_time):<{column_width}}")
-
-    func_elapsed = func_end = time.perf_counter() - func_start
-    print_info(f"{row_count} in {func_elapsed:.2f} secs.")
-    return row_count
-
-    
-def get_resource_group(subscription_id, region_filter) -> str:
-    """Return a list of existing resources for a specified region.
-
-    Alternative to https://portal.azure.com/#browse/resourcegroups
-    # https://learn.microsoft.com/en-us/azure/developer/python/sdk/examples/azure-sdk-example-list-resource-groups?tabs=bash
-    """
-    print_trace(f"get_resource_group() subscription_id: \"{subscription_id}\" region_filter: \"{region_filter}\"")
-    try:
-        #from azure.identity import DefaultAzureCredential
-        credential = DefaultAzureCredential()
-
-        #from azure.mgmt.resource import ResourceManagementClient 
-        resource_client = ResourceManagementClient(credential, subscription_id)
-        print_trace(f"get_resource_group() resource_client: \"{str(resource_client)}\")")
-        group_list = resource_client.resource_groups.list()
-        #print_info(f"get_resource_group() found {len(group_list)} resource groups.")
-            # FIXME: object of type 'ItemPaged' has no len() 
-
-        # Print each line using "rg" the common abbreviation for "resource group":
-        for rg in list(group_list):
-            if rg.location == region_filter:
-                print_info(f"Resource_group: \"{rg.name}\" for region {rg.location} within get_resource_group() ")
-                return rg.name  # the first one
-            else:
-                print_error(f"NO Resource_group: for region {rg.location} within get_resource_group() ")
-
-    except Exception as e:
-        print_error(f"get_resource_group() {e}")
-        return None
+# TODO: Gmail, Slack, Discord, MS-Teams
 
 
-def create_get_resource_group(credential, subscription_id, new_location) -> str:
-    """Create Resource Group if the resource_group_name is not already defined.
-
-    Return json object such as {'additional_properties': {}, 'id': '/subscriptions/15e19a4e-ca95-4101-8e5f-8b289cbf602b/resourceGroups/az-keyvault-for-python-250413', 'name': 'az-keyvault-for-python-250413', 'type': 'Microsoft.Resources/resourceGroups', 'properties': <azure.mgmt.resource.resources.v2024_11_01.models._models_py3.ResourceGroupProperties object at 0x1075ec1a0>, 'location': 'westus', 'managed_by': None, 'tags': None}
-    Equivalent to CLI: az group create -n "myResourceGroup" -l "useast2"
-        --tags "department=tech" "environment=test"
-    Equivalent of Portal: https://portal.azure.com/#browse/resourcegroups
-                          https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups.ReactView
-    See https://learn.microsoft.com/en-us/azure/developer/python/sdk/examples/azure-sdk-example-resource-group?tabs=cmd
-    """
-    try:
-        if my_resource_group:
-            print_info(f"create_get_resource_group() existing resource_group_name: \"{resource_group_name}\"")
-            return my_resource_group
-    except Exception as e:
-        print_error(f"create_get_resource_group() global my_resource_group not defined: {e}")
-        return None
-
-
-    #uv add azure-mgmt-resource
-    #uv add azure-identity
-    #from azure.identity import DefaultAzureCredential
-    #from azure.mgmt.resource import ResourceManagementClient
-
-    try:
-        # Obtain the management object for resources:
-        resource_client = ResourceManagementClient(credential, subscription_id)
-
-        # Get all providers and their registration states:
-        #all_providers = {provider.namespace: provider.registration_state for provider in resource_client.providers.list()}
-        # print(f"create_get_resource_group() all_providers: {all_providers}")
-        # TODO: List resource groups like https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups.ReactView
-
-        # Provision the resource group:
-        rg_result = resource_client.resource_groups.create_or_update(
-            resource_group_name, {"location": new_location}
-        )
-        print_info(f"create_get_resource_group() new resource_group_name: \"{resource_group_name}\"")
-        return rg_result
-    except Exception as e:
-        print_error(f"create_get_resource_group() {str(rg_result)}")
-        print_error(f"create_get_resource_group() {e}")
-        # FIXME: ERROR: (InvalidApiVersionParameter) The api-version '2024-01-01' is invalid. The supported versions are 2024-11-01
-        return None
-
-
-def delete_resource_group(credential, resource_group_name, subscription_id) -> int:
-    """Delete Azure resource group.
-    
-    Equivalent of CLI: az group delete -n PythonAzureExample-rg  --no-wait
-    """
-    try:
-        resource_client = ResourceManagementClient(credential, subscription_id)
-        if not resource_client:
-            print(f"Cannot find ResourceManagementClient to delete_resource_group({resource_group_name})!")
-            return False
-        #rp_result = resource_client.resource_groups.begin_delete(resource_group_name)
-            # EX: <azure.core.polling._poller.LROPoller object at 0x1055f1550>
-        # if DEBUG: print(f"delete_resource_group({resource_group_name}) for {rp_result}")
-        return True
-    except Exception as e:
-        print(f"delete_resource_group() ERROR: {e}")
-        return False
-
-
-#### SECTION 12. Generic Geo utility APIs:
+#### SECTION 16. Generic Geo utility APIs:
 
 
 def get_ip_address() -> str:
@@ -1464,8 +1308,162 @@ def get_elevation(longitude, latitude, units='Meters', service='google' ) -> str
 # print(get_elevation(39.7392, -104.9903, service='google', api_key='YOUR_KEY'))
 
 
+#### SECTION 17. Region & Location Geo utilities:
 
-#### SECTION 13. Azure cloud core utilities:
+
+table_data = []  # Global variable
+def build_az_pricing_table(json_data, table_data):
+    """Build Azure Pricing Table from collections import OrderedDict."""
+    for item in json_data['Items']:
+        #meter = item['meterName']
+        table_data.append([item['retailPrice'], item['unitOfMeasure'], item['armRegionName'], item['productName']])
+        #table_data.append(OrderedDict([item['retailPrice'], item['unitOfMeasure'], item['armRegionName'], item['productName']]))
+        #table_data.append(OrderedDict([item['armSkuName'], item['retailPrice'], item['unitOfMeasure'], item['armRegionName'], item['productName']]))
+        
+def get_cheapest_az_region(arm_sku_name_to_find) -> str:
+    """Return the region with the lowest retailPrice for a given SKU (Stock Keeping Unit).
+
+    For the given SKU, after listing prices in all regions.
+    Equivalent CLI: az vm list-sizes --location westus
+    See https://learn.microsoft.com/en-us/rest/api/cost-management/retail-prices/azure-retail-prices
+    """
+    print_verbose(f"Among {len(AZURE_REGIONS)} possible AZURE_REGIONS in get_cheapest_az_region(): ")
+    
+    table_data.append(['retailPrice', 'unitOfMeasure', 'armRegionName', 'productName'])
+    
+    # TODO: NE https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview
+    api_url = "https://prices.azure.com/api/retail/prices?api-version=2021-10-01-preview"
+    # Loop through earmRegionName eq 'southcentralus' etc. from AZURE_REGIONS array:
+    print_verbose(f"For: armSkuName='{arm_sku_name_to_find}', meterName='NP20s Spot', priceType='Consumption'")
+    query = f"armSkuName eq '{arm_sku_name_to_find}' and priceType eq 'Consumption' and contains(meterName, 'Spot')"
+    response = requests.get(api_url, params={'$filter': query})
+    json_data = json.loads(response.text)
+
+    build_az_pricing_table(json_data, table_data)
+    next_page = json_data.get('next_pageLink')  # Use .get() to safely access the key
+
+    # Retrieve several pages to get them all:
+    while next_page:
+        response = requests.get(next_page)
+        json_data = json.loads(response.text)
+        next_page = json_data.get('next_pageLink')  # Use .get() to safely access the key
+        build_az_pricing_table(json_data, table_data)
+
+    # Sort the table data by price (first column) - skip the header row
+    header = table_data[0]
+    data_rows = table_data[1:]
+    sorted_data = sorted(data_rows, key=lambda x: x[0])  # Sort by price ([0]=first column)
+    
+    # Reconstruct the table with header and sorted data:
+    sorted_table = [header] + sorted_data
+    if len(sorted_data) > 0:
+        print(tabulate(sorted_table, headers='firstrow', tablefmt='psql'))
+    else:
+        print_error(f"No pricing data found for {arm_sku_name_to_find}")
+        return None
+
+    # TODO: Add to table the distance from each Azure region from user/client location.
+
+    #    ***  Among 53 possible AZURE_REGIONS in get_cheapest_az_region():  
+    #    ***  FILTER: armSkuName='Standard_NP20s', meterName='NP20s Spot', priceType='Consumption' 
+    #    +---------------+-----------------+-----------------+------------------------------------+
+    #    |   retailPrice | unitOfMeasure   | armRegionName   | productName                        |
+    #    |---------------+-----------------+-----------------+------------------------------------|
+    #    |        0.462  | 1 Hour          | eastus          | Virtual Machines NP Series         |
+    #    |        0.462  | 1 Hour          | westus2         | Virtual Machines NP Series         |
+    # TODO: Return several regions with the same price.
+    az_svc_region = sorted_data[0][2]   # First armRegionName value.
+    if az_svc_region:
+        print_info(f"my_az_svc_region: \"{az_svc_region}\" from get_cheapest_az_region() ")
+        return az_svc_region
+    else:
+        return None
+
+
+def haversine_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+    """Calculate the great circle distance between two points on earth (specified in decimal degrees)."""
+    # import math
+
+    # Convert decimal degrees to radians
+    lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
+
+    # Haversine formula
+    dlon = lon2 - lon1 
+    dlat = lat2 - lat1 
+    a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
+    c = 2 * math.asin(math.sqrt(a)) 
+    r = 6371  # Radius of earth in kilometers
+    return c * r   
+
+def closest_az_region_by_latlong(latitude: float, longitude: float) -> str:
+    """Return the closeset Azure Region by Latitude Longitude.
+
+    This identifies the Azure region/location for a given geo longitude and latitude.
+    based on the ping speed and distance from each Azure region.
+    TODO: More importantly, for a particular service (resource) Azure charges a different cost each region.
+    WARNING: The variable name "location" is reserved by Azure for its current region name.
+    PROTIP: Notice how variables are defined with float and integers hints.
+    """
+    # CODING EXAMPLE: Ensure valid inputs into function:
+    if not (-90 <= float(latitude) <= 90) or not (-180 <= float(longitude) <= 180):
+        print("Error: Invalid coordinates. Latitude must be between -90 and 90, and longitude between -180 and 180.")
+        return
+
+    # TODO: Identify the longest region name (germanywestcentral) and announce its number of characters (18)
+        # for use in keyvault name which must be no longer than 24 characters long.
+
+    # num_regions = 1
+    distances = []
+    for region, (region_lat, region_lon) in AZURE_REGIONS.items():
+        distance = haversine_distance(latitude, longitude, region_lat, region_lon)
+        distances.append((region, distance))
+    
+    # Sort by distance and return the n closest:
+    n:int = 3
+    closest_regions = sorted(distances, key=lambda x: x[1])[:n]
+    print_verbose(f"closest_az_region_by_latlong({n}:): {closest_regions}")
+    closest_region = closest_regions[0][0]  # the first region ID in the list
+    print_info(f"closest_az_region_by_latlong(of {len(AZURE_REGIONS.items())} in Azure:): \"{closest_region}\" ")
+    
+    return closest_region
+
+
+def get_az_region_by_latency(storage_account_name, attempts=5) -> str:
+    """Return the HTTP latency to a storage account within the Azure cloud."""
+    # import requests
+    # import time
+
+    url = storage_account_name + ".blob.core.windows.net"
+    latencies = []
+    for _ in range(attempts):
+        start = time.time()
+        try:
+            response = requests.get(url, timeout=5)
+            latency = (time.time() - start) * 1000  # ms
+            latencies.append(latency)
+            print(f"get_az_region_by_latency(): response={response}")
+        except requests.RequestException:
+            # FIXME: <Error data-darkreader-white-flash-suppressor="active">
+            # <Code>InvalidQueryParameterValue</Code>
+            # <Message>
+            # Value for one of the query parameters specified in the request URI is invalid. RequestId:3b433e32-d01e-003f-274c-b37a10000000 Time:2025-04-22T06:06:36.7748787Z
+            # </Message>
+            # <QueryParameterName>comp</QueryParameterName>
+            # <QueryParameterValue/>
+            # <Reason/>
+            # </Error>
+            latencies.append(None)
+
+    #valid_latencies = [lm for lx in latencies if lx is not None]
+    #if valid_latencies:
+    #    avg_latencies = sum(valid_latencies)/len(valid_latencies)
+    #    print_info(f"HTTP latency to : avg {avg_latencies:.2f} ms")
+    #else:
+    print_error(f"get_az_region_by_latency(): requests failed to {url}")
+    return None
+
+
+#### SECTION 18. Azure cloud authentication utilities:
 
 
 # def job roles permissions RBAC:
@@ -1690,7 +1688,211 @@ def register_subscription_providers(credential, subscription_id) -> bool:
         print_error(f"register_subscription_providers() ERROR: {e}")
         return False
 
-#### Azure Services Pricing by Resource
+
+
+#### SECTION 18. Azure cloud Resource Group:
+
+def resource_object(subscription_id=""):
+    """List resource groups for subscription."""
+    if not subscription_id:
+        subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
+                
+    try:
+        # Acquire a credential object:
+        credential = DefaultAzureCredential()
+
+        # Obtain the management object for resources:
+        resource_client = ResourceManagementClient(credential, subscription_id)
+        print_trace(f"resource_object() subscription_id: \"{subscription_id}\" {resource_client} ")
+        return resource_client
+    except Exception as e:
+        print_error(f"resource_object() {e}")
+        return None
+
+
+def resource_group_list(subscription_id="") -> int:
+    """List resource groups for subscription.
+
+    Equivalent to: az resource group list --output table
+    Name  ResourceGroup  Location  Type  Status
+    Based on https://learn.microsoft.com/en-us/azure/developer/python/sdk/examples/azure-sdk-example-list-resource-groups?tabs=bash
+    """
+    #from azure.identity import DefaultAzureCredential
+    #from azure.mgmt.resource import ResourceManagementClient
+    #import os
+
+    if not subscription_id:
+        subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
+    print_trace(f"resource_group_list() subscription_id: \"{subscription_id}\"")
+                
+    # Acquire a credential object:
+    credential = DefaultAzureCredential()
+
+    # Obtain the management object for resources:
+    resource_client = ResourceManagementClient(credential, subscription_id)
+    group_list = resource_client.resource_groups.list()
+    # Show the groups in formatted output:
+    column_width = 40
+
+    func_start = time.perf_counter()
+    print("Resource Group".ljust(column_width) + "Location")
+    print("-" * (column_width * 2))
+
+    row_count = 0
+    for group in list(group_list):
+        row_count += 1
+        print(f"{group.name:<{column_width}}{group.location}")
+    
+    func_elapsed = time.perf_counter() - func_start
+    print_info(f"{row_count} in {func_elapsed:.2f} secs.")
+    return row_count
+
+
+def resource_list(subscription_id="", resource_group="") -> int:
+    """List resources in specified resource group for subscription.
+
+    Equivalent to: az resource list --output table
+    Name  ResourceGroup  Location  Type  Status
+    See https://learn.microsoft.com/en-us/azure/developer/python/sdk/examples/azure-sdk-example-list-resource-groups?tabs=bash
+    """
+    # Import the needed credential and management objects from the libraries.
+    #from azure.identity import DefaultAzureCredential
+    #import os
+
+    # Acquire a credential object.
+    credential = DefaultAzureCredential()
+
+    # Retrieve subscription ID from environment variable.
+    if not subscription_id:
+        subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
+
+    if not resource_group:
+        resource_group = os.getenv("AZURE_RESOURCE_GROUP")
+
+    # Obtain the management object for resources.
+    resource_client = ResourceManagementClient(credential, subscription_id)
+
+    func_start = time.perf_counter()
+    # Retrieve the list of resources in "myResourceGroup" (change to any name desired).
+    #from azure.mgmt.resource import ResourceManagementClient
+    resource_list = resource_client.resources.list_by_resource_group(
+        resource_group, expand = "createdTime,changedTime")
+
+    # Show the groups in formatted output
+    column_width = 36
+
+    print("Resource".ljust(column_width) + "Type".ljust(column_width)
+        + "Create date".ljust(column_width) + "Change date".ljust(column_width))
+    print("-" * (column_width * 4))
+
+    row_count = 0
+    for resource in list(resource_list):
+        row_count += 1
+        print(f"{resource.name:<{column_width}}{resource.type:<{column_width}}"
+        f"{str(resource.created_time):<{column_width}}{str(resource.changed_time):<{column_width}}")
+
+    func_elapsed = time.perf_counter() - func_start
+    print_info(f"{row_count} in {func_elapsed:.2f} secs.")
+    return row_count
+
+    
+def get_resource_group(subscription_id, region_filter) -> str:
+    """Return a list of existing resources for a specified region.
+
+    Alternative to https://portal.azure.com/#browse/resourcegroups
+    # https://learn.microsoft.com/en-us/azure/developer/python/sdk/examples/azure-sdk-example-list-resource-groups?tabs=bash
+    """
+    print_trace(f"get_resource_group() subscription_id: \"{subscription_id}\" region_filter: \"{region_filter}\"")
+    try:
+        #from azure.identity import DefaultAzureCredential
+        credential = DefaultAzureCredential()
+
+        #from azure.mgmt.resource import ResourceManagementClient 
+        resource_client = ResourceManagementClient(credential, subscription_id)
+        print_trace(f"get_resource_group() resource_client: \"{str(resource_client)}\")")
+        group_list = resource_client.resource_groups.list()
+        #print_info(f"get_resource_group() found {len(group_list)} resource groups.")
+            # FIXME: object of type 'ItemPaged' has no len() 
+
+        # Print each line using "rg" the common abbreviation for "resource group":
+        for rg in list(group_list):
+            if rg.location == region_filter:
+                print_info(f"Resource_group: \"{rg.name}\" for region {rg.location} within get_resource_group() ")
+                return rg.name  # the first one
+            else:
+                print_error(f"NO Resource_group: for region {rg.location} within get_resource_group() ")
+
+    except Exception as e:
+        print_error(f"get_resource_group() {e}")
+        return None
+
+
+def create_get_resource_group(credential, subscription_id, new_location) -> str:
+    """Create Resource Group if the resource_group_name is not already defined.
+
+    Return json object such as {'additional_properties': {}, 'id': '/subscriptions/15e19a4e-ca95-4101-8e5f-8b289cbf602b/resourceGroups/az-keyvault-for-python-250413', 'name': 'az-keyvault-for-python-250413', 'type': 'Microsoft.Resources/resourceGroups', 'properties': <azure.mgmt.resource.resources.v2024_11_01.models._models_py3.ResourceGroupProperties object at 0x1075ec1a0>, 'location': 'westus', 'managed_by': None, 'tags': None}
+    Equivalent to CLI: az group create -n "myResourceGroup" -l "useast2"
+        --tags "department=tech" "environment=test"
+    Equivalent of Portal: https://portal.azure.com/#browse/resourcegroups
+                          https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups.ReactView
+    See https://learn.microsoft.com/en-us/azure/developer/python/sdk/examples/azure-sdk-example-resource-group?tabs=cmd
+    """
+    try:
+        if my_resource_group:
+            print_info(f"create_get_resource_group() existing resource_group_name: \"{my_resource_group}\"")
+            return my_resource_group
+    except Exception as e:
+        print_error(f"create_get_resource_group() global my_resource_group not defined: {e}")
+        return None
+
+
+    #uv add azure-mgmt-resource
+    #uv add azure-identity
+    #from azure.identity import DefaultAzureCredential
+    #from azure.mgmt.resource import ResourceManagementClient
+
+    try:
+        # Obtain the management object for resources:
+        resource_client = ResourceManagementClient(credential, subscription_id)
+
+        # Get all providers and their registration states:
+        #all_providers = {provider.namespace: provider.registration_state for provider in resource_client.providers.list()}
+        # print(f"create_get_resource_group() all_providers: {all_providers}")
+        # TODO: List resource groups like https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups.ReactView
+
+        # Provision the resource group:
+        rg_result = resource_client.resource_groups.create_or_update(
+            my_resource_group, {"location": new_location}
+        )
+        print_info(f"create_get_resource_group() new resource_group_name: \"{my_resource_group}\"")
+        return rg_result
+    except Exception as e:
+        print_error(f"create_get_resource_group() {str(rg_result)}")
+        print_error(f"create_get_resource_group() {e}")
+        # FIXME: ERROR: (InvalidApiVersionParameter) The api-version '2024-01-01' is invalid. The supported versions are 2024-11-01
+        return None
+
+
+def delete_resource_group(credential, resource_group_name, subscription_id) -> int:
+    """Delete Azure resource group.
+    
+    Equivalent of CLI: az group delete -n PythonAzureExample-rg  --no-wait
+    """
+    try:
+        resource_client = ResourceManagementClient(credential, subscription_id)
+        if not resource_client:
+            print(f"Cannot find ResourceManagementClient to delete_resource_group({resource_group_name})!")
+            return False
+        #rp_result = resource_client.resource_groups.begin_delete(resource_group_name)
+            # EX: <azure.core.polling._poller.LROPoller object at 0x1055f1550>
+        # if DEBUG: print(f"delete_resource_group({resource_group_name}) for {rp_result}")
+        return True
+    except Exception as e:
+        print(f"delete_resource_group() ERROR: {e}")
+        return False
+
+
+#### SECTION 19. Azure Services Pricing by Resource
 
 
 def load_costs_from_api(svc_name_in) -> str:
@@ -1963,125 +2165,8 @@ def az_billing(credential, subscription_id) -> bool:
         return False
 
 
-#### SECTION 14. Region & Location Geo utilities:
 
-
-table_data = []  # Global variable
-def build_az_pricing_table(json_data, table_data):
-    """Build Azure Pricing Table from collections import OrderedDict."""
-    for item in json_data['Items']:
-        #meter = item['meterName']
-        table_data.append([item['retailPrice'], item['unitOfMeasure'], item['armRegionName'], item['productName']])
-        #table_data.append(OrderedDict([item['retailPrice'], item['unitOfMeasure'], item['armRegionName'], item['productName']]))
-        #table_data.append(OrderedDict([item['armSkuName'], item['retailPrice'], item['unitOfMeasure'], item['armRegionName'], item['productName']]))
-        
-def get_cheapest_az_region(arm_sku_name_to_find) -> str:
-    """Return the region with the lowest retailPrice for a given SKU (Stock Keeping Unit).
-
-    For the given SKU, after listing prices in all regions.
-    Equivalent CLI: az vm list-sizes --location westus
-    """
-    print_verbose(f"Among {len(AZURE_REGIONS)} possible AZURE_REGIONS in get_cheapest_az_region(): ")
-    
-    table_data.append(['retailPrice', 'unitOfMeasure', 'armRegionName', 'productName'])
-    
-    api_url = "https://prices.azure.com/api/retail/prices?api-version=2021-10-01-preview"
-    # Loop through earmRegionName eq 'southcentralus' etc. from AZURE_REGIONS array:
-    print_verbose(f"For: armSkuName='{arm_sku_name_to_find}', meterName='NP20s Spot', priceType='Consumption'")
-    query = f"armSkuName eq '{arm_sku_name_to_find}' and priceType eq 'Consumption' and contains(meterName, 'Spot')"
-    response = requests.get(api_url, params={'$filter': query})
-    json_data = json.loads(response.text)
-
-    build_az_pricing_table(json_data, table_data)
-    next_page = json_data.get('next_pageLink')  # Use .get() to safely access the key
-
-    # Retrieve several pages to get them all:
-    while next_page:
-        response = requests.get(next_page)
-        json_data = json.loads(response.text)
-        next_page = json_data.get('next_pageLink')  # Use .get() to safely access the key
-        build_az_pricing_table(json_data, table_data)
-
-    # Sort the table data by price (first column) - skip the header row
-    header = table_data[0]
-    data_rows = table_data[1:]
-    sorted_data = sorted(data_rows, key=lambda x: x[0])  # Sort by price ([0]=first column)
-    
-    # Reconstruct the table with header and sorted data:
-    sorted_table = [header] + sorted_data
-    if len(sorted_data) > 0:
-        print(tabulate(sorted_table, headers='firstrow', tablefmt='psql'))
-    else:
-        print_error(f"No pricing data found for {arm_sku_name_to_find}")
-        return None
-
-    # TODO: Add to table the distance from each Azure region from user/client location.
-
-    #    ***  Among 53 possible AZURE_REGIONS in get_cheapest_az_region():  
-    #    ***  FILTER: armSkuName='Standard_NP20s', meterName='NP20s Spot', priceType='Consumption' 
-    #    +---------------+-----------------+-----------------+------------------------------------+
-    #    |   retailPrice | unitOfMeasure   | armRegionName   | productName                        |
-    #    |---------------+-----------------+-----------------+------------------------------------|
-    #    |        0.462  | 1 Hour          | eastus          | Virtual Machines NP Series         |
-    #    |        0.462  | 1 Hour          | westus2         | Virtual Machines NP Series         |
-
-    az_svc_region = sorted_data[0][2]   # First armRegionName value.
-    if az_svc_region:
-        print_info(f"my_az_svc_region: \"{az_svc_region}\" from get_cheapest_az_region() ")
-        return az_svc_region
-    else:
-        return None
-
-
-def haversine_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
-    """Calculate the great circle distance between two points on earth (specified in decimal degrees)."""
-    # import math
-
-    # Convert decimal degrees to radians
-    lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
-
-    # Haversine formula
-    dlon = lon2 - lon1 
-    dlat = lat2 - lat1 
-    a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
-    c = 2 * math.asin(math.sqrt(a)) 
-    r = 6371  # Radius of earth in kilometers
-    return c * r   
-
-def closest_az_region_by_latlong(latitude: float, longitude: float) -> str:
-    """Return the closeset Azure Region by Latitude Longitude.
-
-    This identifies the Azure region/location for a given geo longitude and latitude.
-    based on the ping speed and distance from each Azure region.
-    TODO: More importantly, for a particular service (resource) Azure charges a different cost each region.
-    WARNING: The variable name "location" is reserved by Azure for its current region name.
-    PROTIP: Notice how variables are defined with float and integers hints.
-    """
-    # CODING EXAMPLE: Ensure valid inputs into function:
-    if not (-90 <= float(latitude) <= 90) or not (-180 <= float(longitude) <= 180):
-        print("Error: Invalid coordinates. Latitude must be between -90 and 90, and longitude between -180 and 180.")
-        return
-
-    # TODO: Identify the longest region name (germanywestcentral) and announce its number of characters (18)
-        # for use in keyvault name which must be no longer than 24 characters long.
-
-    # num_regions = 1
-    distances = []
-    for region, (region_lat, region_lon) in AZURE_REGIONS.items():
-        distance = haversine_distance(latitude, longitude, region_lat, region_lon)
-        distances.append((region, distance))
-    
-    # Sort by distance and return the n closest:
-    n:int = 3
-    closest_regions = sorted(distances, key=lambda x: x[1])[:n]
-    print_verbose(f"closest_az_region_by_latlong({n}:): {closest_regions}")
-    closest_region = closest_regions[0][0]  # the first region ID in the list
-    print_info(f"closest_az_region_by_latlong(of {len(AZURE_REGIONS.items())} in Azure:): \"{closest_region}\" ")
-    
-    return closest_region
-
-
-#### SECTION 15. Azure Blob Storage Containers
+#### SECTION 20. Azure Blob Storage Containers
 
     
 def get_az_blob_storage_acct_name() -> str:
@@ -2354,6 +2439,32 @@ def ping_az_storage_acct(storage_account_name) -> str:
         return None
  
 
+def tag_storage(resource_group,storage_acct) -> bool:
+    """Update storage resources with tag."""
+    #import os
+    #from azure.identity import AzureCliCredential
+    #credential = AzureCliCredential()
+    subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
+    #from azure.mgmt.resource import ResourceManagementClient
+    #resource_client = ResourceManagementClient(credential, subscription_id)
+    tags = {
+        "Dept": "Finance",
+        "Status": "Normal"
+    }
+    #from azure.mgmt.resource.resources.models import TagsResource
+    tag_resource = TagsResource(
+        properties={'tags': tags}
+    )
+    resource = resource_client.resources.get_by_id(
+        f"/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft.Storage/storageAccounts/{storage_acct}",
+        "2022-09-01"
+    )
+    resource_client.tags.begin_create_or_update_at_scope(resource.id, tag_resource)
+    print(f"Tags {tag_resource.properties.tags} were added to resource with ID: {resource.id}")
+    return True
+
+
+
 # def create_storage_blob():
 #     See https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-delete-python
 
@@ -2374,42 +2485,6 @@ def ping_az_storage_acct(storage_account_name) -> str:
 # TODO: Azure Data Factory for data integration, 
 # TODO: Azure Gen2 Data Lake Storage of structured & unstructured data (videos)
 # TODO: Synapse Analytics (Spark ETL jobs)
-
-
-def get_az_region_by_latency(storage_account_name, attempts=5) -> str:
-    """Return the HTTP latency to a storage account within the Azure cloud."""
-    # import requests
-    # import time
-
-    url = storage_account_name + ".blob.core.windows.net"
-    latencies = []
-    for _ in range(attempts):
-        start = time.time()
-        try:
-            response = requests.get(url, timeout=5)
-            latency = (time.time() - start) * 1000  # ms
-            latencies.append(latency)
-            print(f"get_az_region_by_latency(): response={response}")
-        except requests.RequestException:
-            # FIXME: <Error data-darkreader-white-flash-suppressor="active">
-            # <Code>InvalidQueryParameterValue</Code>
-            # <Message>
-            # Value for one of the query parameters specified in the request URI is invalid. RequestId:3b433e32-d01e-003f-274c-b37a10000000 Time:2025-04-22T06:06:36.7748787Z
-            # </Message>
-            # <QueryParameterName>comp</QueryParameterName>
-            # <QueryParameterValue/>
-            # <Reason/>
-            # </Error>
-            latencies.append(None)
-
-    #valid_latencies = [lm for lx in latencies if lx is not None]
-    #if valid_latencies:
-    #    avg_latencies = sum(valid_latencies)/len(valid_latencies)
-    #    print_info(f"HTTP latency to : avg {avg_latencies:.2f} ms")
-    #else:
-    print_error(f"get_az_region_by_latency(): requests failed to {url}")
-    return None
-
 
 # TODO: set the principal with the appropriate level of permissions (typically Directory.Read.All for these operations).
 
@@ -2461,7 +2536,7 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
         )
 
 
-#### SECTION 16. TODO: Azure Keyvault
+#### SECTION 21. TODO: Azure Keyvault
 
 
 def create_content_safety_policy(credential, subscription_id, resource_group_name, keyvault_name) -> bool:
@@ -2655,7 +2730,110 @@ def delete_keyvault_secret(credential, keyvault_name, secret_name) -> bool:
        return False
 
 
-#### SECTION 17. Azure AI Services
+#### SECTION 22. Azure Maps
+
+def maps_search_client(subscription_id):
+    """Search Azure's maps service.
+    
+    https://learn.microsoft.com/en-us/python/api/overview/azure/maps-search-readme?view=azure-python-preview&preserve-view=true
+    First create az maps account create --kind "Gen2" --account-name "myMapAccountName" --resource-group "<resource group>" --sku "G2"
+    # https://portal.azure.com/#browse/Microsoft.Maps%2Faccounts
+    # map-westcentralus-92b065 on Gen2
+    # From "View Authentication" section, copy Primary key = your AZURE_MAPS_SUBSCRIPTION_KEY in .env
+    """
+    # import os
+    # from azure.core.credentials import AzureKeyCredential
+    # from azure.maps.search import MapsSearchClient
+
+    # Retrieve the Azure Maps subscription key from environment:
+    subscription_key = os.getenv("AZURE_MAPS_SUBSCRIPTION_KEY")
+    if not subscription_key:
+        print_error("AZURE_MAPS_SUBSCRIPTION_KEY not found in environment variables")
+        return None
+    try:
+        maps_search_client = MapsSearchClient(credential=AzureKeyCredential(subscription_key))
+        print_trace(f"maps_search(): client created: {maps_search_client}")
+        return maps_search_client
+    except Exception as e:
+        print_error(f"maps_search() ERROR: {e}")
+        return None
+
+def coords_from_string(coord_str):
+    """Convert latitude longitude together in a string to a tuple.
+
+    USAGE: Input to function is a string containing two numbers separated by a comma:
+    coords = coords_from_string("44.6463, -49.583")
+    For output coords = (44.6463, -49.583)
+    """
+    return tuple(map(float, coord_str.split(', ')))
+
+def latlong2street(maps_search_client, subscription_id, lat, long) -> str:
+    """Reverse geocode latitude and longitude coordinate tuple to street address.
+
+    # per https://learn.microsoft.com/en-us/python/api/overview/azure/maps-search-readme?view=azure-python-preview&preserve-view=true#make-a-reverse-address-search-to-translate-coordinate-location-to-street-address
+    Alternative: https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en
+    """
+    #maps_search_client = maps_search_client(subscription_id)
+    #if not search_client:
+    #   print(f"latlong2street(): search_client not created!")
+    #   return (None, None)
+    print_trace(f"latlong2street(): maps_search_client={maps_search_client}")
+
+    lat_float = float(lat)
+    long_float = float(long)
+    print_verbose(f"latlong2street(lat={lat_float} long={long_float})")
+    try:
+        #result = maps_search_client.get_reverse_geocoding(coordinates=[-122.138679, 47.630356])
+        json_result = maps_search_client.get_reverse_geocoding(coordinates=[lat_float, long_float])
+        print_trace(f"latlong2street(): {json_result}")
+        if json_result.get('features', False):
+            props = json_result['features'][0].get('properties', {})
+            if props and props.get('address', False):
+                street_addr = props['address'].get('formattedAddress', 'No formatted address found!')
+                # TODO: print from json:  'confidence': 'High', {'name': 'King County',
+                print_info(f"latlong2street((lat={lat_float} long={long_float}): street_addr=\"{street_addr}\"")
+                return street_addr
+            else:
+                print_error("latlong2street(): Address is None!")
+        else:
+            print_error("latlong2street(): No features available!")
+    except HttpResponseError as exception:
+        if exception.error is not None:
+            print_error(f"latlong2street(): Error Code: {exception.error.code}")
+            print_error(f"latlong2street(): Message: {exception.error.message}")
+            return None
+    except Exception as e:
+        print_error(f"latlong2street() ERROR: {e}")
+        return None
+
+    
+def street2latlong(subscription_id) -> (str, str):
+    """Geocode street address to geo latitude and longitude coordinates.
+    
+    per https://learn.microsoft.com/en-us/python/api/overview/azure/maps-search-readme?view=azure-python-preview&preserve-view=true#make-a-reverse-address-search-to-translate-coordinate-location-to-street-address
+    """
+    search_client = maps_search_client(subscription_id)
+    if not search_client:
+       print("street2latlong(): search_client not created!")
+       return (None, None)
+
+    try:
+
+        return latitude, longitude
+
+    except Exception as e:
+        print_error(f"street2latlong() ERROR: {e}")
+        return (None, None)
+
+
+# TODO: per https://learn.microsoft.com/en-us/azure/azure-maps/how-to-dev-guide-py-sdk   
+# Route	azure-maps-route 	route samples
+# Render	azure-maps-render	render sample
+# Geolocation	azure-maps-geolocation	geolocation sample
+
+
+
+#### SECTION 23. Azure AI Services
 
 
 def get_ai_svc_globals() -> bool:
@@ -2881,11 +3059,11 @@ def translate_text_using_az_ai_rest_client(text_in, ai_languages, location_in):
 # https://github.com/MicrosoftLearning/mslearn-ai-services/blob/main/Instructions/Exercises/05-implement-content-safety.md
 
 
-#### SECTION 18. TODO: Azure VMs (Virtual Machines)
+#### SECTION 23. TODO: Azure VMs (Virtual Machines)
 
 
 
-#### SECTION 19. TODO: (Event-triggered) Azure Serverless Functions
+#### SECTION 24. TODO: (Event-triggered) Azure Serverless Functions
 # to send messages to Azure services (Blob Storage, Event Hubs, Service Bus)
 
 
@@ -2899,9 +3077,6 @@ def translate_text_using_az_ai_rest_client(text_in, ai_languages, location_in):
 #   SKU: Premium | Price: 0.0123 | Unit: 1 GiB Hour
 
 
-#### SECTION 20. Billing and Cost Management:
-
-
 
 #### SECTION 21. Main control loop:
 
@@ -2909,6 +3084,33 @@ def translate_text_using_az_ai_rest_client(text_in, ai_languages, location_in):
 if __name__ == "__main__":
 
     # print_env_vars()
+    
+    # Load environment variables first before trying to get credentials
+    still_good = open_env_file()
+    if not still_good:
+        print_error("main: Failed to load .env file. Exiting.")
+        exit(9)
+
+    my_credential = get_acct_credential()
+        # my_credential=<azure.identity._credentials.default.DefaultAzureCredential object at 0x111f11400>
+    my_subscription_id = get_azure_subscription_id(my_credential)
+    
+    lat = os.environ["MY_LATITUDE"]
+    long = os.environ["MY_LONGITUDE"]
+    if lat and long:
+        # For street_addr="400 Broad St, Seattle, Washington 98109, United States" (Seattle Space Needle)
+        print_warning("latlong2street((): actual values overridden with working lat long!")
+        lat="-122.349309"
+        long="47.620498"
+        maps_search_client = maps_search_client(my_subscription_id)
+        street_addr = latlong2street(maps_search_client, my_subscription_id, lat, long)
+        exit()
+
+    resource_client = resource_object()
+
+    # TODO: When Threema Support responds about secret.
+    #recipient_id = "SYKR8UHT"   # Kermit
+    #send_theema_msg(recipient_id, phone="", text_to_send="Testing")
 
     still_good = True
 

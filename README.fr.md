@@ -11,9 +11,9 @@
 -   [Astuces de codage de script Shell](#ShellCoding)
 -   [Usage](#Usage)
 -   [az-setup-cli.sh](#az-setup-cli.sh)
--   [Les références](#References)
+-   [Références](#References)
 -   [Mainteneurs](#maintainers)
--   [Contribuant](#contributing)
+-   [Contribuer](#contributing)
 -   [Licence](#license)
 -   [Éthique](#Ethics)
 
@@ -23,14 +23,14 @@ Tous les codes, commentaires et documentations ici sont rédigés en anglais am�
 
 -   [Anglais](README.md)
 -   [Chinois simplifié](README.zh-CN.md)
--   [chinois traditionnel](README.zh-TW.md)
+-   [Chinois traditionnel](README.zh-TW.md)
 -   [hindi](README.hi.md)
 -   [Française](README.fr.md)
 -   [arabe](README.ar.md)<br /><br />
 
 La plupart des scripts de ce dépôt sont<strong>Scripts shell Bash qui s'exécutent nativement sur MacOS et Linux</strong>.
 
-Le code de script peut s'exécuter sur Windows Git Bash Shell.
+Le code de script peut s'exécuter sur Windows Git Bash Shell. 
 Les scripts PowerShell sont utilisés dans les cas où c'est la seule solution.
 
 Pour gérer plus de complexité, les programmes codés en<a target="_blank" href="https://wilsonmar.github.io/python/">Python</a>ou<a target="_blank" href="https://wilsonmar.github.io/golang">Aller</a>la langue peut être appelée<a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">le cas échéant</a>pour profiter de leurs capacités.
@@ -78,7 +78,7 @@ Il couvre la création de comptes Azure gratuits et de comptes Azure Storage pou
 
 3.  Soyez dedans<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>ou cliquez sur l'icône CLI dans le portail.
 
-4.  Créez un compte de stockage pour un<strong>Cloud Drive</strong>à l'intérieur de la coquille.
+4.  Créez un compte de stockage pour un<strong>lecteur cloud</strong>à l'intérieur de la coquille.
 
 ### Configurer un environnement pour un nouvel abonnement
 
@@ -122,7 +122,7 @@ Le script d'initialisation établit également à partir d'un échantillon le<st
 
 6.  Cliquez sur le menu "..." à droite de la fenêtre de l'éditeur de code pour enregistrer, puis quitter.
 
-    Vous pouvez désormais exécuter des scripts pour créer et gérer des ressources.
+    Vous pouvez désormais exécuter des scripts pour créer et gérer des ressources. 
     La plupart des scripts font référence à un didacticiel sur Microsoft Learn, CloudAcademy, Pluralsight, Coursera, etc.
 
     Pour exécuter dans le studio Azure Machine Learning, vous avez besoin d’une ou plusieurs instances d’Azure ML Workspace, Compute, Insights et Key Vault.
@@ -149,15 +149,15 @@ Maintenant que vous disposez des ressources nécessaires :
 
 ## Astuces de codage de script Shell
 
-Le contenu des scripts Bash de ce référentiel est écrit en utilisant les conventions de codage définies sur<a target="_blank" href="https://wilsonmar.github.io/bash-codng">https&#x3A;//wilsonmar.github.io/bash-coding</a>qui inclut:
+Le contenu des scripts Bash de ce dépôt est écrit en utilisant les conventions de codage définies sur<a target="_blank" href="https://wilsonmar.github.io/bash-codng">https&#x3A;//wilsonmar.github.io/bash-coding</a>qui comprennent :
 
 -   <tt>source ./az-all-start.sh</tt>configure les variables d'environnement et les fonctions utilitaires.
 
--   <tt>set -o élevé</tt>fait en sorte que le script s'arrête à la première erreur (au lieu de s'exécuter).
+-   <tt>Set -o érigé</tt>fait en sorte que le script s'arrête à la première erreur (au lieu de s'exécuter).
 
 -   Un nouveau groupe de ressources et toutes les ressources sont créées<strong>nouveau à chaque course</strong>pour réduire la complexité du codage de l'idempotence (où le statut est le même à la fin de chaque réexécution).
 
--   <tt>--groupe-de-ressources</tt>est un argument obligatoire sur de nombreuses commandes. C'est le dernier, de sorte que le manque de ligne oblique une ligne au-dessus entraînerait l'échec de la commande.
+-   <tt>--groupe-de-ressources</tt>est un argument obligatoire sur de nombreuses commandes. C'est le dernier, de sorte que le fait de manquer une ligne barre oblique une ligne au-dessus entraînerait l'échec de la commande.
 
 -   Une barre oblique inverse \\ à la fin d’une ligne dans la même commande az shell continue cette commande.
 
@@ -183,7 +183,7 @@ Selon<a target="_blank" href="https://docs.microsoft.com/en-us/azure/machine-lea
 
 2.  Cliquez sur l'instance créée.
 
-3.  Clique le "<https://ml.azure.com/?tid=...">URL sous "URL Web du studio".
+3.  Cliquez sur le "<https://ml.azure.com/?tid=...">URL sous "URL Web du studio".
 
 4.  Si la boîte de dialogue contextuelle « Commencer » apparaît, cliquez sur X pour la fermer.
 
@@ -199,7 +199,7 @@ Selon<a target="_blank" href="https://docs.microsoft.com/en-us/azure/machine-lea
 
 7.  Accédez aux dossiers comme<a target="_blank" href="https://github.com/Azure/azureml-examples/tree/main/cli/jobs/train">https&#x3A;//github.com/Azure/azureml-examples/tree/main/cli/jobs/train</a>:
 
-    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">rapide</a>
+    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">emploi</a>
     -   lumièregbm
     -   torche
     -   r
@@ -209,7 +209,7 @@ Selon<a target="_blank" href="https://docs.microsoft.com/en-us/azure/machine-lea
 
 az ml job create -f jobs/train/lightgbm/iris/job.yml --set computation.target=local --web --stream
 
-1.  Aller vers<https://github.com/Azure/azureml-examples/blob/main/cli/jobs/train/fastai/mnist/>
+1.  Accédez à<https://github.com/Azure/azureml-examples/blob/main/cli/jobs/train/fastai/mnist/>
 
 2.  Sélectionnez "job.yml".
 
@@ -269,12 +269,12 @@ Plus de scripts de mon dépôt Azure-quickly :
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-webapp-cli.sh">az-webapp-cli.sh</a>
      </strong></pre>
 
--   Créez un réseau avec deux sous-réseaux et un groupe de sécurité réseau qui sécurise le trafic entrant. Un sous-réseau est destiné au trafic d'accès à distance, l'autre est au trafic Web pour les machines virtuelles qui exécutent un serveur Web. Deux VM sont alors créées. L’un autorise l’accès SSH et applique les règles de groupe de sécurité réseau appropriées. Vous utilisez cette VM comme<strong>Boîte de connexion SSH</strong>pour ensuite se connecter à la deuxième VM qui peut servir de serveur web :
+-   Créez un réseau avec deux sous-réseaux et un groupe de sécurité réseau qui sécurise le trafic entrant. Un sous-réseau est destiné au trafic d'accès à distance, l'autre est au trafic Web pour les machines virtuelles qui exécutent un serveur Web. Deux VM sont alors créées. L’un autorise l’accès SSH et applique les règles de groupe de sécurité réseau appropriées. Vous utilisez cette VM comme<strong>Boîte de connexion SSH</strong>pour ensuite vous connecter à la deuxième VM qui peut servir de serveur web :
 
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
      </strong></pre> 
 
--   Créez une VM avec une adresse IP publique. Sont activés un compte de stockage, les diagnostics de démarrage avec l'extension de diagnostics de VM appliquée :
+-   Create a VM with a public IP address. Enabled are a storage account, boot diagnostics with the VM diagnostics extension applied:
 
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-diag-cli.sh">az-vm-diag-cli.sh</a>
      </strong></pre>
@@ -457,16 +457,16 @@ Le script doit effectuer toutes les étapes ci-dessous :
 
     C'est ainsi que vous pouvez exécuter des scripts pour plusieurs régions/emplacements - en modifiant simplement le<tt>MY_LOC</tt>valeur de la variable d'environnement et exécutez à nouveau le script.
 
-2.  PROTYPE :<strong>Supprimer des groupes de ressources</strong>pour empêcher les frais de s'accumuler sur les serveurs virtuels :
+2.  PRENDRE:<strong>Supprimer des groupes de ressources</strong>pour empêcher les frais de s'accumuler sur les serveurs virtuels :
 
     <pre><strong>time az group delete --name "${MY_RG}" --yes   # takes several minutes
     </strong></pre>
 
-    <tt>--Oui</tt>avant que la commande az alimente un "y" pour répondre automatiquement à la requête :<br />Etes-vous sûr de vouloir effectuer cette opération? (o/n) : oui
+    <tt>--Oui</tt>avant que la commande az alimente un "y" pour répondre automatiquement à la requête :<br />Êtes-vous sûr de vouloir effectuer cette opération ? (o/n) : oui
 
 <hr />
 
-## Les références
+## Références
 
 Les scripts ici sont adaptés de divers experts généreux en partageant leur code :
 
@@ -480,7 +480,7 @@ Les scripts ici sont adaptés de divers experts généreux en partageant leur co
 
 -   <https://github.com/timothywarner/az400>& az303 par Tim Warner
 
--   <https://github.com/zaalion/oreilly-azure-app-security>Par Raza Saleh
+-   <https://github.com/zaalion/oreilly-azure-app-security>par Reza Salehi
 
 -   <https://github.com/Azure/azure-quickstart-templates>(Modèles BRAS)
 
@@ -498,7 +498,7 @@ Les scripts ici sont adaptés de divers experts généreux en partageant leur co
 
 [@wilsonmar](https://github.com/wilsonmar)
 
-## Contribuant
+## Contribuer
 
 PR acceptés.
 

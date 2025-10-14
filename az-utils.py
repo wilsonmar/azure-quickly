@@ -8,6 +8,7 @@
 #   "azure-functions",
 #   "azure-identity",
 #   "azure-maps-search",
+#   "azure-maps-timezone",
 #   "azure-mgmt-billing",
 #   "azure-mgmt-consumption",
 #   "azure-mgmt-costmanagement",
@@ -115,14 +116,15 @@ USAGE:
     source .venv/bin/activate
         ./scripts/activate       # PowerShell only
         ./scripts/activate.bat   # Windows CMD only
-    uv run az-utils.py -v -vv
+    uv run az-utils.py --lat 47.6204 --long -122.3491 -v    # For Seattle Space Needle
+    uv run az-utils.py -v                                   # For .env file
     pip-audit -r requirements.txt
     ruff check az-utils.py
 """
 
 #### SECTION 01. Metadata about this program file:
 
-__last_commit__ = "25-10-13 v003 + latlong2street :az-utils.py"
+__last_commit__ = "25-10-13 v004 + address from lat long :az-utils.py"
 __status__      = "Run info, Resource lists working on macOS Sequoia 15.3.1"
 
 #### SECTION 02: Import internal libraries already built-in into Python:
@@ -187,6 +189,7 @@ try:   # These should match the uv list at top of this file.
     import azure.functions as func
     from azure.keyvault.secrets import SecretClient
     from azure.maps.search import MapsSearchClient
+    from azure.maps.timezone import MapsTimeZoneClient
     from azure.mgmt.billing import BillingManagementClient
                                  # accounts, profiles (payment), customers, invoices
     from azure.mgmt.costmanagement import CostManagementClient, models
@@ -491,6 +494,8 @@ parser.add_argument("-l", "--log", help="Log to external file")
 
 parser.add_argument("-ri", "--runid", action="store_true", help="Run ID (no spaces or special characters)")
 parser.add_argument("-u", "--user", help="User email (for credential)")
+parser.add_argument("-lat", "--lat", help="Latitude")
+parser.add_argument("-long", "--long", help="Longitude")
 # --tenant
 parser.add_argument("-sub", "--subscription", help="Subscription ID (for costing)")
 parser.add_argument("-z", "--zip", help="6-digit Zip code (in USA)")
@@ -546,7 +551,6 @@ SHOW_SUMMARY_COUNTS = True
 #else:
 #    resource_group = "westcentralus-92b065"
 #print(f"resource_group = {resource_group}")
-
 
 AZURE_ACCT_NAME = args.user
 AZURE_SUBSCRIPTION_ID = args.subscription
@@ -1197,35 +1201,45 @@ def get_geo_coordinates(zip_code) -> (float, float):
 def get_longitude_latitude() -> (float, float):
     """Return longitude and latitude, determined various ways.
 
-    A. From parm --zipcode which calls the DistanceMatrix API.
+    A. From parm --lat and --long.
     B. From .env file containing "MY_LONGITUDE" and "MY_LATITUDE" variable values
-    C. From lookup based on user's IP address.
-    D. From hard-coded defaults.
+    C. From parm --zipcode which calls the DistanceMatrix API.
+    D. From lookup based on user's IP address.
+    E. From hard-coded defaults.
     """
-    # NOTE: No parms -lat & -long defined.
+    # OPTION A. From parms -lat & -long defined.
+    if args.lat and args.long:
+        latitude = args.lat
+        longitude = args.long
+        print_trace(f"get_longitude_latitude() --lat \"{latitude}\" --long \"{longitude}\"  ")
+        return float(latitude), float(longitude)
 
-    # OPTION A. From parm --zipcode, which calls the DistanceMatrix API.
+    # OPTION B. From .env file containing "MY_LONGITUDE" and "MY_LATITUDE" variable values
+    try:
+        latitude = float(os.environ["MY_LATITUDE"])
+        # latitude = get_str_from_env_file('MY_LATITUDE')
+        print_info(f"MY_LATITUDE = \"{latitude:.7f}\"  # (North/South) from .env being used. ")
+        # drop thru to longitude
+    except KeyError:   
+        latitude = 0
+        pass  # do below.
+
+    try:
+        longitude = float(os.environ["MY_LONGITUDE"])
+        # longitude = get_str_from_env_file('MY_LONGITUDE')
+        print_info(f"MY_LONGITUDE = \"{longitude:.7f}\"  # (East/West of GMT) from .env being used. ")
+        return float(latitude), float(longitude)
+    
+    except KeyError:   
+        longitude = 0
+        pass  # do below.
+
+    # OPTION C. From parm --zipcode, which calls the DistanceMatrix API.
     if args.zip:
         zip_code = args.zip   # zip_code = ' '.join(map(str, args.zip))   # convert list from parms to string.
         print_trace(f"get_longitude_latitude() -zip: \"{zip_code}\" ")
         latitude, longitude = get_geo_coordinates(zip_code)
-    else:  
-        # OPTION B. From .env file containing "MY_LONGITUDE" and "MY_LATITUDE" variable values
-        try:
-            latitude = float(os.environ["MY_LATITUDE"])
-            # latitude = get_str_from_env_file('MY_LATITUDE')
-            print_info(f"MY_LATITUDE = \"{latitude:.7f}\"  # (North/South) from .env being used. ")
-        except KeyError:   
-            latitude = 0
-            pass  # do below.
-
-        try:
-            longitude = float(os.environ["MY_LONGITUDE"])
-            # longitude = get_str_from_env_file('MY_LONGITUDE')
-            print_info(f"MY_LONGITUDE = \"{longitude:.7f}\"  # (East/West of GMT) from .env being used. ")
-        except KeyError:   
-            longitude = 0
-            pass  # do below.
+        return float(latitude), float(longitude)
 
     if not (latitude and longitude):
         ip_address = get_ip_address()
@@ -1616,7 +1630,7 @@ def get_azure_subscription_id(credential) -> str:
         print_trace(f"get_azure_subscription_id( \"{str(credential)}\" ")
         try:
             subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
-            print_info(f"AZURE_SUBSCRIPTION_ID = \"{subscription_id}\"  # from .env file being used.")
+            print_trace(f"AZURE_SUBSCRIPTION_ID = \"{subscription_id}\"  # from .env file being used.")
             return subscription_id
         except Exception:
             print_fail("-sub or -subscription / AZURE_SUBSCRIPTION_ID in .env not defined for get_azure_subscription_id()")
@@ -2732,9 +2746,91 @@ def delete_keyvault_secret(credential, keyvault_name, secret_name) -> bool:
 
 #### SECTION 22. Azure Maps
 
-def maps_search_client(subscription_id):
-    """Search Azure's maps service.
+
+def coords_from_string(coord_str):
+    """Convert latitude longitude together in a string to a tuple.
+
+    USAGE: Input to function is a string containing two numbers separated by a comma:
+    coords = coords_from_string("44.6463, -49.583")
+    For output coords = (44.6463, -49.583)
+    """
+    return tuple(map(float, coord_str.split(', ')))
+
+def timezone_client(subscription_key=""):
+    """Return Azure maps timezone client for latlong2timezone().
     
+    https://learn.microsoft.com/en-us/python/api/overview/azure/maps-search-readme?view=azure-python-preview&preserve-view=true
+    First create az maps account create --kind "Gen2" --account-name "myMapAccountName" --resource-group "<resource group>" --sku "G2"
+    # https://portal.azure.com/#browse/Microsoft.Maps%2Faccounts
+    # map-westcentralus-92b065 on Gen2
+    # From "View Authentication" section, copy Primary key = your AZURE_timezone_SUBSCRIPTION_KEY in .env
+    """
+    # import os
+    # from azure.core.credentials import AzureKeyCredential
+    # from azure.core.exceptions import HttpResponseError
+
+    if not subscription_key:
+        subscription_key = os.getenv("AZURE_MAPS_SUBSCRIPTION_KEY")
+
+    if not subscription_key:
+        print_error("latlong2timezone(): AZURE_MAPS_SUBSCRIPTION_KEY not found in .env file!")
+        return None
+    else:
+        print_trace(f"latlong2timezone(): AZURE_MAPS_SUBSCRIPTION_KEY={subscription_key}")
+
+    try:
+        timezone_client = MapsTimeZoneClient(credential=AzureKeyCredential(subscription_key))
+        print_trace(f"latlong2timezone(): client: {timezone_client}")
+            #  latlong2timezone(): client: <azure.maps.timezone._patch.MapsTimeZoneClient object at 0x10c892510> 
+        return timezone_client
+    except Exception as e:
+        print_error(f"latlong2timezone(): subscription: {e}")
+        return None
+
+def latlong2timezone(timezone_client, lat, long) -> str:
+    """Lookup timezone based on geocode latitude and longitude coordinate tuple for subscription_id.
+
+    # per https://learn.microsoft.com/en-us/python/api/overview/azure/maps-timezone-readme?view=azure-python-preview#get-timezone-by-coordinates
+    """
+    lat_float = float(lat)
+    long_float = float(long)
+    if lat_float and long_float:
+        print_trace(f"latlong2timezone(lat={lat_float} long={long_float})")
+    else:
+        print_fail(f"latlong2timezone(): lat & long missing!")
+        return None
+    try:
+        json_result = timezone_client.get_timezone_by_coordinates(coordinates=[lat_float, long_float])
+            # FIXME: latlong2timezone(): Error Code: 400 BadRequest
+        print_trace(f"latlong2timezone(): {json_result}")  # if call works.
+        # TimeZones: {'Version': '2025b', 'ReferenceUtcTimestamp': '2025-10-14T03:42:57.8321228Z', 'TimeZones': [{'Id': 'America/Denver', 'Names': {'ISO6391LanguageCode': 'en', 'Generic': 'Mountain Time', 'Standard': 'Mountain Standard Time', 'Daylight': 'Mountain Daylight Time'}, 'ReferenceTime': {'Tag': 'MDT', 'StandardOffset': '-07:00:00', 'DaylightSavings': '01:00:00', 'WallTime': '2025-10-13T21:42:57.8321228-06:00', 'PosixTzValidYear': 2025, 'PosixTz': 'MST+7MDT,M3.2.0,M11.1.0', 'Sunrise': '2025-10-13T07:29:39.1395261-06:00', 'Sunset': '2025-10-13T18:34:35.710823-06:00'}}]} 
+        timezone_version = json_result["Version"]
+        timezone_abbr = json_result["TimeZones"][0]["ReferenceTime"]["Tag"]
+        timezone_offset = json_result["TimeZones"][0]["ReferenceTime"]["StandardOffset"]
+        if show_verbose:
+            tz = json_result['TimeZones'][0]
+            print_verbose(f"latlong2timezone(): Time Zone Information for Latitude={lat_float} Longitude={long_float}:")
+            print_verbose(f"   ID:      \"{timezone_abbr}\" = \"{tz['Id']}\" at Version \"{timezone_version}\" ")
+            print_verbose(f"   Standard: {tz['Names']['Standard']}")
+            print_verbose(f"   Daylight: {tz['Names']['Daylight']}. Offset from GMT/UTC: {timezone_offset} ")
+            print_verbose(f"   Time now: {tz['ReferenceTime']['WallTime']} (24-hour time format local time)")
+            print_verbose(f"   Sunrise:  {tz['ReferenceTime']['Sunrise']}")
+            print_verbose(f"   Sunset:   {tz['ReferenceTime']['Sunset']}")
+        return timezone_abbr
+
+    except HttpResponseError as exception:
+        if exception.error is not None:
+            print_error(f"latlong2timezone(): Error Code: {exception.error.code}")
+            print_error(f"latlong2timezone(): Message: {exception.error.message}")
+            return None
+    except Exception as e:
+        print_error(f"latlong2timezone() ERROR: {e}")
+        return None
+
+
+def maps_search_client(subscription_id):
+    """Return Azure maps search client for latlong2street().
+
     https://learn.microsoft.com/en-us/python/api/overview/azure/maps-search-readme?view=azure-python-preview&preserve-view=true
     First create az maps account create --kind "Gen2" --account-name "myMapAccountName" --resource-group "<resource group>" --sku "G2"
     # https://portal.azure.com/#browse/Microsoft.Maps%2Faccounts
@@ -2748,43 +2844,37 @@ def maps_search_client(subscription_id):
     # Retrieve the Azure Maps subscription key from environment:
     subscription_key = os.getenv("AZURE_MAPS_SUBSCRIPTION_KEY")
     if not subscription_key:
-        print_error("AZURE_MAPS_SUBSCRIPTION_KEY not found in environment variables")
+        print_error("maps_search_client(): AZURE_MAPS_SUBSCRIPTION_KEY not found in .env file!")
         return None
+    else:
+        print_trace(f"maps_search_client(): AZURE_MAPS_SUBSCRIPTION_KEY={subscription_key}")
+
     try:
         maps_search_client = MapsSearchClient(credential=AzureKeyCredential(subscription_key))
-        print_trace(f"maps_search(): client created: {maps_search_client}")
+        print_trace(f"maps_search_client(): client: {maps_search_client}")
         return maps_search_client
     except Exception as e:
-        print_error(f"maps_search() ERROR: {e}")
+        print_error(f"maps_search_client() SUBSCRIPTION: {e}")
         return None
 
-def coords_from_string(coord_str):
-    """Convert latitude longitude together in a string to a tuple.
-
-    USAGE: Input to function is a string containing two numbers separated by a comma:
-    coords = coords_from_string("44.6463, -49.583")
-    For output coords = (44.6463, -49.583)
-    """
-    return tuple(map(float, coord_str.split(', ')))
-
-def latlong2street(maps_search_client, subscription_id, lat, long) -> str:
+def latlong2street(maps_search_client, lat, long) -> str:
     """Reverse geocode latitude and longitude coordinate tuple to street address.
 
     # per https://learn.microsoft.com/en-us/python/api/overview/azure/maps-search-readme?view=azure-python-preview&preserve-view=true#make-a-reverse-address-search-to-translate-coordinate-location-to-street-address
     Alternative: https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en
     """
-    #maps_search_client = maps_search_client(subscription_id)
-    #if not search_client:
-    #   print(f"latlong2street(): search_client not created!")
-    #   return (None, None)
-    print_trace(f"latlong2street(): maps_search_client={maps_search_client}")
-
     lat_float = float(lat)
     long_float = float(long)
-    print_verbose(f"latlong2street(lat={lat_float} long={long_float})")
+    if lat_float and long_float:
+        print_verbose(f"latlong2street(lat={lat_float} long={long_float})")
+    else:
+        print_fail(f"latlong2street(): lat & long missing!")
+        return None, None
+    
     try:
-        #result = maps_search_client.get_reverse_geocoding(coordinates=[-122.138679, 47.630356])
-        json_result = maps_search_client.get_reverse_geocoding(coordinates=[lat_float, long_float])
+        print_trace(f"maps_search_client(): {maps_search_client}")
+        json_result = maps_search_client.get_reverse_geocoding(coordinates=[long_float, lat_float])
+            # FIXME: latlong2street(): Error Code: InvalidKey Message: The provided key was incorrect or the account resource does not exist. 
         print_trace(f"latlong2street(): {json_result}")
         if json_result.get('features', False):
             props = json_result['features'][0].get('properties', {})
@@ -2792,11 +2882,23 @@ def latlong2street(maps_search_client, subscription_id, lat, long) -> str:
                 street_addr = props['address'].get('formattedAddress', 'No formatted address found!')
                 # TODO: print from json:  'confidence': 'High', {'name': 'King County',
                 print_info(f"latlong2street((lat={lat_float} long={long_float}): street_addr=\"{street_addr}\"")
-                return street_addr
+                # return street_addr
             else:
                 print_error("latlong2street(): Address is None!")
+                street_addr = None
         else:
             print_error("latlong2street(): No features available!")
+            street_addr = None
+
+        # Get subscription key for timezone client
+        maps_subscription_key = os.getenv("AZURE_MAPS_SUBSCRIPTION_KEY")
+        if maps_subscription_key:
+            timezone_client = MapsTimeZoneClient(credential=AzureKeyCredential(maps_subscription_key))
+            timezone_str = timezone_client.get_timezone_by_coordinates(coordinates=[lat_float, long_float])
+            print_trace(f"latlong2street(): timezone_str=\"{timezone_str}\" ")
+        else:
+            print_warning("latlong2street(): AZURE_MAPS_SUBSCRIPTION_KEY not found for timezone lookup")
+
     except HttpResponseError as exception:
         if exception.error is not None:
             print_error(f"latlong2street(): Error Code: {exception.error.code}")
@@ -3088,22 +3190,23 @@ if __name__ == "__main__":
     # Load environment variables first before trying to get credentials
     still_good = open_env_file()
     if not still_good:
-        print_error("main: Failed to load .env file. Exiting.")
+        print_fail("main: Failed to load .env file. Exiting.")
         exit(9)
 
     my_credential = get_acct_credential()
         # my_credential=<azure.identity._credentials.default.DefaultAzureCredential object at 0x111f11400>
+    if not my_credential:
+        exit()
     my_subscription_id = get_azure_subscription_id(my_credential)
-    
-    lat = os.environ["MY_LATITUDE"]
-    long = os.environ["MY_LONGITUDE"]
+
+    lat, long = get_longitude_latitude()
     if lat and long:
-        # For street_addr="400 Broad St, Seattle, Washington 98109, United States" (Seattle Space Needle)
-        print_warning("latlong2street((): actual values overridden with working lat long!")
-        lat="-122.349309"
-        long="47.620498"
+        timezone_client = timezone_client()
+        my_timezone = latlong2timezone(timezone_client, lat, long)
+        # latlong2timezone() TRACE: {'Version': '2025b', 'ReferenceUtcTimestamp': '2025-10-14T03:42:57.8321228Z', 'TimeZones': [{'Id': 'America/Denver', 'Names': {'ISO6391LanguageCode': 'en', 'Generic': 'Mountain Time', 'Standard': 'Mountain Standard Time', 'Daylight': 'Mountain Daylight Time'}, 'ReferenceTime': {'Tag': 'MDT', 'StandardOffset': '-07:00:00', 'DaylightSavings': '01:00:00', 'WallTime': '2025-10-13T21:42:57.8321228-06:00', 'PosixTzValidYear': 2025, 'PosixTz': 'MST+7MDT,M3.2.0,M11.1.0', 'Sunrise': '2025-10-13T07:29:39.1395261-06:00', 'Sunset': '2025-10-13T18:34:35.710823-06:00'}}]} 
+
         maps_search_client = maps_search_client(my_subscription_id)
-        street_addr = latlong2street(maps_search_client, my_subscription_id, lat, long)
+        street_addr = latlong2street(maps_search_client, lat, long)
         exit()
 
     resource_client = resource_object()

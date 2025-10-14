@@ -33,7 +33,7 @@
 腳本代碼可以在 Windows Git Bash Shell 上運行。 
 PowerShell 腳本用於唯一解決方案的情況。
 
-為了處理更多的複雜性，程序編碼為<a target="_blank" href="https://wilsonmar.github.io/python/">Python</a>或者<a target="_blank" href="https://wilsonmar.github.io/golang">去</a>語言可以稱為<a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">在適當的時候</a>充分利用他們的能力。
+為了處理更多的複雜性，程序編碼為<a target="_blank" href="https://wilsonmar.github.io/python/">Python</a>或者<a target="_blank" href="https://wilsonmar.github.io/golang">去</a>語言可以稱為<a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">在適當的時候</a> to take advantage of their capabilities.
 
 存在以下風險：CLI 功能在其底層時可能無法工作<a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">Azure REST API</a>確實有效。因此，適當時會包含 Postman 文件。
 

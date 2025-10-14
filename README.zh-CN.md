@@ -470,7 +470,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
 这里的脚本改编自慷慨分享代码的多位专家：
 
--   <https://github.com/fouldsy/azure-mol-samples-2nd-ed>作者：Iain Foulds，解释于<https://aka.ms/monthoflunches> published 4/30/2020.
+-   <https://github.com/fouldsy/azure-mol-samples-2nd-ed>作者：Iain Foulds，解释于<https://aka.ms/monthoflunches>2020 年 4 月 30 日发布。
 
 -   <https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies>
 
@@ -480,7 +480,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
 -   <https://github.com/timothywarner/az400>& 蒂姆·华纳的 az303
 
--   <https://github.com/zaalion/oreilly-azure-app-security> by Reza Salehi 
+-   <https://github.com/zaalion/oreilly-azure-app-security>通过礼萨·萨利希
 
 -   <https://github.com/Azure/azure-quickstart-templates>（ARM 模板）
 

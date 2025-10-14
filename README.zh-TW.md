@@ -43,7 +43,7 @@ PowerShell 腳本用於唯一解決方案的情況。
 
 人們讓資源保持運行是因為他們<strong>不想把一生都花在重複體力勞動上</strong>單擊 Azure 門戶 GUI，如大多數 Azure 教程所述。
 
-這個倉庫（位於<a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https&#x3A;//github.com/wilsonmar/azure-quickly</a>）包含自動化腳本，使您能夠自信地<strong>刪除資源組</strong> when you're resting or playing because it enables you to <strong>拿回資源</strong>即使使用全新的訂閱，也只需幾個命令。
+這個倉庫（位於<a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https&#x3A;//github.com/wilsonmar/azure-quickly</a>）包含自動化腳本，使您能夠自信地<strong>刪除資源組</strong>當您休息或玩耍時，因為它使您能夠<strong>拿回資源</strong>即使使用全新的訂閱，也只需幾個命令。
 
 您可以節省金錢，因為您不必讓資源保持運行、消耗積分或增加信用卡賬單。
 

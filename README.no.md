@@ -33,7 +33,7 @@ De fleste skript i denne repoen er<strong>Bash shell manus som kjører innfødt 
 Skriptkode kan kjøres på Windows Git Bash Shell. 
 PowerShell -skript brukes i tilfeller der det er den eneste løsningen.
 
-For å håndtere mer kompleksitet, programmer kodet i<a target="_blank" href="https://wilsonmar.github.io/python/">Python</a>eller<a target="_blank" href="https://wilsonmar.github.io/golang">Gå</a>Språk kan kalles<a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">Når det er passende</a>å dra nytte av deres evner.
+For å håndtere mer kompleksitet, programmer kodet i<a target="_blank" href="https://wilsonmar.github.io/python/">Python</a> or <a target="_blank" href="https://wilsonmar.github.io/golang">Gå</a>Språk kan kalles<a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">Når det er passende</a>å dra nytte av deres evner.
 
 Det er en risiko for at CLI -funksjoner kanskje ikke fungerer når det er underliggende<a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">Azure REST API</a>Fungerer. Så postmanfiler er inkludert når det er aktuelt.
 
@@ -213,7 +213,7 @@ AZ ML Job Create -F Jobs/Train/LightGBM/Iris/Job.yml -Set Compute.Target = Local
 
 2.  Velg "Job.yml".
 
-3.  Klikk "Last opp".
+3.  Click "Upload".
 
 4.  Velg Beregne hvor du kjører den bærbare PC -en.
 

@@ -183,7 +183,7 @@ Jupyter 的 Python 笔记本图库：
 
 2.  单击创建的实例。
 
-3.  单击“<https://ml.azure.com/?tid=...">“Studio Web URL”下的 URL。
+3.  单击“<https://ml.azure.com/?tid=..."> URL under the "Studio web URL".
 
 4.  如果出现“开始”弹出对话框，请单击 X 将其关闭。
 

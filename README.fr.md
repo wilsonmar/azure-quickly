@@ -120,7 +120,7 @@ Le script d'initialisation établit également à partir d'un échantillon le<st
 
     Il peut y avoir un fichier différent pour chaque environnement (comme dev ou prod).
 
-6.  Cliquez sur le menu "..." à droite de la fenêtre de l'éditeur de code pour enregistrer, puis quitter.
+6.  Cliquez sur le menu "..." à droite de la fenêtre de l'éditeur de code pour enregistrer, puis quittez.
 
     Vous pouvez désormais exécuter des scripts pour créer et gérer des ressources. 
     La plupart des scripts font référence à un didacticiel sur Microsoft Learn, CloudAcademy, Pluralsight, Coursera, etc.
@@ -524,6 +524,6 @@ Ce projet fonctionne sous l'égide du W3C[Code d'éthique et de conduite profess
 > pratique. Il fournit également une référence pour l'auto-évaluation et fait office de
 > véhicule d’une meilleure identité de l’organisation.
 
-Nous espérons que notre groupe communautaire agira conformément à ces directives et que
-les participants s’engagent mutuellement à respecter ces normes élevées. Si vous avez des questions
-ou si vous craignez que le code ne soit pas suivi, veuillez contacter le propriétaire du référentiel.
+We hope that our community group act according to these guidelines, and that
+participants hold each other to these high standards. If you have any questions
+or are worried that the code isn't being followed, please contact the owner of the repository.

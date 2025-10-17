@@ -28,7 +28,7 @@
 -   [法语](README.fr.md)
 -   [阿拉伯](README.ar.md)<br /><br />
 
-这个仓库中的大多数脚本都是<strong>在 MacOS 和 Linux 上本机运行的 Bash shell 脚本</strong>.
+Most scripts in this repo are <strong>在 MacOS 和 Linux 上本机运行的 Bash shell 脚本</strong>.
 
 脚本代码可以在 Windows Git Bash Shell 上运行。 
 PowerShell 脚本用于唯一解决方案的情况。
@@ -153,7 +153,7 @@ ML CLI v2（预览版）提供了一种自动化方法：<br /><a target="_blank
 
 -   <tt>来源 ./az-all-start.sh</tt>设置环境变量和实用函数。
 
--   <tt>设置-o 竖立</tt>使脚本在出现第一个错误时停止（而不是继续运行）。
+-   <tt>设置-O 凸起</tt>使脚本在出现第一个错误时停止（而不是继续运行）。
 
 -   创建一个新的资源组和所有资源<strong>每次运行都有新内容</strong>降低幂等性编码的复杂性（每次重新运行结束时状态相同）。
 
@@ -183,7 +183,7 @@ Jupyter 的 Python 笔记本图库：
 
 2.  单击创建的实例。
 
-3.  单击“<https://ml.azure.com/?tid=..."> URL under the "Studio web URL".
+3.  单击“<https://ml.azure.com/?tid=...">“Studio Web URL”下的 URL。
 
 4.  如果出现“开始”弹出对话框，请单击 X 将其关闭。
 
@@ -199,7 +199,7 @@ Jupyter 的 Python 笔记本图库：
 
 7.  导航到文件夹<a target="_blank" href="https://github.com/Azure/azureml-examples/tree/main/cli/jobs/train">https&#x3A;//github.com/Azure/azureml-examples/tree/main/cli/jobs/train</a>:
 
-    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">就业</a>
+    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">快速地</a>
     -   光GBM
     -   火炬
     -   r
@@ -457,7 +457,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
     这就是您可以为多个区域/位置运行脚本的方法 - 只需更改<tt>我的位置</tt>环境变量的值并再次运行脚本。
 
-2.  拿：<strong>删除资源组</strong>阻止虚拟服务器上累积费用：
+2.  原型：<strong>删除资源组</strong>阻止虚拟服务器上累积费用：
 
     <pre><strong>time az group delete --name "${MY_RG}" --yes   # takes several minutes
     </strong></pre>

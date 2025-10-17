@@ -28,7 +28,7 @@
 -   [法语](README.fr.md)
 -   [阿拉伯](README.ar.md)<br /><br />
 
-Most scripts in this repo are <strong>在 MacOS 和 Linux 上本机运行的 Bash shell 脚本</strong>.
+这个仓库中的大多数脚本都是<strong>在 MacOS 和 Linux 上本机运行的 Bash shell 脚本</strong>.
 
 脚本代码可以在 Windows Git Bash Shell 上运行。 
 PowerShell 脚本用于唯一解决方案的情况。
@@ -213,7 +213,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
 2.  选择“job.yml”。
 
-3.  点击“上传”。
+3.  单击“上传”。
 
 4.  选择运行笔记本的计算位置。
 

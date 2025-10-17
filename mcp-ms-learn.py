@@ -2,8 +2,9 @@
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
+#   "flask",
+#   "markdown",
 #   "requests",
-#   "typing",
 # ]
 # ///
 # https://docs.astral.sh/uv/guides/scripts/#using-a-shebang-to-create-an-executable-file
@@ -14,9 +15,10 @@
 at https://github.com/wilsonmar/azure-quickly/blob/main/mcp-ms-learn.py
 by Wilson Mar
 
-Query a MCP Server containing Microsoft's LEARN documents.
-Use MCP-standard JSON 2.0 async protocol in 
-SSE (Server-Sent Event) format (text/event-stream).
+Query a MCP Server containing Microsoft's LEARN documents using
+MCP-standard JSON 2.0 async protocol containing SSE (Server-Sent Event) text/event-streams.
+Output to a JSON file converted to Markdown (.md) format, then HTML and
+displayed by a localhost to the default internet browser.
 
 USAGE:
     chmod +x mcp-ms-learn.py
@@ -25,15 +27,30 @@ USAGE:
 
 #### SECTION 01. Metadata about this program file:
 
-__last_commit__ = "25-10-16 v001 + new :mcp-ms-learn.py"
-__status__      = "working on macOS Sequoia 15.3.1"
+__last_commit__ = "25-10-17 v003 + display md as html in browser :mcp-ms-learn.py"
+__status__      = "works until html display on macOS Sequoia 15.3.1"
+# TODO: argparse query text.
 
 #### SECTION 02: Import internal libraries already built-in into Python:
 
-import json
-import requests
-from pathlib import Path
+from threading import Timer
+import webbrowser
 from typing import Dict, Any
+
+#### SECTION 03: Import external libraries from PiPy:
+
+try:
+    from flask import Flask, render_template_string
+    import json
+    import markdown
+    from pathlib import Path
+    import requests
+except Exception as e:
+    print(f"Python module import failed: {e}")
+    print("Please activate your virtual environment:\n  uv env env\n  source .venv/bin/activate")
+    exit(9)
+
+#### SECTION 04: Define hard-coded values in global variables:
 
 test_run_endpoint = False
 show_tools = False
@@ -41,6 +58,7 @@ mcp_server_url = "https://learn.microsoft.com/api/mcp"
 question = "What is the difference between MCP and A2A?"
 output_json_filepath = "mcp-ms-learn.json"
 output_md_filepath = "mcp-ms-learn.md"
+
 
 def test_endpoint(url: str) -> bool:
     """Test if the endpoint exists and is reachable."""
@@ -224,19 +242,37 @@ def format_json_to_markdown(json_file_path: str, output_path: str) -> None:
     with open(output_path, "w", encoding="utf-8") as out_f:
         out_f.write("\n".join(markdown_output) if markdown_output else "No parsable content found.")
     
-    #try:
-    #    markdown_output = json.loads(content)
-    #    print(f"DEBUGGING: markdown_output={markdown_output}")
-    ##except json.JSONDecodeError:
-    #    raise ValueError("Invalid JSON content found in file.")    
-    #    markdown_output = "``````"
-    
-    #with open(output_path, "w", encoding="utf-8") as out:
-    #    out.write(json.dumps(markdown_output, indent=2, ensure_ascii=False))
-    
-    #print(f"Markdown-formatted JSON written to: {output_path}")
+    print(f"Markdown-formatted content written to: {output_path}")
     return
 
+app = Flask(__name__)
+@app.route('/')  # referenced by function index()
+def index():
+    """Display markdown (md) file as html in browser."""
+    # Open file and read it into "md_content"
+    if not output_md_filepath:
+        print("FAIL: no md_filepath specified!")
+        return "Error: No markdown file specified"
+    
+    with open(output_md_filepath, 'r', encoding='utf-8') as f:
+        md_content = f.read()
+    # Convert Markdown to HTML using the markdown package:
+    html_content = markdown.markdown(md_content, extensions=['fenced_code', 'tables'])
+    # Basic HTML wrapper:
+    html_page = f"""
+    <html>
+        <head><title>Markdown Preview</title></head>
+        <body>{html_content}</body>
+    </html>
+    """
+    # Serve the HTML result using Flask:
+    print("INFO: File is accessible at http://localhost:5000/")
+    return render_template_string(html_page)
+
+
+def open_browser(port="5000"):
+    """Open browser using a delay."""
+    webbrowser.open_new(f"http://127.0.0.1:{port}")
 
 def main():
     """Just do the program."""
@@ -267,7 +303,6 @@ def main():
     # Query the server
     response = query_mcp_server(mcp_server_url, question)
 
-
     # Pretty format and display the response
     formatted_output = pretty_format_response(response)
     print(formatted_output)
@@ -279,13 +314,13 @@ def main():
 
     format_json_to_markdown(output_json_filepath, output_md_filepath)
 
+    # if md file exists:
+    # Open the browser after the specified number of seconds of delay:
+    Timer(2, open_browser).start()
+    # if port 5000 is available:
+    #app.run(debug=True,port=5000)
+    app.run(debug=True,port=5000)
+    # FIXME: Internal Server Error - The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+
 if __name__ == "__main__":
     main()
-
-"""
-Response headers: {'Content-Type': 'text/event-stream', 'Content-Encoding': 'identity', 'Request-Context': 'appId=cid-v1:b4f06...guid', 'X-Powered-By': 'ASP.NET', 'x-azure-ref': '20251017T033714Z-r18f794d4f8n4xv9hC1CO1qg3400000000x0000000000fb4', 'nel': '{"report_to":"network-errors","max_age":604800,"success_fraction":0.01,"failure_fraction":1.0}', 'report-to': '{"group":"network-errors","max_age":604800,"endpoints":[{"url":"https://mdec.nelreports.net/api/report?cat=mdocs"}]}', 'X-Content-Type-Options': 'nosniff', 'Content-Length': '19753', 'Cache-Control': 'no-cache, no-store', 'Expires': 'Fri, 17 Oct 2025 03:37:14 GMT', 'Date': 'Fri, 17 Oct 2025 03:37:14 GMT', 'Connection': 'keep-alive', 'Set-Cookie': 'ASLBSA=...; Path=/; Secure; HttpOnly;, ASLBSACORS=...; SameSite=none; Path=/; Secure; HttpOnly;', 'Akamai-Cache-Status': 'Miss from child, Miss from parent', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'}
-Response text (first 500 chars): event: message
-
-data: {"result":{"content":[{"type":"text","text":"[{\u0022title\u0022:\u0022MCP support\u0022,\u0022content\u0022:\u0022# MCP support\\nModel Context Protocol (MCP) is an open protocol that standardizes how applications provide context to large language models (LLMs). Starting in AI Shell 1.0.0-preview.6, AI Shell can act as an MCP Host and client to MCP servers. The key participants in the MCP architecture are:\\n1. MCP Host - AI Shell coordinates and manages one or multiple MCP
-
-"""

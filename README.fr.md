@@ -221,7 +221,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --set computation.target=lo
 
 5.  Cliquez sur l'icône "Exécuter".
 
-    ### Alternately
+    ### Alternativement
 
 6.  Dans le<strong>Fichiers utilisateur</strong>section de votre espace de travail. Cliquez sur la cellule que vous souhaitez modifier. Si vous n'avez aucun bloc-notes dans cette section, consultez Créer et gérer des fichiers dans votre espace de travail.
 

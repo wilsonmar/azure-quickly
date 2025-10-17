@@ -78,7 +78,7 @@
 
 3.  كن في<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>أو انقر فوق أيقونة CLI داخل البوابة.
 
-4.  إنشاء حساب تخزين ل<strong>com.clouddrive</strong>داخل القشرة.
+4.  قم بإنشاء حساب تخزين لـ<strong>com.clouddrive</strong>داخل القشرة.
 
 ### قم بإعداد بيئة لاشتراك جديد
 
@@ -153,7 +153,7 @@
 
 -   <tt>المصدر ./az-all-start.sh</tt>يقوم بإعداد متغيرات البيئة ووظائف الأداة المساعدة.
 
--   <tt>مجموعة -o نصبت</tt>يجعله يتوقف البرنامج النصي عند الخطأ الأول (بدلاً من الاستمرار فيه).
+-   <tt>مجموعة -o مرفوعة</tt>يجعله يتوقف البرنامج النصي عند الخطأ الأول (بدلاً من الاستمرار فيه).
 
 -   يتم إنشاء مجموعة موارد جديدة وجميع الموارد<strong>جديد في كل شوط</strong>لتقليل تعقيد ترميز العجز الجنسي (حيث تكون الحالة هي نفسها في نهاية كل عملية إعادة تشغيل).
 
@@ -199,7 +199,7 @@
 
 7.  انتقل إلى المجلدات باسم<a target="_blank" href="https://github.com/Azure/azureml-examples/tree/main/cli/jobs/train">https&#x3A;//github.com/Azure/azureml-examples/tree/main/cli/jobs/train</a>:
 
-    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">التوظيف</a>
+    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">سريع</a>
     -   com.lightgbm
     -   pytorch
     -   ص
@@ -457,7 +457,7 @@
 
     هذه هي الطريقة التي يمكنك بها تشغيل البرامج النصية لعدة مناطق/مواقع - عن طريق تغيير ملف<tt>MY_LOC</tt>قيمة متغير البيئة وتشغيل البرنامج النصي مرة أخرى.
 
-2.  يأخذ:<strong>حذف مجموعات الموارد</strong>لمنع تراكم الرسوم على الخوادم الافتراضية:
+2.  النموذج:<strong>حذف مجموعات الموارد</strong>لمنع تراكم الرسوم على الخوادم الافتراضية:
 
     <pre><strong>time az group delete --name "${MY_RG}" --yes   # takes several minutes
     </strong></pre>

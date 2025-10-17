@@ -153,7 +153,7 @@ Le contenu des scripts Bash de ce dépôt est écrit en utilisant les convention
 
 -   <tt>source ./az-all-start.sh</tt>configure les variables d'environnement et les fonctions utilitaires.
 
--   <tt>Set -o érigé</tt>fait en sorte que le script s'arrête à la première erreur (au lieu de s'exécuter).
+-   <tt>set -o élevé</tt>fait en sorte que le script s'arrête à la première erreur (au lieu de s'exécuter).
 
 -   Un nouveau groupe de ressources et toutes les ressources sont créées<strong>nouveau à chaque course</strong>pour réduire la complexité du codage de l'idempotence (où le statut est le même à la fin de chaque réexécution).
 
@@ -199,7 +199,7 @@ Selon<a target="_blank" href="https://docs.microsoft.com/en-us/azure/machine-lea
 
 7.  Accédez aux dossiers comme<a target="_blank" href="https://github.com/Azure/azureml-examples/tree/main/cli/jobs/train">https&#x3A;//github.com/Azure/azureml-examples/tree/main/cli/jobs/train</a>:
 
-    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">emploi</a>
+    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">rapide</a>
     -   lumièregbm
     -   torche
     -   r
@@ -457,7 +457,7 @@ Le script doit effectuer toutes les étapes ci-dessous :
 
     C'est ainsi que vous pouvez exécuter des scripts pour plusieurs régions/emplacements - en modifiant simplement le<tt>MY_LOC</tt>valeur de la variable d'environnement et exécutez à nouveau le script.
 
-2.  PRENDRE:<strong>Supprimer des groupes de ressources</strong>pour empêcher les frais de s'accumuler sur les serveurs virtuels :
+2.  PROTYPE :<strong>Supprimer des groupes de ressources</strong>pour empêcher les frais de s'accumuler sur les serveurs virtuels :
 
     <pre><strong>time az group delete --name "${MY_RG}" --yes   # takes several minutes
     </strong></pre>

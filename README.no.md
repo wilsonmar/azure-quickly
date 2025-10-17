@@ -143,7 +143,7 @@ ML CLI v2 (forhåndsvisning) gir én automatiseringstilnærming:<br /><a target=
 
 2.  Rediger<tt>aliases.sh</tt>fil og fjern eller legg til tastaturmakroer.
 
-Nå som du har ressursene som trengs:
+Nå som du har ressursene du trenger:
 
 <a name="ShellCoding"></a>
 
@@ -157,7 +157,7 @@ Innholdet i Bash-skriptene i denne repoen er skrevet ved å bruke kodingskonvens
 
 -   En ny ressursgruppe og alle ressurser opprettes<strong>nytt for hvert løp</strong>for å redusere kompleksiteten ved koding for idempotens (hvor statusen er den samme på slutten av hver re-kjøring).
 
--   <tt>--resource-group</tt>er et nødvendig argument for mange kommandoer. Det er sist slik at manglende skråstrek en linje over den vil føre til at kommandoen mislykkes.
+-   <tt>--ressursgruppe</tt>er et nødvendig argument for mange kommandoer. Det er sist slik at manglende skråstrek en linje over den vil føre til at kommandoen mislykkes.
 
 -   Et omvendt skråstrek \\-tegn på slutten av en linje innenfor samme az-shell-kommando fortsetter den kommandoen.
 

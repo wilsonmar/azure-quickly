@@ -33,7 +33,7 @@
 腳本代碼可以在 Windows Git Bash Shell 上運行。 
 PowerShell 腳本用於唯一解決方案的情況。
 
-為了處理更多的複雜性，程序編碼為<a target="_blank" href="https://wilsonmar.github.io/python/">Python</a>或者<a target="_blank" href="https://wilsonmar.github.io/golang">去</a>語言可以稱為<a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">在適當的時候</a> to take advantage of their capabilities.
+為了處理更多的複雜性，程序編碼為<a target="_blank" href="https://wilsonmar.github.io/python/">Python</a>或者<a target="_blank" href="https://wilsonmar.github.io/golang">去</a>語言可以稱為<a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">在適當的時候</a>充分利用他們的能力。
 
 存在以下風險：CLI 功能在其底層時可能無法工作<a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">Azure REST API</a>確實有效。因此，適當時會包含 Postman 文件。
 
@@ -153,7 +153,7 @@ ML CLI v2（預覽版）提供了一種自動化方法：<br /><a target="_blank
 
 -   <tt>來源 ./az-all-start.sh</tt>設置環境變量和實用函數。
 
--   <tt>設置-o 豎立</tt>使腳本在出現第一個錯誤時停止（而不是繼續運行）。
+-   <tt>設置-O 凸起</tt>使腳本在出現第一個錯誤時停止（而不是繼續運行）。
 
 -   創建一個新的資源組和所有資源<strong>每次運行都有新內容</strong>降低冪等性編碼的複雜性（每次重新運行結束時狀態相同）。
 
@@ -199,7 +199,7 @@ Jupyter 的 Python 筆記本圖庫：
 
 7.  導航到文件夾<a target="_blank" href="https://github.com/Azure/azureml-examples/tree/main/cli/jobs/train">https&#x3A;//github.com/Azure/azureml-examples/tree/main/cli/jobs/train</a>:
 
-    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">就業</a>
+    -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">快速地</a>
     -   光GBM
     -   火炬
     -   r
@@ -457,7 +457,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
     這就是您可以為多個區域/位置運行腳本的方法 - 只需更改<tt>我的位置</tt>環境變量的值並再次運行腳本。
 
-2.  拿：<strong>刪除資源組</strong>阻止虛擬服務器上累積費用：
+2.  原型：<strong>刪除資源組</strong>阻止虛擬服務器上累積費用：
 
     <pre><strong>time az group delete --name "${MY_RG}" --yes   # takes several minutes
     </strong></pre>

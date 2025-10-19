@@ -213,7 +213,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
 2.  选择“job.yml”。
 
-3.  单击“上传”。
+3.  点击“上传”。
 
 4.  选择运行笔记本的计算位置。
 

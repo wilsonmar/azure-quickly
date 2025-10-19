@@ -143,7 +143,7 @@ ML CLI v2 (forhåndsvisning) gir én automatiseringstilnærming:<br /><a target=
 
 2.  Rediger<tt>aliases.sh</tt>fil og fjern eller legg til tastaturmakroer.
 
-Nå som du har ressursene du trenger:
+Nå som du har ressursene som trengs:
 
 <a name="ShellCoding"></a>
 
@@ -470,7 +470,7 @@ Skriptet skal gjøre alle trinnene nedenfor:
 
 Skriptene her er tilpasset fra ulike eksperter som er sjenerøse med å dele koden sin:
 
--   <https://github.com/fouldsy/azure-mol-samples-2nd-ed>av Iain Foulds, forklart i<https://aka.ms/monthoflunches>publisert 30.04.2020.
+-   <https://github.com/fouldsy/azure-mol-samples-2nd-ed>av Iain Foulds, forklart i<https://aka.ms/monthoflunches> published 4/30/2020.
 
 -   <https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies>
 

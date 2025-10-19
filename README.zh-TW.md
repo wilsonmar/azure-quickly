@@ -22,7 +22,7 @@
 這裡的所有代碼、註釋和文檔都是用美國英語編寫的。這樣我們就可以與世界各地的開發者分享我們的經驗，翻譯歸功於<https://github.com/dephraiim/translate-readme>
 
 -   [英語](README.md)
--   [简体中文](README.zh-CN.md)
+-   [簡體中文](README.zh-CN.md)
 -   [繁體中文](README.zh-TW.md)
 -   [印地語](README.hi.md)
 -   [法語](README.fr.md)
@@ -43,7 +43,7 @@ PowerShell 腳本用於唯一解決方案的情況。
 
 人們讓資源保持運行是因為他們<strong>不想把一生都花在重複體力勞動上</strong>單擊 Azure 門戶 GUI，如大多數 Azure 教程所述。
 
-這個倉庫（位於<a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https&#x3A;//github.com/wilsonmar/azure-quickly</a>) contains automation scripts that enable you to confidently <strong>刪除資源組</strong>當您休息或玩耍時，因為它使您能夠<strong>拿回資源</strong>即使使用全新的訂閱，也只需幾個命令。
+這個倉庫（位於<a target="_blank" href="https://github.com/wilsonmar/azure-quickly">https&#x3A;//github.com/wilsonmar/azure-quickly</a>）包含自動化腳本，使您能夠自信地<strong>刪除資源組</strong>當您休息或玩耍時，因為它使您能夠<strong>拿回資源</strong>即使使用全新的訂閱，也只需幾個命令。
 
 您可以節省金錢，因為您不必讓資源保持運行、消耗積分或增加信用卡賬單。
 
@@ -90,7 +90,7 @@ PowerShell 腳本用於唯一解決方案的情況。
 
 3.  進來<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>或者輸入後點擊CLI圖標<a target="_blank" href="https://portal.azure.com/">https&#x3A;//portal.azure.com</a>
 
-4.  右鍵單擊 CLI Bash 終端窗口上的任意位置，然後按<strong>command+V</strong>從剪貼板粘貼。
+4.  右鍵單擊 CLI Bash 終端窗口上的任意位置，然後按<strong>命令+V</strong>從剪貼板粘貼。
 
 5.  按 Enter 運行腳本。運行需要幾分鐘。
 
@@ -112,7 +112,7 @@ PowerShell 腳本用於唯一解決方案的情況。
 
 2.  切換到門戶 GUI。
 
-3.  打開訂閱邊欄選項卡。單擊您當前的訂閱。
+3.  Open the Subscription blade. Click on your current Subscription. 
 
 4.  單擊訂閱代碼旁邊的複製圖標（以便將其保存到剪貼板）。
 
@@ -141,7 +141,7 @@ ML CLI v2（預覽版）提供了一種自動化方法：<br /><a target="_blank
 
     ### 根據您的喜好配置別名
 
-2.  編輯<tt>aliases.sh</tt> file and remove or add keyboard macros.
+2.  編輯<tt>aliases.sh</tt>文件並刪除或添加鍵盤宏。
 
 現在您已經擁有所需的資源：
 
@@ -213,7 +213,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
 2.  選擇“job.yml”。
 
-3.  單擊“上傳”。
+3.  點擊“上傳”。
 
 4.  選擇運行筆記本的計算位置。
 
@@ -233,7 +233,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
      </strong></pre>
 
 
--   創建一個 Azure Key Vault 供以下腳本使用：
+-   Create an Azure Key Vault for use by scripts to follow:
 
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-keyvault-cli.sh">az-keyvault-cli.sh</a>
      </strong></pre>

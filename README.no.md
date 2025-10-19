@@ -19,7 +19,7 @@
 
 ## Språk
 
-All kode, kommentarer og dokumentasjon her er skrevet på amerikansk engelsk. Så vi kan dele læringen vår med utviklere over hele verden, takket være oversettelser<https://github.com/dephraiim/translate-readme>
+All kode, kommentarer og dokumentasjon her er skrevet på amerikansk engelsk. Så vi kan dele lærdommen vår med utviklere over hele verden, takket være oversettelser<https://github.com/dephraiim/translate-readme>
 
 -   [engelsk](README.md)
 -   [Forenklet kinesisk](README.zh-CN.md)
@@ -49,7 +49,7 @@ Du sparer penger fordi du ikke trenger å la ressurser gå, forbruke kreditt ell
 
 Det er stressende å gjenta den manuelle musingen og skrivingen nøyaktig gjennom Azure Portal (som ikke raskt kan repeteres).
 
-Så denne README forklarer hvordan du kan starte ditt tilpassede miljø fra bunnen av ved å bruke CLI Bash-terminalen.
+Så, denne README forklarer hvordan du kan starte ditt tilpassede miljø fra bunnen av ved å bruke CLI Bash-terminalen.
 
 <a name="Todos"></a>
 
@@ -470,7 +470,7 @@ Skriptet skal gjøre alle trinnene nedenfor:
 
 Skriptene her er tilpasset fra ulike eksperter som er sjenerøse med å dele koden sin:
 
--   <https://github.com/fouldsy/azure-mol-samples-2nd-ed>av Iain Foulds, forklart i<https://aka.ms/monthoflunches> published 4/30/2020.
+-   <https://github.com/fouldsy/azure-mol-samples-2nd-ed>av Iain Foulds, forklart i<https://aka.ms/monthoflunches>publisert 30.04.2020.
 
 -   <https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies>
 

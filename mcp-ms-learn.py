@@ -18,29 +18,38 @@ by Wilson Mar
 Query a MCP Server containing Microsoft's LEARN documents using
 MCP-standard JSON 2.0 async protocol containing SSE (Server-Sent Event) text/event-streams.
 Output to a JSON file converted to Markdown (.md) format, then HTML and
-displayed by a localhost to the default internet browser.
+displayed by a Werkzeug localhost to the default internet browser.
 
 USAGE:
+    # cd azure-quickly
     chmod +x mcp-ms-learn.py
-    uv run mcp-ms-learn.py
+    run check mcp-ms-learn.py
+    # See https://wilsonmar.github.io/mcp
+    uv run mcp-ms-learn.py -v -q "Who is the CEO"
+
 """
 
 #### SECTION 01. Metadata about this program file:
 
-__last_commit__ = "25-10-17 v003 + display md as html in browser :mcp-ms-learn.py"
-__status__      = "works until html display on macOS Sequoia 15.3.1"
+__last_commit__ = "25-10-18 v004 + query :mcp-ms-learn.py"
+__status__      = "works until localhost has to be shutdown on macOS Sequoia 15.3.1"
 # TODO: argparse query text.
 
 #### SECTION 02: Import internal libraries already built-in into Python:
 
+import argparse
 from threading import Timer
 import webbrowser
 from typing import Dict, Any
+import socket
+
+import platform
+import subprocess
 
 #### SECTION 03: Import external libraries from PiPy:
 
 try:
-    from flask import Flask, render_template_string
+    from flask import Flask, render_template_string, request
     import json
     import markdown
     from pathlib import Path
@@ -55,9 +64,32 @@ except Exception as e:
 test_run_endpoint = False
 show_tools = False
 mcp_server_url = "https://learn.microsoft.com/api/mcp"
-question = "What is the difference between MCP and A2A?"
+query = "What is the difference between MCP and A2A?"
 output_json_filepath = "mcp-ms-learn.json"
 output_md_filepath = "mcp-ms-learn.md"
+
+#### SECTION 05: parse inputs as arguments to command:
+
+#import argparse
+#from argparse import ArgumentParser
+parser = argparse.ArgumentParser(allow_abbrev=True,description="secrets-utils.py")
+#parser.add_argument("-q", "--quiet", action="store_true", help="Run without output")
+parser.add_argument("-v", "--verbose", action="store_true", help="Show tools")
+#parser.add_argument("-vv", "--debug", action="store_true", help="Debug outputs from functions")
+#parser.add_argument("-s", "--summary", action="store_true", help="Show summary stats")
+
+parser.add_argument("-q", "--query", type=str, help="Query for Microsoft answer")
+parser.add_argument("-p", "--port", type=str, help="Port for localhost")
+# Default -h = --help (list arguments)
+
+args = parser.parse_args()
+
+if args.verbose:       # -v --verbose (flag)
+    show_tools = True
+if args.query:      # -q  --query "what to answer"
+    query = args.query
+if args.port:          # -p  --port
+    my_port = args.port
 
 
 def test_endpoint(url: str) -> bool:
@@ -117,12 +149,12 @@ def list_mcp_tools(url: str) -> Dict[str, Any]:
         return {"error": f"Unexpected error: {str(e)}"}
 
 
-def query_mcp_server(url: str, question: str) -> Dict[str, Any]:
-    """Query an MCP server with a question.
+def query_mcp_server(url: str, query: str) -> Dict[str, Any]:
+    """Query an MCP server with a query (question).
     
     Args:
         url: The MCP server endpoint URL
-        question: The question to ask
+        query: The query to ask
     Returns:
         The JSON response from the server
     """
@@ -134,7 +166,7 @@ def query_mcp_server(url: str, question: str) -> Dict[str, Any]:
         "params": {
             "name": "microsoft_docs_search",
             "arguments": {
-                "query": question
+                "query": query
             }
         }
     }
@@ -245,6 +277,75 @@ def format_json_to_markdown(json_file_path: str, output_path: str) -> None:
     print(f"Markdown-formatted content written to: {output_path}")
     return
 
+def is_port_available(port_in: int, host: str = '127.0.0.1') -> bool:
+    """Check if a port is available.
+    
+    USAGE: if is_port_available(5000):
+    """
+    #import socket
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        try:
+            s.bind((host, port_in))
+            return True  # Port is available
+        except OSError:
+            return False  # Port is already in use
+
+def get_port_available(port_in: int, host: str = '127.0.0.1') -> bool:
+    """Iterate through ports to find one available."""
+    x = int(port_in)
+    for port in range(x, x + 1):
+        print(f"TRACE: get_port_available() trying port {port} at [X]")
+        if is_port_available(port):
+            return port
+
+
+def get_default_browser():
+    os_name = platform.system()
+
+    # Windows: Query the registry
+    if os_name == "Windows":
+        import winreg
+        try:
+            with winreg.OpenKey(winreg.HKEY_CURRENT_USER,
+                r"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice") as key:
+                prog_id, _ = winreg.QueryValueEx(key, "ProgId")
+                return prog_id  # e.g. "ChromeHTML", "MSEdgeHTM", "FirefoxURL"
+        except FileNotFoundError:
+            return "Unknown (no default set)"
+
+    # macOS: use Apple’s Launch Services
+    elif os_name == "Darwin":
+        try:
+            result = subprocess.run(
+                ["defaults", "read", "com.apple.LaunchServices/com.apple.launchservices.secure",
+                 "LSHandlers"],
+                capture_output=True, text=True
+            )
+            if ".https" in result.stdout:
+                if "Safari" in result.stdout:
+                    return "Safari"
+                elif "Chrome" in result.stdout:
+                    return "Chrome"
+                elif "Firefox" in result.stdout:
+                    return "Firefox"
+            return "Unknown"
+        except Exception:
+            return "Unknown"
+
+    # Linux: use xdg-settings or fallback
+    elif os_name == "Linux":
+        try:
+            browser = subprocess.run(
+                ["xdg-settings", "get", "default-web-browser"],
+                capture_output=True, text=True
+            )
+            return browser.stdout.strip()
+        except Exception:
+            return "Unknown"
+
+    return "Unsupported OS"
+
+
 app = Flask(__name__)
 @app.route('/')  # referenced by function index()
 def index():
@@ -274,6 +375,18 @@ def open_browser(port="5000"):
     """Open browser using a delay."""
     webbrowser.open_new(f"http://127.0.0.1:{port}")
 
+def shutdown_server():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+
+@app.route('/down', methods=['GET'])
+def shutdown():
+    """Shutdown server with url http://localhost:5000/down browser address."""
+    shutdown_server()
+    return 'Server shutting down...'
+
 def main():
     """Just do the program."""
     if mcp_server_url:
@@ -294,14 +407,14 @@ def main():
         print(json.dumps(tools_response, indent=2))
         print("\n" + "="*60 + "\n")
     
-    if not question:
-        print("FAIL: No question text to answer!")
+    if not query:
+        print("FAIL: No query text to answer!")
         exit(9)
     # else:
 
-    print(f"Question: {question}\n")
+    print(f"Query: {query}\n")
     # Query the server
-    response = query_mcp_server(mcp_server_url, question)
+    response = query_mcp_server(mcp_server_url, query)
 
     # Pretty format and display the response
     formatted_output = pretty_format_response(response)
@@ -314,13 +427,18 @@ def main():
 
     format_json_to_markdown(output_json_filepath, output_md_filepath)
 
+    print("INFO: Default browser:", get_default_browser())
+
     # if md file exists:
     # Open the browser after the specified number of seconds of delay:
     Timer(2, open_browser).start()
-    # if port 5000 is available:
-    #app.run(debug=True,port=5000)
-    app.run(debug=True,port=5000)
-    # FIXME: Internal Server Error - The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+
+    use_port = get_port_available(my_port)
+    app.run(debug=False,port=use_port)
+    # TODO: Because app.run() is blocking, Flask’s built-in server doesn’t natively support stopping the server automatically right after app.run() starts (without external request).
+    # You’d need to run the server in a separate thread or process and then 
+    # kill it programmatically using signals (os.kill) or similar methods, which  
+    # is more complex and less clean.
 
 if __name__ == "__main__":
     main()

@@ -33,7 +33,7 @@
 يمكن تشغيل التعليمات البرمجية النصية على Windows Git Bash Shell. 
 يتم استخدام البرامج النصية PowerShell في الحالات التي يكون فيها هذا هو الحل الوحيد.
 
-ولمعالجة المزيد من التعقيد، تم ترميز البرامج<a target="_blank" href="https://wilsonmar.github.io/python/">بايثون</a>أو<a target="_blank" href="https://wilsonmar.github.io/golang">يذهب</a>يمكن أن تسمى اللغة<a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">عندما يكون ذلك مناسبا</a>للاستفادة من قدراتهم.
+للتعامل مع المزيد من التعقيد، يتم ترميز البرامج<a target="_blank" href="https://wilsonmar.github.io/python/">بايثون</a>أو<a target="_blank" href="https://wilsonmar.github.io/golang">يذهب</a>يمكن أن تسمى اللغة<a target="_blank" href="https://medium.com/capital-one-tech/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989">عندما يكون ذلك مناسبا</a>للاستفادة من قدراتهم.
 
 هناك خطر من أن وظائف CLI قد لا تعمل عندما تكون أساسية<a target="_blank" href="https://docs.microsoft.com/en-us/rest/api/azure/">أزور ريست API</a>لا يعمل. لذلك يتم تضمين ملفات Postman عند الاقتضاء.
 
@@ -269,7 +269,7 @@
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-webapp-cli.sh">az-webapp-cli.sh</a>
      </strong></pre>
 
--   قم بإنشاء شبكة تحتوي على شبكتين فرعيتين ومجموعة أمان الشبكة التي تعمل على تأمين حركة المرور الواردة. شبكة فرعية واحدة مخصصة لحركة مرور الوصول عن بعد، والأخرى هي حركة مرور الويب للأجهزة الافتراضية التي تقوم بتشغيل خادم الويب. يتم بعد ذلك إنشاء جهازين افتراضيين. أحدهما يسمح بالوصول إلى SSH ويتم تطبيق قواعد مجموعة أمان الشبكة المناسبة. يمكنك استخدام هذا VM باعتباره<strong>صندوق القفز SSH</strong>للاتصال بعد ذلك بالجهاز الظاهري الثاني الذي يمكن استخدامه كخادم ويب:
+-   قم بإنشاء شبكة تحتوي على شبكتين فرعيتين ومجموعة أمان الشبكة التي تعمل على تأمين حركة المرور الواردة. شبكة فرعية واحدة مخصصة لحركة مرور الوصول عن بعد، والأخرى هي حركة مرور الويب للأجهزة الافتراضية التي تقوم بتشغيل خادم الويب. يتم بعد ذلك إنشاء جهازين افتراضيين. أحدهما يسمح بالوصول إلى SSH ويتم تطبيق قواعد مجموعة أمان الشبكة المناسبة. يمكنك استخدام هذا VM باعتباره<strong>SSH jumpbox</strong>للاتصال بعد ذلك بالجهاز الظاهري الثاني الذي يمكن استخدامه كخادم ويب:
 
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
      </strong></pre> 

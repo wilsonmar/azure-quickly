@@ -112,7 +112,7 @@ PowerShell 腳本用於唯一解決方案的情況。
 
 2.  切換到門戶 GUI。
 
-3.  Open the Subscription blade. Click on your current Subscription. 
+3.  打開訂閱邊欄選項卡。單擊您當前的訂閱。
 
 4.  單擊訂閱代碼旁邊的複製圖標（以便將其保存到剪貼板）。
 
@@ -233,7 +233,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
      </strong></pre>
 
 
--   Create an Azure Key Vault for use by scripts to follow:
+-   創建一個 Azure Key Vault 供以下腳本使用：
 
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-keyvault-cli.sh">az-keyvault-cli.sh</a>
      </strong></pre>

@@ -319,7 +319,7 @@ Le script doit effectuer toutes les étapes ci-dessous :
 
 1.  FACULTATIF : Modifiez le<tt>.bashrc</tt>fichier pour personnaliser l'invite :
 
-    Si vous êtes dans le<strong>coquille de nuage</strong>(qui exécute le système d'exploitation Linux), ajoutez ces lignes au bas du<strong>.bashrc</strong>:
+    Si vous êtes dans le<strong>cloud Shell</strong>(qui exécute le système d'exploitation Linux), ajoutez ces lignes au bas du<strong>.bashrc</strong>:
 
     <pre>export PS1="\n  \w\[\033[33m\]\n$ "
     #</pre>

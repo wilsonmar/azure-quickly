@@ -19,11 +19,11 @@
 
 ## Språk
 
-All kode, kommentarer og dokumentasjon her er skrevet på amerikansk engelsk. Så vi kan dele lærdommen vår med utviklere over hele verden, takket være oversettelser<https://github.com/dephraiim/translate-readme>
+All kode, kommentarer og dokumentasjon her er skrevet på amerikansk engelsk. Så vi kan dele læringen vår med utviklere over hele verden, takket være oversettelser<https://github.com/dephraiim/translate-readme>
 
 -   [engelsk](README.md)
 -   [Forenklet kinesisk](README.zh-CN.md)
--   [Tradisjonell kinesisk](README.zh-TW.md)
+-   [繁体中文](README.zh-TW.md)
 -   [Hindi](README.hi.md)
 -   [fransk](README.fr.md)
 -   [arabisk](README.ar.md)<br /><br />
@@ -49,7 +49,7 @@ Du sparer penger fordi du ikke trenger å la ressurser gå, forbruke kreditt ell
 
 Det er stressende å gjenta den manuelle musingen og skrivingen nøyaktig gjennom Azure Portal (som ikke raskt kan repeteres).
 
-Så, denne README forklarer hvordan du kan starte ditt tilpassede miljø fra bunnen av ved å bruke CLI Bash-terminalen.
+Så denne README forklarer hvordan du kan starte ditt tilpassede miljø fra bunnen av ved å bruke CLI Bash-terminalen.
 
 <a name="Todos"></a>
 
@@ -61,7 +61,7 @@ Så, denne README forklarer hvordan du kan starte ditt tilpassede miljø fra bun
 
 <a name="Install"></a>
 
-## Installer
+## Install
 
 ![azure-quickly-cli.png](https://user-images.githubusercontent.com/300046/120510665-e3370580-c386-11eb-947d-477191a8888e.png)
 
@@ -88,13 +88,13 @@ Den dekker opprettelsen av gratis Azure-kontoer og Azure Storage-kontoer for å 
 
 2.  Høyreklikk på den uthevede og velg "Kopier" for å lagre den uthevede midlertidig i utklippstavlen.
 
-3.  Gå inn<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>eller klikk på CLI-ikonet etter inntasting<a target="_blank" href="https://portal.azure.com/">https&#x3A;//portal.azure.com</a>
+3.  Kom inn<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>eller klikk på CLI-ikonet etter inntasting<a target="_blank" href="https://portal.azure.com/">https&#x3A;//portal.azure.com</a>
 
 4.  Høyreklikk hvor som helst på CLI Bash-terminalvinduet, og trykk deretter<strong>kommando+V</strong>å lime inn fra utklippstavlen.
 
 5.  Trykk Enter for å kjøre skriptet. Det tar flere minutter å kjøre.
 
-    Trinn utført av<a href="#az-setup-cli.sh">skriptet "az-setup-cli.sh" er beskrevet nedenfor</a>.
+    Steps executed by the <a href="#az-setup-cli.sh">skriptet "az-setup-cli.sh" er beskrevet nedenfor</a>.
 
     Når du er ferdig, bør du se mappen som inneholder skript og ledeteksten til venstre, der den blir liggende etter hver kommando (i stedet for på slutten av mappebanen):
 
@@ -103,7 +103,7 @@ Den dekker opprettelsen av gratis Azure-kontoer og Azure Storage-kontoer for å 
 
 ### Tilpass setmem.sh-verdier
 
-Init-skriptet etablerer også fra en prøve<strong>setmem-skript</strong>som definerer miljøvariabelverdier i minnet for å kontrollere skriptoperasjonen. Legg merke til at setmen-filen er i en høyere mappe enn der skriptkoden kan skyves til github. Det er fordi
+Init-skriptet etablerer også fra en prøve<strong>setmem script</strong>som definerer miljøvariabelverdier i minnet for å kontrollere skriptoperasjonen. Legg merke til at setmen-filen er i en høyere mappe enn der skriptkoden kan skyves til github. Det er fordi
 
 1.  Bruk den innebygde Visual Studio Code-editoren for å redigere filen setmem.sh:
 

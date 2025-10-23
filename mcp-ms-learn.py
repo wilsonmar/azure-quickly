@@ -25,13 +25,13 @@ USAGE:
     chmod +x mcp-ms-learn.py
     run check mcp-ms-learn.py
     # See https://wilsonmar.github.io/mcp
-    uv run mcp-ms-learn.py -v -q "Who is the CEO"
+    uv run mcp-ms-learn.py -v -q "What region supports Azure AI Foundry"
 
 """
 
 #### SECTION 01. Metadata about this program file:
 
-__last_commit__ = "25-10-18 v004 + query :mcp-ms-learn.py"
+__last_commit__ = "25-10-22 v005 + subprocess to open/close :mcp-ms-learn.py"
 __status__      = "works until localhost has to be shutdown on macOS Sequoia 15.3.1"
 # TODO: argparse query text.
 
@@ -41,10 +41,12 @@ import argparse
 from threading import Timer
 import webbrowser
 from typing import Dict, Any
+import os
 import socket
 
 import platform
 import subprocess
+import time
 
 #### SECTION 03: Import external libraries from PiPy:
 
@@ -54,6 +56,7 @@ try:
     import markdown
     from pathlib import Path
     import requests
+    import signal
 except Exception as e:
     print(f"Python module import failed: {e}")
     print("Please activate your virtual environment:\n  uv env env\n  source .venv/bin/activate")
@@ -88,9 +91,10 @@ if args.verbose:       # -v --verbose (flag)
     show_tools = True
 if args.query:      # -q  --query "what to answer"
     query = args.query
+
+my_port = 5000         # Default:
 if args.port:          # -p  --port
     my_port = args.port
-
 
 def test_endpoint(url: str) -> bool:
     """Test if the endpoint exists and is reachable."""
@@ -290,13 +294,14 @@ def is_port_available(port_in: int, host: str = '127.0.0.1') -> bool:
         except OSError:
             return False  # Port is already in use
 
-def get_port_available(port_in: int, host: str = '127.0.0.1') -> bool:
+def get_port_available(port_in: int, host: str = '127.0.0.1') -> int:
     """Iterate through ports to find one available."""
-    x = int(port_in)
-    for port in range(x, x + 1):
-        print(f"TRACE: get_port_available() trying port {port} at [X]")
+    # Check a range of 10 ports starting from port_in
+    for port in range(port_in, port_in + 10):
+        print(f"TRACE: get_port_available() trying port {port}")
         if is_port_available(port):
             return port
+    raise RuntimeError(f"No available port found in range {port_in}-{port_in + 9}")
 
 
 def get_default_browser():
@@ -420,7 +425,7 @@ def main():
     formatted_output = pretty_format_response(response)
     print(formatted_output)
     
-    # Optionally save to file
+    # Optionally save to file:
     with open(output_json_filepath, "w", encoding="utf-8") as f:
         json.dump(response, f, indent=2, ensure_ascii=False)
     print(f"\n📄 Response saved to: {output_json_filepath}")
@@ -433,12 +438,38 @@ def main():
     # Open the browser after the specified number of seconds of delay:
     Timer(2, open_browser).start()
 
-    use_port = get_port_available(my_port)
-    app.run(debug=False,port=use_port)
-    # TODO: Because app.run() is blocking, Flask’s built-in server doesn’t natively support stopping the server automatically right after app.run() starts (without external request).
-    # You’d need to run the server in a separate thread or process and then 
-    # kill it programmatically using signals (os.kill) or similar methods, which  
-    # is more complex and less clean.
 
 if __name__ == "__main__":
     main()
+
+    # NOTE: Because app.run() is blocking, Flask’s built-in server doesn’t natively support stopping the server automatically right after app.run() starts (without external request).
+    # You’d need to run the server in a separate thread or process and then 
+    # kill it programmatically using signals (os.kill) or similar methods, which  
+    # is more complex and less clean.
+    # FROM localhost-up-down.py
+    # Step 1: Start a localhost server in the background
+    use_port = get_port_available(my_port)
+
+    # FIXME: TODO: Use app.run or subprocess.Popen?
+    #app.run(debug=False,port=use_port)
+    server_process = subprocess.Popen(
+        ['python', '-m', 'http.server', str(use_port)],
+        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+    )
+
+    pid = server_process.pid
+    print(f"Localhost server started at http://127.0.0.1:{use_port} with PID {pid}")
+
+    # Wait briefly and verify:
+    time.sleep(1)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    result = sock.connect_ex(('127.0.0.1', 5000))
+    if result == 0:
+        print("Server is active.")
+    else:
+        print("Server failed to start.")
+    sock.close()
+
+    # Close the server:
+    os.kill(pid, signal.SIGTERM)
+    print(f"Server with PID {pid} has been terminated.")

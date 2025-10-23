@@ -200,7 +200,7 @@ Jupyter 的 Python 筆記本圖庫：
 7.  導航到文件夾<a target="_blank" href="https://github.com/Azure/azureml-examples/tree/main/cli/jobs/train">https&#x3A;//github.com/Azure/azureml-examples/tree/main/cli/jobs/train</a>:
 
     -   <a target="_blank" href="https://forums.fast.ai/t/platform-azure/35920">快速地</a>
-    -   光GBM
+    -   lightbm
     -   火炬
     -   r
     -   張量流<br /><br />
@@ -279,7 +279,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-diag-cli.sh">az-vm-diag-cli.sh</a>
      </strong></pre>
 
--   創建虛擬機；恢復服務保管庫（一種備份策略）會在開始初始備份作業之前創建虛擬機並應用備份策略。
+-   Create a VM; Recovery Services vault, a backup policy, then creates a VM and applies the backup policy before starting the initial backup job.
 
      <pre><strong>./<a target="_blank" href="https://github.com/wilsonmar/azure-quickly/blob/main/az-vm-backup-cli.sh">az-vm-backup-cli.sh</a>
      </strong></pre>
@@ -345,7 +345,7 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
     ls
     </strong></pre>
 
-    <tt>--深度1</tt>指定僅下載最新版本，以節省所用空間。
+    <tt>--深度1</tt> specifies download of only the latest version, to save space used.
 
     <tt>LS</tt>列出文件夾和文件以確認下載確實發生。
 
@@ -401,13 +401,13 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
     <pre><strong>code ../setmem.sh
     </strong></pre>
 
-    <tt>..</tt>使用它是因為包含機密的文件位於永遠不應該推送到 GitHub 的文件夾中。
+    <tt>..</tt> is used because the file, containing secrets, is in a folder which should never be pushed to GitHub.
 
 10. 使用文本編輯器程序編輯 ../setmem.sh 文件：
 
     腳本已<strong>廣義的</strong>通過環境變量替換腳本中的硬編碼值。 PROTIP：使用變量而不是硬編碼可以避免拼寫錯誤和錯誤配置。
 
-    下面的行定義了每個變量的值，以便多次運行可以使用不同的值，而無需更改腳本文件。
+    Lines below define values for each variable so that multiple runs can use different values, without need to change the script file. 
 
 11. 在<a target="_blank" href="https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade">Portal.azure.com 訂閱刀片</a>，選擇您要使用的訂閱，然後單擊圖標複製到剪貼板。
 
@@ -455,14 +455,15 @@ az ml job create -f jobs/train/lightgbm/iris/job.yml --setcompute.target=local -
 
     執行後，您仍然可以在運行另一個腳本之前覆蓋變量值。
 
-    這就是您可以為多個區域/位置運行腳本的方法 - 只需更改<tt>我的位置</tt>環境變量的值並再次運行腳本。
+    That is how you can run scripts for several regions/locations - by changing just the <tt>我的位置</tt>環境變量的值並再次運行腳本。
 
 2.  原型：<strong>刪除資源組</strong>阻止虛擬服務器上累積費用：
 
     <pre><strong>time az group delete --name "${MY_RG}" --yes   # takes several minutes
     </strong></pre>
 
-    <tt> - 是的</tt>在 az 命令輸入“y”以自動應答請求之前：<br />您確定要執行此操作嗎？ （是/否）： 是
+    <tt> - 是的</tt>在 az 命令輸入“y”以自動應答請求之前：<br />
+    Are you sure you want to perform this operation? (y/n): y
 
 <hr />
 

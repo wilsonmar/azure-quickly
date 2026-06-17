@@ -1,4 +1,10 @@
-# azure-quickly
+---
+layout: post
+date: "2026-06-17"
+lastchange: "v046 header updt for re autotranslate @README.md"
+url: "https://github.com/wilsonmar/python-samples/blob/main/README.md"
+layout: post
+---
 
 ![license](https://img.shields.io/github/license/wilsonmar/azure-quickly)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg)](https://github.com/RichardLitt/standard-readme)

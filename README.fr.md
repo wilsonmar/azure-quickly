@@ -56,7 +56,7 @@ Ainsi, ce README explique comment vous pouvez lancer votre environnement personn
 ## Toutes les listes
 
 -   Ajouter un alias.sh
--   Testez pour vous assurer que le code du script peut s’exécuter sur Windows Git Bash Shell.
+-   Testez pour vous assurer que le code de script peut s’exécuter sur Windows Git Bash Shell.
 -   UN<strong>vérification des variables</strong>script pour valider les variables de mémoire avant l’invocation.
 
 <a name="Install"></a>
@@ -120,7 +120,7 @@ Le script d'initialisation établit également à partir d'un échantillon le<st
 
     Il peut y avoir un fichier différent pour chaque environnement (comme dev ou prod).
 
-6.  Cliquez sur le menu "..." à droite de la fenêtre de l'éditeur de code pour enregistrer, puis quitter.
+6.  Cliquez sur le menu "..." à droite de la fenêtre de l'éditeur de code pour enregistrer, puis quittez.
 
     Vous pouvez désormais exécuter des scripts pour créer et gérer des ressources. 
     La plupart des scripts font référence à un didacticiel sur Microsoft Learn, CloudAcademy, Pluralsight, Coursera, etc.
@@ -153,7 +153,7 @@ Le contenu des scripts Bash de ce dépôt est écrit en utilisant les convention
 
 -   <tt>source ./az-all-start.sh</tt>configure les variables d'environnement et les fonctions utilitaires.
 
--   <tt>set -o élevé</tt>fait en sorte que le script s'arrête à la première erreur (au lieu de s'exécuter).
+-   <tt>set -o errexit</tt>fait en sorte que le script s'arrête à la première erreur (au lieu de s'exécuter).
 
 -   Un nouveau groupe de ressources et toutes les ressources sont créées<strong>nouveau à chaque course</strong>pour réduire la complexité du codage de l'idempotence (où le statut est le même à la fin de chaque réexécution).
 
@@ -319,7 +319,7 @@ Le script doit effectuer toutes les étapes ci-dessous :
 
 1.  FACULTATIF : Modifiez le<tt>.bashrc</tt>fichier pour personnaliser l'invite :
 
-    Si vous êtes dans le<strong>cloud Shell</strong>(qui exécute le système d'exploitation Linux), ajoutez ces lignes au bas du<strong>.bashrc</strong>:
+    Si vous êtes dans le<strong>coquille de nuage</strong>(qui exécute le système d'exploitation Linux), ajoutez ces lignes au bas du<strong>.bashrc</strong>:
 
     <pre>export PS1="\n  \w\[\033[33m\]\n$ "
     #</pre>

@@ -1,4 +1,11 @@
-# 天蓝色快速
+* * *
+
+布局：帖子
+日期：“2026-06-17”
+最后更改：“v046 header updt for re autotranslate @README.md”
+网址：“<https://github.com/wilsonmar/python-samples/blob/main/README.md">
+
+## 布局：帖子
 
 ![license](https://img.shields.io/github/license/wilsonmar/azure-quickly)[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg)](https://github.com/RichardLitt/standard-readme)[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
@@ -521,9 +528,9 @@ PR 已被接受。
 >
 > 道德和职业行为准则有助于定义公认的和
 > 可接受的行为并促进高标准的专业
-> 实践。它还为自我评价提供了基准，并作为
+> 练习。它还为自我评价提供了基准，并作为
 > 更好地展现组织形象的工具。
 
 我们希望我们的社区团体按照这些准则行事，并且
-参与者互相要求遵守这些高标准。如有任何问题
+参与者互相要求遵守这些高标准。如果您有任何疑问
 或者担心代码没有被遵循，请联系存储库的所有者。

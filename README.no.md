@@ -1,4 +1,11 @@
-# asurblått raskt
+* * *
+
+layout: post
+dato: "2026-06-17"
+lastchange: "v046 header updt for re autotranslate @README.md"
+url: "<https://github.com/wilsonmar/python-samples/blob/main/README.md">
+
+## layout: post
 
 ![license](https://img.shields.io/github/license/wilsonmar/azure-quickly)[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg)](https://github.com/RichardLitt/standard-readme)[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
@@ -23,7 +30,7 @@ All kode, kommentarer og dokumentasjon her er skrevet på amerikansk engelsk. S�
 
 -   [engelsk](README.md)
 -   [Forenklet kinesisk](README.zh-CN.md)
--   [繁体中文](README.zh-TW.md)
+-   [Tradisjonell kinesisk](README.zh-TW.md)
 -   [Hindi](README.hi.md)
 -   [fransk](README.fr.md)
 -   [arabisk](README.ar.md)<br /><br />
@@ -61,7 +68,7 @@ Så denne README forklarer hvordan du kan starte ditt tilpassede miljø fra bunn
 
 <a name="Install"></a>
 
-## Install
+## Installer
 
 ![azure-quickly-cli.png](https://user-images.githubusercontent.com/300046/120510665-e3370580-c386-11eb-947d-477191a8888e.png)
 
@@ -76,7 +83,7 @@ Den dekker opprettelsen av gratis Azure-kontoer og Azure Storage-kontoer for å 
 
 2.  Bruk en nettleser (Google Chrome) for å adressere<a target="_blank" href="https://portal.azure.com/">https&#x3A;//portal.azure.com</a>og logg inn.
 
-3.  være inne<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>eller klikk på CLI-ikonet i portalen.
+3.  være med<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>eller klikk på CLI-ikonet i portalen.
 
 4.  Opprett en lagringskonto for en<strong>clouddrive</strong>inne i skallet.
 
@@ -88,13 +95,13 @@ Den dekker opprettelsen av gratis Azure-kontoer og Azure Storage-kontoer for å 
 
 2.  Høyreklikk på den uthevede og velg "Kopier" for å lagre den uthevede midlertidig i utklippstavlen.
 
-3.  Kom inn<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>eller klikk på CLI-ikonet etter inntasting<a target="_blank" href="https://portal.azure.com/">https&#x3A;//portal.azure.com</a>
+3.  Gå inn<a target="_blank" href="https://shell.azure.com/">https&#x3A;//shell.azure.com</a>eller klikk på CLI-ikonet etter inntasting<a target="_blank" href="https://portal.azure.com/">https&#x3A;//portal.azure.com</a>
 
 4.  Høyreklikk hvor som helst på CLI Bash-terminalvinduet, og trykk deretter<strong>kommando+V</strong>å lime inn fra utklippstavlen.
 
 5.  Trykk Enter for å kjøre skriptet. Det tar flere minutter å kjøre.
 
-    Steps executed by the <a href="#az-setup-cli.sh">skriptet "az-setup-cli.sh" er beskrevet nedenfor</a>.
+    Trinn utført av<a href="#az-setup-cli.sh">skriptet "az-setup-cli.sh" er beskrevet nedenfor</a>.
 
     Når du er ferdig, bør du se mappen som inneholder skript og ledeteksten til venstre, der den blir liggende etter hver kommando (i stedet for på slutten av mappebanen):
 
@@ -103,7 +110,7 @@ Den dekker opprettelsen av gratis Azure-kontoer og Azure Storage-kontoer for å 
 
 ### Tilpass setmem.sh-verdier
 
-Init-skriptet etablerer også fra en prøve<strong>setmem script</strong>som definerer miljøvariabelverdier i minnet for å kontrollere skriptoperasjonen. Legg merke til at setmen-filen er i en høyere mappe enn der skriptkoden kan skyves til github. Det er fordi
+Init-skriptet etablerer også fra en prøve<strong>setmem-skript</strong>som definerer miljøvariabelverdier i minnet for å kontrollere skriptoperasjonen. Legg merke til at setmen-filen er i en høyere mappe enn der skriptkoden kan skyves til github. Det er fordi
 
 1.  Bruk den innebygde Visual Studio Code-editoren for å redigere filen setmem.sh:
 
@@ -326,7 +333,7 @@ Skriptet skal gjøre alle trinnene nedenfor:
 
     PS1 setter ledeteksten slik at den vises på samme sted på skjermen hver linje, under gjeldende mappe og filbane (i stedet for til høyre for den på forskjellige punkter på skjermen).
 
-    "#" på den siste linjen i filen er et hack for å lage en kommentar ut av PS1-en systemet legger til på egen hånd.
+    "#" på den siste linjen i filen er et hack for å lage en kommentar ut av PS1 systemet legger til på egen hånd.
 
 2.  Naviger inn i en mappe som inneholder depot som skal lastes ned:
 

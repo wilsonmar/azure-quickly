@@ -1,4 +1,11 @@
-# الأزرق السماوي بسرعة
+* * *
+
+التخطيط: آخر
+التاريخ: "17-06-2026"
+lastchange: "تحديث رأس v046 لإعادة الترجمة التلقائية @README.md"
+عنوان URL: "<https://github.com/wilsonmar/python-samples/blob/main/README.md">
+
+## التخطيط: آخر
 
 ![license](https://img.shields.io/github/license/wilsonmar/azure-quickly)[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg)](https://github.com/RichardLitt/standard-readme)[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
@@ -379,7 +386,7 @@
     >>> Microsoft.Web already Registered.
        </pre>
 
-    ما سبق يجب القيام به مرة واحدة فقط، ولكن تشغيله مرة أخرى لن يكون ضارًا.
+    ما سبق يجب القيام به مرة واحدة فقط، لكن تشغيله مرة أخرى لن يكون ضارًا.
 
 7.  امنح setmem.sh أذونات لتشغيله وتشغيله:
 
@@ -521,7 +528,7 @@
 >
 > تعتبر مدونة قواعد الأخلاق والسلوك المهني مفيدة في تحديد المعايير المقبولة والمقبولة
 > السلوكيات المقبولة وتعزيز المعايير المهنية العالية
-> يمارس. كما أنه يوفر معيارًا للتقييم الذاتي ويعمل كمقياس
+> ممارسة. كما أنه يوفر معيارًا للتقييم الذاتي ويعمل كمقياس
 > وسيلة لتحسين هوية المنظمة.
 
 نأمل أن تتصرف مجموعة مجتمعنا وفقًا لهذه الإرشادات

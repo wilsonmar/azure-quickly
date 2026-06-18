@@ -1,4 +1,11 @@
-# azur-rapidement
+* * *
+
+mise en page : message
+date : "2026-06-17"
+lastchange : "Mise à jour de l'en-tête v046 pour la retraduction automatique @README.md"
+URL : "<https://github.com/wilsonmar/python-samples/blob/main/README.md">
+
+## mise en page : message
 
 ![license](https://img.shields.io/github/license/wilsonmar/azure-quickly)[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg)](https://github.com/RichardLitt/standard-readme)[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
@@ -56,7 +63,7 @@ Ainsi, ce README explique comment vous pouvez lancer votre environnement personn
 ## Toutes les listes
 
 -   Ajouter un alias.sh
--   Testez pour vous assurer que le code de script peut s’exécuter sur Windows Git Bash Shell.
+-   Testez pour vous assurer que le code du script peut s’exécuter sur Windows Git Bash Shell.
 -   UN<strong>vérification des variables</strong>script pour valider les variables de mémoire avant l’invocation.
 
 <a name="Install"></a>
@@ -120,7 +127,7 @@ Le script d'initialisation établit également à partir d'un échantillon le<st
 
     Il peut y avoir un fichier différent pour chaque environnement (comme dev ou prod).
 
-6.  Cliquez sur le menu "..." à droite de la fenêtre de l'éditeur de code pour enregistrer, puis quittez.
+6.  Cliquez sur le menu "..." à droite de la fenêtre de l'éditeur de code pour enregistrer, puis quitter.
 
     Vous pouvez désormais exécuter des scripts pour créer et gérer des ressources. 
     La plupart des scripts font référence à un didacticiel sur Microsoft Learn, CloudAcademy, Pluralsight, Coursera, etc.
@@ -153,7 +160,7 @@ Le contenu des scripts Bash de ce dépôt est écrit en utilisant les convention
 
 -   <tt>source ./az-all-start.sh</tt>configure les variables d'environnement et les fonctions utilitaires.
 
--   <tt>set -o errexit</tt>fait en sorte que le script s'arrête à la première erreur (au lieu de s'exécuter).
+-   <tt>set -o élevé</tt>fait en sorte que le script s'arrête à la première erreur (au lieu de s'exécuter).
 
 -   Un nouveau groupe de ressources et toutes les ressources sont créées<strong>nouveau à chaque course</strong>pour réduire la complexité du codage de l'idempotence (où le statut est le même à la fin de chaque réexécution).
 
